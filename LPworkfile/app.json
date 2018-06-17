@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/wantsell/wantsell",
+    "pages/wantbuy/wantbuy",
+    "pages/history/history",
+    "pages/success_submit/success",
+    "pages/userinfo/user",
+    "pages/userinfo/info"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  }
+}

@@ -1,0 +1,23 @@
+<!--pages/userinfo/info.wxml-->
+<text>个人信息：</text>
+<form bindsubmit='submit_in'>
+<view class="name">
+<input type="text" class="sdinput" placeholder="名" name="first_name"/>
+<input type="text" class="sdinput" placeholder="姓" name="second_name"/>
+</view>
+
+<view class="basic_info">
+<input type="text" class="sdinput" placeholder="你的微信号" name="wechat_name"/>
+<input type="text" class="sdinput" placeholder="你的邮箱" name="email"/>
+<input type="text" class="sdinput" placeholder="你的电话号码" name="phone"/>
+<input type="text" class="sdinput" placeholder="你的Program" name="program"/>
+</view>
+<button style="margin:30rpx;" bindtap="submit" form-type='submit'>提交</button>
+</form>
+<text>测试结果</text>
+<view><text>名:{{first_name}}</text></view>
+<view><text>姓:{{second_name}}</text></view>
+<view><text>微信号:{{wechat_name}}</text></view>
+<view><text>邮箱:{{email}}</text></view>
+<view><text>program:{{program}}</text></view>
+<view><text>电话:{{phone}}</text></view>

@@ -1,0 +1,30 @@
+<!--pages/wantsell/wantsell.wxml-->
+<view><text>请填写下列书本信息(必填）</text></view>
+<form bindsubmit='submit_in'>
+<view class="book_info">
+<input type="text" class="sdinput" placeholder='课程代码(AAAA00)' name="course_code"/>
+<input type="text" class="sdinput" placeholder='书本名称' name="bookname"/>
+<input type="text" class="sdinput" placeholder='使用年份' name="bookyear"/>
+<input type="text" class="sdinput" placeholder='讲师姓名' name="instructor"/>
+</view>
+<textarea type="text" class="description" placeholder="书本描述（须少于150字）" name="description" maxlength='170'/>
+<button style="margin:30rpx;" bindtap="chooseimage">添加图片</button>
+<view class="image_container">
+<image src="{{tempFilePaths[0] }}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+<image src="{{tempFilePaths[1] }}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+<image src="{{tempFilePaths[2] }}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+</view>
+<view class="image_container">
+<image src="{{tempFilePaths[3] }}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+<image src="{{tempFilePaths[4] }}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+<image src="{{tempFilePaths[5] }}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+</view>
+
+<button style="margin:30rpx;" bindtap="submit" form-type='submit'>提交</button>
+</form>
+<text>测试结果</text>
+<view><text>书名:{{bookname}}</text></view>
+<view><text>年份:{{bookyear}}</text></view>
+<view><text>讲师:{{instructor}}</text></view>
+<view><text>描述:{{description}}</text></view>
+<view><text>course:{{course_code}}</text></view>

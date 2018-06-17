@@ -1,0 +1,10 @@
+/* pages/userinfo/info.wxss */
+.sdinput{
+  border: lightgrey;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 31px;
+  padding-left: 10px;
+}

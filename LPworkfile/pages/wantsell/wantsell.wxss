@@ -1,0 +1,30 @@
+/* pages/wantsell/wantsell.wxss */
+.image_container{
+  font-size-adjust: 0;
+  height:auto;
+  width:100%;
+  display:flex;
+}
+
+.sdinput{
+  border: lightgrey;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 31px;
+  padding-left: 10px;
+}
+
+.description{
+  width:99%;
+  border: lightgrey;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 14px;
+  border-radius: 5px;
+  height: 200px;
+}
+.name{
+  display:flex;
+}
