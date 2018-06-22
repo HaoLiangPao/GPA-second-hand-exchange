@@ -14,8 +14,8 @@ public class UpdateUserInfoHandler implements HttpHandler{
 		// Assumed query tokens (Has to be in this particular order)
 		final String ordered_qry_tokens[] = {Configuration.COL_USER_USER_NAME,
 				Configuration.COL_USER_USER_PWD, Configuration.COL_USER_WECHAT_INFO, Configuration.COL_USER_PHONE_NUMBER,
-				Configuration.COL_USER_EMAIL, Configuration.COL_USER_PROGRAM};
-		Util.oneQueryHandler(arg0, ordered_qry_tokens, Configuration.QRY_CREATE_USER);
+				Configuration.COL_USER_EMAIL, Configuration.COL_USER_PROGRAM, Configuration.COL_USER_USER_ID};
+		Util.oneQueryHandler(arg0, ordered_qry_tokens, Configuration.QRY_UPDATE_USER);
 	}
 
 }

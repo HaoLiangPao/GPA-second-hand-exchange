@@ -15,7 +15,7 @@ public class UpdatePostHandler implements HttpHandler{
 		final String ordered_qry_tokens[] = {Configuration.COL_POST_OWNER_ID,
 				Configuration.COL_POST_BOOK_TITLE, Configuration.COL_POST_BOOK_PHOTO, Configuration.COL_POST_COURSE_ID,
 				Configuration.COL_POST_INSTRUCTOR, Configuration.COL_POST_TAKE_YEAR, Configuration.COL_POST_DESCRIPTION,
-				Configuration.COL_POST_PRICE, Configuration.COL_POST_STATUS};
+				Configuration.COL_POST_PRICE, Configuration.COL_POST_STATUS, Configuration.COL_POST_POST_ID};
 		Util.oneQueryHandler(arg0, ordered_qry_tokens, Configuration.QRY_UPDATE_POST);
 	}
 

@@ -41,7 +41,7 @@ public class Server {
 		
 		// Configure a JDBC Connection pool and set its own configuration 
 		// Use c3p0 library, documented here: https://www.mchange.com/projects/c3p0/index.html
-		DataSource unpooled = DataSources.unpooledDataSource(Configuration.MYSQL_JDBC_URL + Configuration.MYSQL_DB, Configuration.MYSQL_USER, Configuration.MYSQL_PWD);
+		DataSource unpooled = DataSources.unpooledDataSource(String.format(Configuration.MYSQL_JDBC_URL, Configuration.MYSQL_DB), Configuration.MYSQL_USER, Configuration.MYSQL_PWD);
 		@SuppressWarnings("rawtypes")
 		Map properties = new HashMap();
 		properties.put(Configuration.PR_ACQUIRE_INCREMENT , Configuration.ACQUIRE_INCREMENT);

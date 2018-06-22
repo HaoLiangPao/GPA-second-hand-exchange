@@ -64,10 +64,11 @@ public class Util {
         // Collecting query results and write into response
         ResultSet rs;
         try {
-			rs = ps.executeQuery();
+			ps.execute();
+			rs = ps.getResultSet();
 			Util.writeRsIntoStringBuilder(rs, response);
 			Util.doSuccessResponse(response, arg0, os);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			Util.doSQLError(e, response, arg0, os);
 			return;
 		} finally {
@@ -99,11 +100,12 @@ public class Util {
 				this_key = null;
 				this_value = null;
 				if (param.length > 0) {
-					this_key = URLDecoder.decode(param[0], System.getProperty("file.encoding"));
+					this_key = URLDecoder.decode(param[0], "UTF-8"); // Expected content-type is "application/x-www-form-urlencoded"
+																	 // From https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html, UTF-8 should be used as the encoding scheme
 				}
 				if (param.length > 1) {
-					this_value = URLDecoder.decode(param[1], System.getProperty("file.encoding"));
-				}
+					this_value = URLDecoder.decode(param[1], "UTF-8"); // Expected content-type is "application/x-www-form-urlencoded"
+				}													   // From https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html, UTF-8 should be used as the encoding scheme
 				if (parameters.containsKey(this_key)) {
 					parameters.put(this_key, this_value);
 				} else {
@@ -146,6 +148,7 @@ public class Util {
 	/**
 	 * String format:
 	 * 
+	 * col1Name,col2Name,col3Name,col4Name......
 	 * row1col1,row2col2,row3col3,row4col4......
 	 * row2col1,row2col2,row2col3,row2col4......
 	 * ...... (No spaces, one row per line)
@@ -154,22 +157,37 @@ public class Util {
 	 * @param sb
 	 * @throws SQLException 
 	 */
-	protected static void writeRsIntoStringBuilder(ResultSet rs, StringBuilder sb) throws SQLException{
-		ResultSetMetaData rsmd = rs.getMetaData();
-		int num_cols = rsmd.getColumnCount();
-		int i;
-		while ( rs.next() ){
-			for ( i = 1; i <= num_cols; i++ ){
-				sb.append(rs.getString(i));
-				if ( i != num_cols ){
+	protected static void writeRsIntoStringBuilder(ResultSet rs, StringBuilder sb) throws Exception{
+		if( rs != null ){
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int num_cols = rsmd.getColumnCount();
+			// Print column names
+			int j;
+			for ( j = 1; j <= num_cols; j++ ){
+				sb.append(rsmd.getColumnName(j));
+				if ( j != num_cols ){
 					sb.append(",");
 				}
 				else{
 					sb.append("\n");
 				}
 			}
+			
+			// Print rows
+			int i;
+			while ( rs.next() ){
+				for ( i = 1; i <= num_cols; i++ ){
+					sb.append(rs.getString(i));
+					if ( i != num_cols ){
+						sb.append(",");
+					}
+					else{
+						sb.append("\n");
+					}
+				}
+			}
+			rs.close();
 		}
-		rs.close();
 	}
 	
 	protected static void returnConnectionToPool(Connection conn){
@@ -219,7 +237,7 @@ public class Util {
 	/**
 	 * Helper function to deal with exceptions in handlers
 	 * 
-	 * print ST + write response with given msg + close response stream
+	 * print ST + write response with given msg and the exception msg + close response stream
 	 * 
 	 * @param e
 	 * @param response
@@ -229,8 +247,11 @@ public class Util {
 	 * @throws IOException
 	 */
 	private static void doError(Exception e, StringBuilder response, HttpExchange arg0, OutputStream os, String msg) throws IOException{
+		response.append(msg + "\n");
+		String err_msg = e.getMessage();
+		response.append("Error message: " + err_msg);
+		System.out.println("Exception: " + err_msg);
 		e.printStackTrace();
-		response.append(msg);
 		arg0.sendResponseHeaders(500, response.length());
 		os.write(response.toString().getBytes());
 		os.close();
