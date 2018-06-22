@@ -56,8 +56,8 @@ public class Util {
 			Util.setPsParams(ordered_qry_tokens, ps, parameters);
 		} catch (SQLException e) {
 			Util.doSQLError(e, response, arg0, os);
-			Util.returnConnectionToPool(pooledConn);
 			Util.returnStatementToPool(ps);
+			Util.returnConnectionToPool(pooledConn);
 			return;
 		}
         // Execute generated queries against the mysql database
@@ -72,8 +72,8 @@ public class Util {
 			Util.doSQLError(e, response, arg0, os);
 			return;
 		} finally {
-			Util.returnConnectionToPool(pooledConn);
 			Util.returnStatementToPool(ps);
+			Util.returnConnectionToPool(pooledConn);
         }
 	}
 	
