@@ -4,12 +4,23 @@ const app = getApp()
 
 Page({
   data: {
+    
+    imgUrls: [
+      "../../image/book_image.jpeg",
+      "../../image/gpa.jpg",
+      "../../image/gpa_qr.jpg"
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
     motto: '欢迎使用二手书平台',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     tempFilePaths: ''
   },
+  
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({

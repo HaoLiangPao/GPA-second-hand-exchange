@@ -1,4 +1,12 @@
 <!--index.wxml-->
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" style='height:{{height*2 +80}}rpx;width:100%;' interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" width="350" height="150" />
+      </swiper-item>
+    </block>
+  </swiper>
+
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -9,10 +17,5 @@
   </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
-  </view>
-  <view>
-  <button style="margin:30rpx;" bindtap="wantbuy">我要买书</button>
-  <button style="margin:30rpx;" bindtap="wantsell">我要卖书</button>
-  <button style="margin:30rpx;" bindtap="info">我的账户</button>
   </view>
 </view>

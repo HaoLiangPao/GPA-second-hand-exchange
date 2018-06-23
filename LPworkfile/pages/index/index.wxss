@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.swiper-item{
+  display: block;
+  height: 150px;
+}
+
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
