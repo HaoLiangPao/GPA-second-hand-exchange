@@ -1,5 +1,0 @@
-<!--pages/userinfo/user.wxml-->
-<view>
-<button style="margin:30rpx;" bindtap="user_info">个人信息</button>
-<button style="margin:30rpx;" bindtap="history">历史记录</button>
-</view>

@@ -1,0 +1,3 @@
+<!--pages/ShuJia/shujia.wxml-->
+<button style="margin:30rpx;" bindtap="wantsell">我要卖书</button>
+<button style="margin:30rpx;" bindtap="history">卖书历史</button>

@@ -1,4 +1,4 @@
-// pages/userinfo/user.js
+// pages/ShuJia/shujia.js
 Page({
 
   /**
@@ -64,13 +64,13 @@ Page({
   
   },
 
-  user_info:function(){
+  wantsell: function () {
     wx.navigateTo({
-      url: '../userinfo/info',
+      url: '../wantsell/wantsell'
     })
   },
 
-  history:function(){
+  history:function (){
     wx.navigateTo({
       url: '../history/history',
     })

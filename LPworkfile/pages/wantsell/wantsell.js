@@ -106,12 +106,6 @@ Page({
   submit_in: function(e){
     const that = this;
     that.setData({
-      first_name: e.detail.value.first_name,
-      second_name: e.detail.value.second_name,
-      wechat_name: e.detail.value.wechat_name,
-      email: e.detail.value.email,
-      phone: e.detail.value.phone,
-      program: e.detail.value.program,
       course_code:e.detail.value.course_code,
       bookname: e.detail.value.bookname,
       bookyear: e.detail.value.bookyear,

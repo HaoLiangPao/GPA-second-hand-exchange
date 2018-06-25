@@ -6,8 +6,8 @@
     "pages/wantbuy/wantbuy",
     "pages/history/history",
     "pages/success_submit/success",
-    "pages/userinfo/user",
-    "pages/userinfo/info"
+    "pages/userinfo/info",
+    "pages/ShuJia/shujia"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,7 +28,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/wantsell/wantsell",
+        "pagePath": "pages/ShuJia/shujia",
         "iconPath": "image/book_icon.jpg",
         "selectedIconPath": "image/book_icon.jpg",
         "text": "书架"

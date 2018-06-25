@@ -62,20 +62,5 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  },
-  wantbuy: function() {
-    wx.navigateTo({
-      url: '../wantbuy/wantbuy'//The path to new page
-    })
-  },
-  wantsell: function() {
-    wx.navigateTo({
-      url: '../wantsell/wantsell'
-    })
-  },
-  info: function() {
-    wx.navigateTo({
-      url: '../userinfo/user'
-    })
   }
 })
