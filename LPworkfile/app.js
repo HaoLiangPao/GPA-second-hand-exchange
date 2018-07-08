@@ -1,5 +1,31 @@
+import util from './utils/bookList';
+let handler = {
+  // initialize the mini program
+  onLaunch() {
+    console.log('app init...')
+    /*
+     store some local storage data
+     
+    */
+    util.getStorageData('visited', (data) => {
+      this.globalData.visitedBooks = data;
+    })
+  },
+  // global data
+  globalData: {
+    user: {
+      name: '',
+      avator: ''
+    },
+    visitedBooks: ''
+  }
+};
+App(handler);
+
 //app.js
-App({
+App(
+  handler,
+  {
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []

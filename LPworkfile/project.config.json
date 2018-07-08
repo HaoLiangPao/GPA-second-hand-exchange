@@ -15,6 +15,7 @@
 	"appid": "wx5ac935a7dddac379",
 	"projectname": "LPworkfile",
 	"isGameTourist": false,
+	"miniprogramRoot": "./",
 	"condition": {
 		"search": {
 			"current": -1,
