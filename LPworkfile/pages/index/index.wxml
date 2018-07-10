@@ -1,23 +1,24 @@
 <!--index.wxml-->
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" style='height:{{height*2 +80}}rpx;width:100%;' interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}">
-      <swiper-item>
-        <image src="{{item}}" class="slide-image" width="350" height="150" />
-      </swiper-item>
-    </block>
-  </swiper>
-
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="book-logo">
+    <image class="book-logo" mode='aspectFill' src="/image/logo.png"></image>
 </view>
-<view class="searching">this is the place for searching bar</view>
-<button bindtap='BookList'>我要买书</button>
+
+<view class="search-wrapper">
+    <view class="search-panel">
+      <view class="search-section">
+        <view class="search-button-wrapper">
+        </view>
+        <view class="search-input-wrapper ">
+          <input bindinput="bindBarcodeInput" bindconfirm="query" bindfocus="bindFocus" bindblur="bindBlur" class="search-input" placeholder="Course Code for text book" value="{{coursecode}}" confirm-type="search" auto-focus='true'auto-height='true' />
+        </view>
+        <view class="search-button-wrapper">
+          <image class="search-button" src="/image/search.png" bindtap="query"></image>
+        </view>
+      </view>
+    </view>
+    <view class="search-demo" hidden="{{hiddenDropdown}}">
+      <button size="mini" bindtap="CourseType">课程分类</button>
+      <button size="mini" bindtap='BookList' style="margin-left:10px;">最新上架</button>
+      <button size="mini" bindtap='scan' style="margin-left:10px;">照片查书</button>
+    </view>
+  </view>

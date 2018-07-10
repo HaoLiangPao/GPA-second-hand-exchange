@@ -10,6 +10,7 @@
     "pages/ShuJia/shujia",
     "pages/detail/detail",
     "pages/bookList/bookList",
+    "pages/CourseType/CourseType",
     "pages/userDis/userDis"
   ],
   "window": {
