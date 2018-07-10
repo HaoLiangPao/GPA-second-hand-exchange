@@ -1,5 +1,3 @@
-'use strict';
-
 import util from '../../utils/bookList';
 import config from '../../utils/config';
 
@@ -260,6 +258,5 @@ let handler = {
       bookList: newBooks
     });
   },
-
 }
 Page(handler)

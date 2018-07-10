@@ -135,17 +135,17 @@
   word-wrap: break-word
 }
 
-.wrapper .content .langs_cn,.wrapper .content .para.translate {
+.wrapper .content .answer,.wrapper .content .para.translate {
   font-size: 32rpx;
   color: #666
 }
 
-.wrapper .content .langs_cn,.wrapper .content .langs_en,.wrapper .content .para,.wrapper .content .wxParse-p {
+.wrapper .content .answer,.wrapper .content .question,.wrapper .content .para,.wrapper .content .wxParse-p {
   margin: 44rpx 0
 }
 
 .wrapper .content image {
-  max-width: 100%;
+  max-width: 50%;
   vertical-align: top
 }
 
@@ -171,4 +171,9 @@
   border: none;
   background: url(https://n1image.hjfile.cn/mh/2017/06/12/20703f295b7b3ee4f5fe077c4e464283.png) 0 0 no-repeat;
   background-size: contain
+}
+
+.wrapper .content .author{
+  font: italic;
+  size: 10in;
 }

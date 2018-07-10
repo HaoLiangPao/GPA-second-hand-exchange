@@ -62,5 +62,11 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+
+  BookList: function () {
+    wx.navigateTo({
+      url: '../bookList/bookList',
+    })
   }
 })

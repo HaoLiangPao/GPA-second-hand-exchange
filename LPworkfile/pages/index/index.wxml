@@ -19,3 +19,5 @@
     <text class="user-motto">{{motto}}</text>
   </view>
 </view>
+<view class="searching">this is the place for searching bar</view>
+<button bindtap='BookList'>我要买书</button>
