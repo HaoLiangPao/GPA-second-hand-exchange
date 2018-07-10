@@ -18,7 +18,20 @@
     </view>
     <view class="search-demo" hidden="{{hiddenDropdown}}">
       <button size="mini" bindtap="CourseType">课程分类</button>
-      <button size="mini" bindtap='BookList' style="margin-left:10px;">最新上架</button>
+      <button size="mini" bindtap='BookList' style="margin-left:10px;">上架书目</button>
       <button size="mini" bindtap='scan' style="margin-left:10px;">照片查书</button>
     </view>
   </view>
+
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>
