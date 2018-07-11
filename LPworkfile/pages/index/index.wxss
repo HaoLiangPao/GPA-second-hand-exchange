@@ -12,7 +12,7 @@
 }
 
 .search-wrapper {
-  position: fixed;/*悬停搜索框的样式*/
+  position: absolute;/*悬停搜索框的样式*/
   top: 250px;
   left: 0;
   width: 100%;

@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    first_name: '',
-    second_name: '',
+    full_name: '',
     wechat_name: '',
     email: '',
     phone: '',
@@ -72,8 +71,7 @@ Page({
   submit_in: function (e) {
     const that = this;
     that.setData({
-      first_name: e.detail.value.first_name,
-      second_name: e.detail.value.second_name,
+      full_name: e.detail.value.full_name,
       wechat_name: e.detail.value.wechat_name,
       email: e.detail.value.email,
       phone: e.detail.value.phone,

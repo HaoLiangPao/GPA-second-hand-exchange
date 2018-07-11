@@ -2,8 +2,7 @@
 <text>个人信息：</text>
 <form bindsubmit='submit_in'>
 <view class="name">
-<input type="text" class="sdinput" placeholder="名" name="first_name"/>
-<input type="text" class="sdinput" placeholder="姓" name="second_name"/>
+<input type="text" class="sdinput" placeholder="姓名" name="full_name"/>
 </view>
 
 <view class="basic_info">
