@@ -34,4 +34,5 @@
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>
+  <view class="contact"><text class="contact_text">联系客服</text><contact-button size="22" class='pos'></contact-button></view>
 </view>
