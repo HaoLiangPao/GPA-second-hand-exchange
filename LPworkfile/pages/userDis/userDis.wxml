@@ -10,9 +10,9 @@
 
   <view class="row">
   <text>电话号码：</text>
-  <text class="phone">6478708349</text>
-  <contact-button size="22" class='pos'></contact-button>
+  <text class="phone">{{phonecall}}</text>
   <image class="icon" src="/image/call_icon.jpg"></image>
+  <button size='mini' bindtap='call' class='pos'>CALL</button>
   </view>
 
   <view class="row">

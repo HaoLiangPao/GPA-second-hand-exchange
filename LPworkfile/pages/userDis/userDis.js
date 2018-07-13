@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    phonecall: '1234567891'
   },
 
   /**
@@ -62,5 +62,11 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  call: function(){
+    wx.makePhoneCall({
+      phoneNumber: this.data.phonecall
+    })
   }
 })
