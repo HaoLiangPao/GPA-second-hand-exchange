@@ -1,16 +1,7 @@
 /**index.wxss**/
 
-<<<<<<< HEAD
 page{
   background-color: whitesmoke;
-=======
-.book-logo {
-  width: 100%;
-
-
-  margin-top:5% ;
-  margin-right:5% ;
->>>>>>> 1df3593c177f2ba85e2c518d863e46789baf752d
 }
 
 /*
@@ -101,9 +92,6 @@ page{
   color: green;
 }
 
-/*
-* 左下角恐龙图标
-*/
 .dinosaur {
   position: fixed;
   top: 90%;

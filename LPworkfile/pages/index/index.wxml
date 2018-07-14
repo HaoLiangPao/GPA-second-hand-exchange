@@ -1,13 +1,8 @@
 <!--index.wxml-->
-<<<<<<< HEAD
 
 <!-- Logo -->
 <view class="logo-view">
     <image mode='aspectFit' src="/image/GPA-LOGO-basic.jpeg"></image>
-=======
-<view>
-    <image class="book-logo" mode='aspectFit' src="/image/logo.png"></image>
->>>>>>> 1df3593c177f2ba85e2c518d863e46789baf752d
 </view>
 
 <view class="search-wrapper">
