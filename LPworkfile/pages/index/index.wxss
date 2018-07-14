@@ -1,8 +1,11 @@
 /**index.wxss**/
 
 .book-logo {
-  width: 385px;
-  height: 250px;
+  width: 100%;
+
+
+  margin-top:5% ;
+  margin-right:5% ;
 }
 
 

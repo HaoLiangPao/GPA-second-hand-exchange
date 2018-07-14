@@ -1,6 +1,6 @@
 <!--index.wxml-->
-<view class="book-logo">
-    <image class="book-logo" mode='aspectFill' src="/image/logo.png"></image>
+<view>
+    <image class="book-logo" mode='aspectFit' src="/image/logo.png"></image>
 </view>
 
 <view class="search-wrapper">

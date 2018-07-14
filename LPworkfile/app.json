@@ -39,7 +39,7 @@
         "text": "书架"
       },
       {
-        "pagePath": "pages/userinfo/info",
+        "pagePath": "pages/userDis/userDis",
         "iconPath": "image/self_icon.jpeg",
         "selectedIconPath": "image/self_icon.jpeg",
         "text": "个人"

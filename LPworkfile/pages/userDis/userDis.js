@@ -1,18 +1,43 @@
 // pages/userDis/userDis.js
+
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phonecall: '1234567891'
+    phonecall: '1234567891',
+    userInfo: {},
+    // if the page is entered from bookList -- seller info
+    fromSale: false,
+    // get the QR_Code from the server?
+    qrCode: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else {
+      console.log("lalala");
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -67,6 +92,12 @@ Page({
   call: function(){
     wx.makePhoneCall({
       phoneNumber: this.data.phonecall
+    })
+  },
+
+  edit: function (){
+    wx.navigateTo({
+      url: '/pages/userinfo/info',
     })
   }
 })

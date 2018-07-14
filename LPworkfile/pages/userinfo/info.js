@@ -1,8 +1,12 @@
 // pages/userinfo/info.js
+
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
+   * tempData
    */
   data: {
     full_name: '',
@@ -10,6 +14,9 @@ Page({
     email: '',
     phone: '',
     program: '',
+    // remember to upload the QR_Code to the server
+    qrCode: {},
+    userInfo: {},
   },
 
   /**
@@ -17,6 +24,24 @@ Page({
    */
   onLoad: function (options) {
     //加载db里的账户信息并作显示
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else {
+      console.log("lalala");
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -75,9 +100,43 @@ Page({
       wechat_name: e.detail.value.wechat_name,
       email: e.detail.value.email,
       phone: e.detail.value.phone,
-      program: e.detail.value.program
+      program: e.detail.value.program,
+      qrCode: e.detail.value.qrCode,
     })
     //wx.navigateTo({url:'../success_submit/success'})
     //在检查通过后对db进行update/insert
+  },
+
+  chooseimage: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#11110f",
+      success: function (res) {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            that.chooseWxImage('album')
+          } else if (res.tapIndex == 1) {
+            that.chooseWxImage('camera')
+          }
+        }
+      }
+    })
+
+  },
+
+  chooseWxImage: function (type) {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: [type],
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          qrCode: res.tempFilePaths,
+        })
+      }
+    })
   }
 })

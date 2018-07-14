@@ -1,15 +1,20 @@
 <!--pages/userinfo/info.wxml-->
-<text>个人信息：</text>
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  </view>
+  
 <form bindsubmit='submit_in'>
 <view class="name">
 <input type="text" class="sdinput" placeholder="姓名" name="full_name"/>
 </view>
 
 <view class="basic_info">
-<input type="text" class="sdinput" placeholder="你的微信号" name="wechat_name"/>
-<input type="text" class="sdinput" placeholder="你的邮箱" name="email"/>
-<input type="text" class="sdinput" placeholder="你的电话号码" name="phone"/>
-<input type="text" class="sdinput" placeholder="你的Program" name="program"/>
+<input type="text" class="sdinput" placeholder="您的微信号" name="wechat_name"/>
+<input type="text" class="sdinput" placeholder="您的邮箱" name="email"/>
+<input type="text" class="sdinput" placeholder="您的电话号码" name="phone"/>
+<input type="text" class="sdinput" placeholder="您的Program" name="program"/>
+<button style="margin:30rpx;" bindtap="chooseimage">上传您的QR_Code</button>
 </view>
 <button style="margin:30rpx;" bindtap="submit" form-type='submit'>提交</button>
 </form>
@@ -20,3 +25,9 @@
 <view><text>邮箱:{{email}}</text></view>
 <view><text>program:{{program}}</text></view>
 <view><text>电话:{{phone}}</text></view>
+
+<!-- how to get qrCode[0] from the server? but not under same package -->
+<view class="image_container">
+<image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+</view>
+
