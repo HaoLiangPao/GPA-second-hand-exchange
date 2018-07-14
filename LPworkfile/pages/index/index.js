@@ -116,7 +116,7 @@ Page({
 
   //搜索方程 （待接课程编码）
   query: function (e) {
-    var url = "https://www.xxx.com/query";//查询数据的URL
+    var url = "http://138.51.32.192:8000/search/byBook?BookTitle=val3";//查询数据的URL
     var that = this;
     if (that.data.coursecode == undefined
       || that.data.coursecode == null
@@ -127,19 +127,22 @@ Page({
         image: '/image/info.png',
         duration: 2000
       });
-      return;
+      //return;
     }
+    console.log("YES!")
     // 搜索：获取数据库书本数据
     wx.request({
       url: url,
-      data: { coursecode: that.data.coursecode },
+      //data: { coursecode: that.data.coursecode },
       method: 'GET',
       success: function (res) {
         var result = res.data;
+        console.log("\n\n\n" + result + "\n\n\n")
         if (result.Status != 0) {
           that.setData({ hiddenData: true });
           wx.showToast({
-            title: result.Message,
+            //title: result.Message,
+            title: "Success",
             image: '/images/fail.png',
             duration: 2000
           })

@@ -1,38 +1,37 @@
 <!--index.wxml-->
-<view class="book-logo">
-    <image class="book-logo" mode='aspectFill' src="/image/logo.png"></image>
+
+<!-- Logo -->
+<view class="logo-view">
+    <image mode='aspectFit' src="/image/GPA-LOGO-basic.jpeg"></image>
 </view>
 
 <view class="search-wrapper">
-    <view class="search-panel">
+
+    <!-- 搜索框 -->
       <view class="search-section">
-        <view class="search-button-wrapper">
-        </view>
+
         <view class="search-input-wrapper ">
-          <input bindinput="bindBarcodeInput" bindconfirm="query" bindfocus="bindFocus" bindblur="bindBlur" class="search-input" placeholder="Course Code for text book" value="{{coursecode}}" confirm-type="search" auto-focus='true'auto-height='true' />
+          <input bindinput="bindBarcodeInput" bindconfirm="query" bindfocus="bindFocus" bindblur="bindBlur" class="search-input" placeholder="输入课号吧..." value="{{coursecode}}" confirm-type="search" auto-focus='true'auto-height='true' />
         </view>
+
         <view class="search-button-wrapper">
           <image class="search-button" src="/image/search.png" bindtap="query"></image>
         </view>
-      </view>
-    </view>
-    <view class="search-demo" hidden="{{hiddenDropdown}}">
-      <button size="mini" bindtap="CourseType">课程分类</button>
-      <button size="mini" bindtap='BookList' style="margin-left:10px;">上架书目</button>
-      <button size="mini" bindtap='scan' style="margin-left:10px;">照片查书</button>
-    </view>
-  </view>
 
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-  <view class="contact"><text class="contact_text">联系客服</text><contact-button size="22" class='pos'></contact-button></view>
+      </view>
+
+    <!-- 搜索框下面的3个按钮 -->
+    <view class="option-buttons" hidden="{{hiddenDropdown}}">
+      <button class="option-button" size="mini" bindtap="CourseType">课程分类</button>
+      <button class="option-button" size="mini" bindtap="BookList">上架书目</button>
+      <button class="option-button" size="mini" bindtap="scan">照片查书</button>
+    </view>
+
+</view>
+
+<image class="dinosaur" src="/image/dinosaur.png"></image>
+
+<view class="contact">
+    <text class="contact_text">联系客服</text>
+    <contact-button size="22"></contact-button>
 </view>

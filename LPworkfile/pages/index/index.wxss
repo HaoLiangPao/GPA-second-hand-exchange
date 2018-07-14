@@ -1,99 +1,118 @@
 /**index.wxss**/
 
-.book-logo {
-  width: 385px;
-  height: 250px;
+page{
+  background-color: whitesmoke;
 }
 
-
-.usermotto {
-  margin-top: 50px;
-  color: #210;
-}
-
-.search-wrapper {
-  position: absolute;/*悬停搜索框的样式*/
-  top: 250px;
-  left: 0;
+/*
+* 装GPA Logo的view
+*/
+.logo-view {
   width: 100%;
-  z-index: 999;
-}
- 
-.search-panel {
-  background-color: #f50;
-}
- 
-.search-section {
-  padding: 5px 0px;
+  height: 60%;
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(12, 205, 137, 0.7)), to(rgba(0, 0, 0, 0)));
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
- 
-.search-demo {
-  padding: 5px;
-  height: 35px;
+
+/*
+* 装搜索框和它下面按钮的外层view
+*/
+.search-wrapper {
+  position: absolute;/*悬停搜索框的样式*/
+  top: 60%;
+  width: 100%;
+  height: 20%;
+  z-index: 999;
+}
+
+/*
+* 装搜索框的外层view
+*/
+.search-section {
+  padding: 3% 3% 3% 3%;
+  display: flex;
   flex-direction: row;
-  background-color: whitesmoke;
-  padding-left:42px;   
-  align-items: flex-start;
+  background-color: #26b961;
 }
- 
+
+/*
+* 装搜索框打字输入部分的外层view
+*/
 .search-input-wrapper {
   flex: 8;
   padding: 5px;
   background-color: #eee;
   border-radius: 3px;
 }
- 
+
+/*
+* 搜索框打字输入部分input
+*/
 .search-input {
   padding-top: 5px;
 }
- 
-.search-clear {
-  float: right;
-  width: 50px;
-  height: 50px;
-  z-index: 998;
-}
- 
+
+/*
+* 装搜索框搜索按钮部分的view
+*/
 .search-button-wrapper {
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top:5px; 
-}
- 
-.search-button {
   flex: 1;
-  border: none !important;
-  color: white !important;
-  width: 32px;
-  height: 32px;
+  padding: 5px 5px 5px 5px;
 }
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.contact{
-  position:fixed;
-  top: 95%;
-  left:70%;
+/*
+* 搜索框搜索按钮
+*/
+.search-button {
+  /*这两个需要吗？*/
+  /*border: none !important;
+  color: white !important;*/
   width: 100%;
+  height: 100%;
 }
 
-.contact_text{
+/*
+* 搜索框下面按钮
+*/
+.option-buttons {
+  display: flex;
+  padding: 1% 1% 1% 1%;
+  height: 30%;
+  width: 100%;
+  flex-direction: row;
+  background-color: whitesmoke;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-button {
+  color: green;
+}
+
+/*
+* 左下角恐龙图标
+*/
+.dinosaur {
+  position: fixed;
+  top: 90%;
+  width: 100%;
+  height: 10%;
+}
+
+/*
+* 联系客服文字+按钮
+*/
+.contact {
+  position: fixed;
+  top: 90%;
+  left: 70%;
+  width: 100%;
+  /*background-color: black;*/
+}
+
+.contact_text {
   color: #aaa;
 }
