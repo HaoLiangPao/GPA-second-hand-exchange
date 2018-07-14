@@ -12,11 +12,17 @@ Page({
     full_name: '',
     wechat_name: '',
     email: '',
+    year: '',
     phone: '',
     program: '',
     // remember to upload the QR_Code to the server
     qrCode: {},
     userInfo: {},
+    checkItems: [
+      { name: 'GP_Student', value: 'ture'},
+      { name: 'Non_GP', value: 'false' },
+    ],
+    GP: ''
   },
 
   /**
@@ -59,34 +65,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
@@ -102,11 +80,13 @@ Page({
       phone: e.detail.value.phone,
       program: e.detail.value.program,
       qrCode: e.detail.value.qrCode,
+      year: e.detail.value.year
     })
     //wx.navigateTo({url:'../success_submit/success'})
     //在检查通过后对db进行update/insert
   },
 
+  // function to upload pictures
   chooseimage: function () {
     var that = this;
     wx.showActionSheet({
@@ -125,6 +105,7 @@ Page({
 
   },
 
+  // help function to set filePath
   chooseWxImage: function (type) {
     var that = this;
     wx.chooseImage({
@@ -138,5 +119,14 @@ Page({
         })
       }
     })
+  },
+
+  // how to define the checked item??
+  checkboxChange: function (e) {
+    const that = this;
+    that.setData({
+      GP: e.detail.value
+    })
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   }
 })

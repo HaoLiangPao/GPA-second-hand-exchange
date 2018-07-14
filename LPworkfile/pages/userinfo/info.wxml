@@ -1,33 +1,48 @@
 <!--pages/userinfo/info.wxml-->
-  <view class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  
-<form bindsubmit='submit_in'>
-<view class="name">
-<input type="text" class="sdinput" placeholder="姓名" name="full_name"/>
+<view class="userinfo">
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
 </view>
 
-<view class="basic_info">
-<input type="text" class="sdinput" placeholder="您的微信号" name="wechat_name"/>
-<input type="text" class="sdinput" placeholder="您的邮箱" name="email"/>
-<input type="text" class="sdinput" placeholder="您的电话号码" name="phone"/>
-<input type="text" class="sdinput" placeholder="您的Program" name="program"/>
-<button style="margin:30rpx;" bindtap="chooseimage">上传您的QR_Code</button>
-</view>
-<button style="margin:30rpx;" bindtap="submit" form-type='submit'>提交</button>
+<form bindsubmit='submit_in'>
+  <view class="basic_info">
+    <input type="text" class="sdinput" placeholder="您的姓名" name="full_name" />
+    <input type="text" class="sdinput" placeholder="您的微信号" name="full_name" />
+    <input type="text" class="sdinput" placeholder="您的入学年份" name="full_name" />
+    <input type="text" class="sdinput" placeholder="您的邮箱" name="email" />
+    <input type="text" class="sdinput" placeholder="您的电话号码" name="phone" />
+    <input type="text" class="sdinput" placeholder="您的Program" name="program" />
+    <checkbox-group bindchange="checkboxChange">
+      <label class="checkbox" wx:for="{{checkItems}}">
+        <checkbox value="{{checkItems.name}}" checked="{{checkItems.checked}}" />{{item.name}}
+      </label>
+    </checkbox-group>
+    <button style="margin:30rpx;" bindtap="chooseimage">上传您的QR_Code</button>
+  </view>
+  <button type="primary" style="margin:30rpx;" bindtap="submit" form-type='submit'>确认修改</button>
 </form>
+
 <text>测试结果</text>
-<view><text>名:{{first_name}}</text></view>
-<view><text>姓:{{second_name}}</text></view>
-<view><text>微信号:{{wechat_name}}</text></view>
-<view><text>邮箱:{{email}}</text></view>
-<view><text>program:{{program}}</text></view>
-<view><text>电话:{{phone}}</text></view>
+<view>
+  <text>名:{{first_name}}</text>
+</view>
+<view>
+  <text>姓:{{second_name}}</text>
+</view>
+<view>
+  <text>微信号:{{wechat_name}}</text>
+</view>
+<view>
+  <text>邮箱:{{email}}</text>
+</view>
+<view>
+  <text>program:{{program}}</text>
+</view>
+<view>
+  <text>电话:{{phone}}</text>
+</view>
 
 <!-- how to get qrCode[0] from the server? but not under same package -->
 <view class="image_container">
-<image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+  <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
 </view>
-
