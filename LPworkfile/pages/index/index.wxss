@@ -17,6 +17,10 @@ page{
   align-items: center;
 }
 
+.logo {
+  border-radius: 50%;
+}
+
 /*
 * 装搜索框和它下面按钮的外层view
 */
