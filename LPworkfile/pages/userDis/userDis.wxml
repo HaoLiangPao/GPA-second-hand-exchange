@@ -1,29 +1,36 @@
 <!--pages/userDis.wxml-->
 <view class="container">
-<view class="userinfo">
-  <view><image class="image1" src="../../image/book_icon.jpg" background-size="cover"></image></view>
-  <view><text class="nickname">测试昵称123</text></view>
+
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+
+  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+
   <view class="row">
-  <text>专业：</text>
-  <text class="program">Statistics</text>
+    <text>专业：</text>
+    <text class="program">Statistics</text>
   </view>
 
   <view class="row">
-  <text>电话号码：</text>
-  <text class="phone">{{phonecall}}</text>
-  <image class="icon" src="/image/call_icon.jpg"></image>
-  <button size='mini' bindtap='call' class='pos'>CALL</button>
-  </view>
-
-  <view class="row">
-  <text>邮箱：</text>
-  <text class="email">weisiyi2@gmail.com</text>
-  </view>
-
-  <view class="row">
-  <text>微信号：</text>
-  <text class="wechat">weisiyi222</text>
+    <text>入学年份：</text>
+    <text class="program">2016</text>
   </view>
   
+  <view class="row">
+    <text class="phoneNumber">电话号码：{{phonecall}}</text>
+  </view>
+
+  <view class="row">
+    <text>邮箱：</text>
+    <text class="email">weisiyi2@gmail.com</text>
+  </view>
+
+  <button wx:if="{{!fromSale}}" bindtap="edit"> 编辑个人信息 </button>
+  <block wx:else>
+  <button bindtap='call'>Call</button>
+  </block>
+
 </view>
+
+<view class="image_container">
+  <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit"></image>
 </view>

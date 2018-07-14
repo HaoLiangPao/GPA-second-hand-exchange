@@ -1,15 +1,28 @@
 // pages/userinfo/info.js
+
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
+   * tempData
    */
   data: {
     full_name: '',
     wechat_name: '',
     email: '',
+    year: '',
     phone: '',
     program: '',
+    // remember to upload the QR_Code to the server
+    qrCode: {},
+    userInfo: {},
+    checkItems: [
+      { name: 'GP_Student', value: 'ture'},
+      { name: 'Non_GP', value: 'false' },
+    ],
+    GP: ''
   },
 
   /**
@@ -17,6 +30,24 @@ Page({
    */
   onLoad: function (options) {
     //加载db里的账户信息并作显示
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        hasUserInfo: true
+      })
+    } else {
+      console.log("lalala");
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+            hasUserInfo: true
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -34,34 +65,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
@@ -75,9 +78,55 @@ Page({
       wechat_name: e.detail.value.wechat_name,
       email: e.detail.value.email,
       phone: e.detail.value.phone,
-      program: e.detail.value.program
+      program: e.detail.value.program,
+      qrCode: e.detail.value.qrCode,
+      year: e.detail.value.year
     })
     //wx.navigateTo({url:'../success_submit/success'})
     //在检查通过后对db进行update/insert
+  },
+
+  // function to upload pictures
+  chooseimage: function () {
+    var that = this;
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#11110f",
+      success: function (res) {
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            that.chooseWxImage('album')
+          } else if (res.tapIndex == 1) {
+            that.chooseWxImage('camera')
+          }
+        }
+      }
+    })
+
+  },
+
+  // help function to set filePath
+  chooseWxImage: function (type) {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: [type],
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          qrCode: res.tempFilePaths,
+        })
+      }
+    })
+  },
+
+  // how to define the checked item??
+  checkboxChange: function (e) {
+    const that = this;
+    that.setData({
+      GP: e.detail.value
+    })
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   }
 })

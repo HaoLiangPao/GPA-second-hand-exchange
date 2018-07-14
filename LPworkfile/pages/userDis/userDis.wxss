@@ -1,36 +1,33 @@
-.userinfo{
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.image1{
-  width: 185rpx;
-  height: 185rpx;
-  margin:20rpx;
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
   border-radius: 50%;
 }
 
-.nickname{
-  margin-top: 10rpx;
+.userinfo-nickname {
+  color: #aaa;
 }
 
-.row{  
+.row{
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center
 } 
 
-.pos{
-  margin:0%;
-  position: fixed;
-  top:45%;
-  left:70%;
-  opacity: 0;
+.call{
+  margin-left: 10%;
+  flex: 1
 }
 
-.icon{
-  width: 30px;  
-  height: 30px;
-  margin:0%;
+.phoneNumber{
+  flex: 5
 }
