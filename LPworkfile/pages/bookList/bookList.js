@@ -8,9 +8,8 @@ let isDEV = config.isDev;
 let handler = {
   data: {
     page: 1, //当前加载第几页的数据
-    days: 3,
-    pageSize: 4,
-    totalSize: 0,
+    totalPage: 4,
+    pageSize:4,
     hasMore: true,// 用来判断下拉加载更多内容操作
     bookList: [], // 存放文章列表数据，与视图相关联
     defaultImg: config.defaultImg
@@ -32,11 +31,14 @@ let handler = {
       data: {
         tag: 'U of T',
         start: this.data.page || 1,
-        days: this.data.days || 3,
-        pageSize: this.data.pageSize,
       }
+
     })
       .then(res => {
+        console.log("requestBook -- res.data is :", res.data );
+        console.log("requestBook -- this.data is :", this.data);
+        console.log("requestBook -- res.data.page is :", this.data.page);
+        console.log("RequestData - res.data.length is :", res.data.length);
         if (res && res.status === 0 && res.data && res.data.length) {
           // get original data
           let bookData = res.data;
@@ -45,6 +47,8 @@ let handler = {
           console.log("requestBook -- format data is:", bookData);
           // append book to the bookList
           this.renderBook(formatData)
+
+
         }
         /*
         * 1. no data after request:
@@ -79,6 +83,7 @@ let handler = {
           });
           return null;
         }
+        console.log("requestBook -- this.data is :", this.data);
       });
   },
   /*
@@ -103,13 +108,12 @@ let handler = {
           // group.books is either an empty list or formatedBooks
           let formatBookItems = group.books.map((item) => {
             // 判断是否已经访问过
-            //
             item.hasVisited = this.isVisited(item.contentId);
-            console.log("formatBookData - the most recent read book is: ", item);
+            console.log("formatBookData - a newly checked book is: ", item);
             return item;
           }) || [];
           group.books = formatBookItems;
-          console.log("formatBookData - the formatBookItems are: ", formatBookItems);
+          console.log("formatBookData - the formatGroup is: ", formatBookItems);
         }
         return group
       })
@@ -162,6 +166,8 @@ let handler = {
     // if data exist
     if (data && data.length) {
       console.log("renderBook - newly appended data is: ", data);
+      console.log("renderBook - length is: ", data.length);
+
       // append new book groups to a list and update the old list
       let newList = this.data.bookList.concat(data);
       this.setData({
@@ -169,6 +175,7 @@ let handler = {
         hiddenLoading: true,
       })
       console.log("renderBook - the newList is : ", newList);
+      console.log("renderBook -- this.data is: ", this.data);
     }
   },
 
@@ -178,11 +185,14 @@ let handler = {
   onReachBottom() {
     // hasMore is defaulted to be true, only update under cases that request fails
     if (this.data.hasMore) {
+      console.log("the data is: ", this.data);
       // keep track on the page nubmer for #books references
       let nextPage = this.data.page + 1;
+      console.log("onReachBottom -- the next page is: ", nextPage);
       this.setData({
         page: nextPage
       });
+      console.log("\n onReachBottom -- the page is: \n ", this.data.page);
       this.requestBook();
     }
   },
@@ -214,10 +224,6 @@ let handler = {
     console.log("\n showDetail -- item is: \n", item);
     // default the ID to be 0
     let contentId = item.contentId || 0
-    console.log("\n showDetail -- itemID is: \n", item.contentId);
-    console.log("\n showDetail -- itemID is: \n", item.contentId || 0);
-    console.log("\n showDetail -- itemID is: \n", item.contentId);
-    console.log("\n showDetail -- itemID is: \n", contentId);
     // varify the "visited" function
     this.markRead(contentId)
     wx.navigateTo({

@@ -78,7 +78,8 @@
 }
 
 .wrapper .group-content-item.visited .group-content-item-desc {
-  color: #999
+  color: #999;
+  font-size: 55rpx;
 }
 
 .wrapper .no-more {
@@ -88,4 +89,14 @@
   color: #ccc;
   text-align: center;
   padding: 20rpx 0
+}
+
+.wrapper .group-content-price {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #26b961;
+  line-height: 1;
+  font-size: 30rpx;
+  font-weight: 300;
 }

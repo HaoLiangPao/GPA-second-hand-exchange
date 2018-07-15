@@ -43,10 +43,6 @@ Page({
           this.configPageData(data)
           util.log(data)
         })
-        //调用wxparse
-        .then(() => {
-          this.articleRevert()
-        })
     }
   },
 
@@ -92,12 +88,6 @@ Page({
     }
   },
 
-  // 
-  articleRevert() {
-    // this.data.detailData 是之前我们通过 setData 设置的响应数据
-    let htmlContent = this.data.detailData && this.data.detailData.content;
-    WxParse.wxParse('article', 'html', htmlContent, this, 0);
-  },
 
   // enable "next book" function
   next() {
