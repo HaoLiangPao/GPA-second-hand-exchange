@@ -49,6 +49,7 @@ let util = {
       }
     })
   },
+
   setStorageData(key, value = '', cb) {
     wx.setStorage({
       key: key,
@@ -58,6 +59,7 @@ let util = {
       }
     })
   },
+  
   // 网络请求
   request(opt) {
     let options = Object.assign({}, DEFAULT_REQUEST_OPTIONS, opt)

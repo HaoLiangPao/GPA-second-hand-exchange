@@ -14,7 +14,7 @@ let handler = {
     hasMore: true,// 用来判断下拉加载更多内容操作
     bookList: [], // 存放文章列表数据，与视图相关联
     defaultImg: config.defaultImg
-  }, 
+  },
   onLoad(options) {
     this.requestBook()
     this.setData({
@@ -22,7 +22,7 @@ let handler = {
     })
   },
   /*
-   * reques book information
+   * request book information
    */
   requestBook() {
     // request for mock data stored in list
@@ -34,7 +34,6 @@ let handler = {
         start: this.data.page || 1,
         days: this.data.days || 3,
         pageSize: this.data.pageSize,
-        langs: config.appLang || 'en'
       }
     })
       .then(res => {
@@ -43,6 +42,7 @@ let handler = {
           let bookData = res.data;
           // format original data
           let formatData = this.formatBookData(bookData);
+          console.log("requestBook -- format data is:", bookData);
           // append book to the bookList
           this.renderBook(formatData)
         }
@@ -105,9 +105,11 @@ let handler = {
             // 判断是否已经访问过
             //
             item.hasVisited = this.isVisited(item.contentId);
+            console.log("formatBookData - the most recent read book is: ", item);
             return item;
           }) || [];
           group.books = formatBookItems;
+          console.log("formatBookData - the formatBookItems are: ", formatBookItems);
         }
         return group
       })
@@ -147,9 +149,11 @@ let handler = {
   */
   isVisited(contentId) {
     let visitedBooks = app.globalData && app.globalData.visitedBooks || '';
+    // help debug message
+    console.log("the index of the contentID is: ", visitedBooks.indexOf(`${contentId}`));
     return visitedBooks.indexOf(`${contentId}`) > -1;
   },
-  
+
   /*
   * append requested book to the bookList
   *
@@ -157,12 +161,14 @@ let handler = {
   renderBook(data) {
     // if data exist
     if (data && data.length) {
-      // append new book to a list and update the old list
+      console.log("renderBook - newly appended data is: ", data);
+      // append new book groups to a list and update the old list
       let newList = this.data.bookList.concat(data);
       this.setData({
         bookList: newList,
-        hiddenLoading: true
+        hiddenLoading: true,
       })
+      console.log("renderBook - the newList is : ", newList);
     }
   },
 
@@ -203,9 +209,15 @@ let handler = {
   */
   showDetail(book) {
     let dataset = book.currentTarget.dataset
+    console.log("\n showDetail -- dataset is: \n", dataset);
     let item = dataset && dataset.item
+    console.log("\n showDetail -- item is: \n", item);
     // default the ID to be 0
     let contentId = item.contentId || 0
+    console.log("\n showDetail -- itemID is: \n", item.contentId);
+    console.log("\n showDetail -- itemID is: \n", item.contentId || 0);
+    console.log("\n showDetail -- itemID is: \n", item.contentId);
+    console.log("\n showDetail -- itemID is: \n", contentId);
     // varify the "visited" function
     this.markRead(contentId)
     wx.navigateTo({
@@ -229,10 +241,12 @@ let handler = {
         if (data.indexOf(contentId) === -1) {
           newStorage = `${data},${contentId}`;
         }
+        console.log("markRead add content: newStorage is ", newStorage);
       }
       // 如果还没有阅读 visited 的数据，那说明当前的文章是用户阅读的第一篇，直接赋值就行了 
       else {
         newStorage = `${contentId}`;
+        console.log("markRead add content / first: newStorage is ", newStorage);
       }
 
       /*
@@ -240,6 +254,8 @@ let handler = {
       * we need to update the global data (local storage) 
       */
       if (data !== newStorage) {
+        console.log("markRead / data-newStorage different: data is ", data);
+        console.log("markRead / data-newStorage different: newStorage is ", newStorage);
         if (app.globalData) {
           app.globalData.visitedBooks = newStorage;
         }
@@ -249,7 +265,7 @@ let handler = {
       }
     });
   },
-  
+
   // reset the book to the final updated visited version
   resetBooks() {
     let old = this.data.bookList;

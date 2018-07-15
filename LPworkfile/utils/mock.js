@@ -3,7 +3,7 @@ const list = {
     {
       books: [
         {
-          contentID: 1000000,
+          contentId: 1000000,
           cover:"https://images-na.ssl-images-amazon.com/images/I/51XckHoPQFL._SX258_BO1,204,203,200_.jpg",
           pubdate:"2018-07-08 12:12:12",
           title:"MGTA01",
@@ -19,7 +19,7 @@ const list = {
           price: "20$"
         }
       ],
-      date: "2017-06-27"
+      date: "2018-07-14"
     },
     {
       books: [
@@ -42,6 +42,27 @@ const list = {
       ],
       date: "2017-06-26"
     },
+    {
+      books: [
+        {
+          contentID: 121121212,
+          cover: "https://images-na.ssl-images-amazon.com/images/I/51XckHoPQFL._SX258_BO1,204,203,200_.jpg",
+          pubdate: "2018-07-08 12:12:12",
+          title: "MGTA01",
+          seller: "Hao Liang",
+          price: "10$"
+        },
+        {
+          contentId: 11223344,
+          cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBGnTjcjcIZFsPdOHcXkdD1-qvbmgsXpd1zAgPNnrV3kgsOMJiRA",
+          pubdate: "2017-06-27 00:45:00",
+          title: "CSCA20",
+          seller: "Hao Liang",
+          price: "20$"
+        }
+      ],
+      date: "2018-07-12"
+    }
   ],
   message: "success",
   status: 0,

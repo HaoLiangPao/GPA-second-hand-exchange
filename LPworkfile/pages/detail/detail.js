@@ -190,8 +190,8 @@ Page({
     }
   },
 
-  sellerInfo: function (){
-    wx.navigateTo({
+  sellerInfo: function (event){
+    wx.switchTab({
       url: '../userDis/userDis'
     })
   }
