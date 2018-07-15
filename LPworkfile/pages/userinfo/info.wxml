@@ -5,10 +5,23 @@
 </view>
 
 <form bindsubmit='submit_in'>
+  <template is="head" data="{{title: 'picker'}}"/>
   <view class="basic_info">
     <input type="text" class="sdinput" placeholder="您的姓名" name="full_name" />
     <input type="text" class="sdinput" placeholder="您的微信号" name="full_name" />
-    <input type="text" class="sdinput" placeholder="您的入学年份" name="full_name" />
+    <view class="weui-cells__title">您的入学日期</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label"></view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="date" value="{{date}}" start="2015-09-01" end="2019-09-01" bindchange="bindDateChange">
+              <view class="weui-input">{{date}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
     <input type="text" class="sdinput" placeholder="您的邮箱" name="email" />
     <input type="text" class="sdinput" placeholder="您的电话号码" name="phone" />
     <input type="text" class="sdinput" placeholder="您的Program" name="program" />
@@ -16,6 +29,13 @@
       <label class="checkbox" wx:for="{{checkItems}}">
         <checkbox value="{{checkItems.name}}" checked="{{checkItems.checked}}" />{{item.name}}
       </label>
+      <view class="page-section page-section-gap">
+        <view class="page-section-title">radio</view>
+        <radio-group name="radio">
+          <label><radio value="radio1"/>GP学生</label>
+          <label><radio value="radio2"/>非GP学生</label>
+        </radio-group>
+      </view>
     </checkbox-group>
     <button style="margin:30rpx;" bindtap="chooseimage">上传您的QR_Code</button>
   </view>

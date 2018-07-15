@@ -15,6 +15,8 @@ Page({
     year: '',
     phone: '',
     program: '',
+    index: 0,
+    date: '2018-09-01',
     // remember to upload the QR_Code to the server
     qrCode: {},
     userInfo: {},
@@ -104,7 +106,19 @@ Page({
     })
 
   },
+  // picker
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+  },
 
+  bindDateChange: function (e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
   // help function to set filePath
   chooseWxImage: function (type) {
     var that = this;
