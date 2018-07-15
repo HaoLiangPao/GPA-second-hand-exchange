@@ -22,8 +22,8 @@
 
     <!-- 搜索框下面的3个按钮 -->
     <view class="option-buttons" hidden="{{hiddenDropdown}}">
-      <button class="option-button" size="mini" bindtap="CourseType">课程分类</button>
-      <button class="option-button" size="mini" bindtap="BookList">上架书目</button>
+      <button class="option-button" size="mini" bindtap="CourseType">按类找书</button>
+      <button class="option-button" size="mini" bindtap="BookList">最新上架</button>
       <button class="option-button" size="mini" bindtap="scan">照片查书</button>
     </view>
 
