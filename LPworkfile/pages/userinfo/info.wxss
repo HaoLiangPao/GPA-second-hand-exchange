@@ -16,6 +16,10 @@
   padding-left: 10px;
 }
 
+.basic_info{
+  padding:5px;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
