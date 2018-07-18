@@ -5,32 +5,34 @@
 </view>
 
 <form bindsubmit='submit_in'>
-  <template is="head" data="{{title: 'picker'}}"/>
   <view class="basic_info">
-    <input type="text" class="sdinput" placeholder="您的姓名" name="full_name" />
-    <input type="text" class="sdinput" placeholder="您的微信号" name="full_name" />
-    <view class="weui-cells__title">您的入学日期</view>
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label"></view>
-          </view>
-          <view class="weui-cell__bd">
-            <picker mode="date" value="{{date}}" start="2015-09-01" end="2019-09-01" bindchange="bindDateChange">
-              <view class="weui-input">{{date}}</view>
-            </picker>
-          </view>
-        </view>
-      </view>
-    <input type="text" class="sdinput" placeholder="您的邮箱" name="email" />
-    <input type="text" class="sdinput" placeholder="您的电话号码" name="phone" />
-    <input type="text" class="sdinput" placeholder="您的Program" name="program" />
+    <text>您的姓名</text>
+    <input type="text" class="sdinput" placeholder="姓名" name="full_name" />
+  </view>
+  <view class="basic_info">
+    <text>您的微信号</text>
+    <input type="text" class="sdinput" placeholder="微信" name="full_name" />
+  </view>
+  <view class="basic_info">
+    <text>您的入学日期</text>
+      <picker mode="date" value="{{date}}" start="2015-09-01" end="2019-09-01" bindchange="bindDateChange">
+      <text class="weui-input">{{date}}</text>
+      </picker>
+    </view>
+  <view class="basic_info">
+    <text>您的邮箱</text>
+    <input type="text" class="sdinput" placeholder="EX:aaaa@gmail.com" name="email" />
+  </view>
+  <view class="basic_info">
+    <text>您的电话号码</text>
+    <input type="text" class="sdinput" placeholder="EX:123456789" name="phone" />
+  </view>
+  <view class="basic_info">
+    <text>您的Program</text>
+    <input type="text" class="sdinput" placeholder="EX:STA Major" name="program" />
+  </view>
     <checkbox-group bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{checkItems}}">
-        <checkbox value="{{checkItems.name}}" checked="{{checkItems.checked}}" />{{item.name}}
-      </label>
       <view class="page-section page-section-gap">
-        <view class="page-section-title">radio</view>
         <radio-group name="radio">
           <label><radio value="radio1"/>GP学生</label>
           <label><radio value="radio2"/>非GP学生</label>
@@ -38,29 +40,8 @@
       </view>
     </checkbox-group>
     <button style="margin:30rpx;" bindtap="chooseimage">上传您的QR_Code</button>
-  </view>
   <button type="primary" style="margin:30rpx;" bindtap="submit" form-type='submit'>确认修改</button>
 </form>
-
-<text>测试结果</text>
-<view>
-  <text>名:{{first_name}}</text>
-</view>
-<view>
-  <text>姓:{{second_name}}</text>
-</view>
-<view>
-  <text>微信号:{{wechat_name}}</text>
-</view>
-<view>
-  <text>邮箱:{{email}}</text>
-</view>
-<view>
-  <text>program:{{program}}</text>
-</view>
-<view>
-  <text>电话:{{phone}}</text>
-</view>
 
 <!-- how to get qrCode[0] from the server? but not under same package -->
 <view class="image_container">

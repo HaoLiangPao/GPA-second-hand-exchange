@@ -1,4 +1,11 @@
 /* pages/wantsell/wantsell.wxss */
+.title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center
+}
+
 .image_container{
   font-size-adjust: 0;
   height:auto;
@@ -7,7 +14,7 @@
 }
 
 .sdinput{
-  border: lightgrey;
+  border: lightgreen;
   border-style: solid;
   border-width: 1px;
   font-size: 14px;
@@ -18,12 +25,16 @@
 
 .description{
   width:99%;
-  border: lightgrey;
+  border: lightgreen;
   border-style: solid;
   border-width: 1px;
   font-size: 14px;
   border-radius: 5px;
   height: 200px;
+}
+
+.book_info{
+  padding:5px;
 }
 .name{
   display:flex;

@@ -16,7 +16,7 @@ Page({
     phone: '',
     program: '',
     index: 0,
-    date: '2018-09-01',
+    date: '0000-00-00',
     // remember to upload the QR_Code to the server
     qrCode: {},
     userInfo: {},
