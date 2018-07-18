@@ -4,12 +4,6 @@ const app = getApp()
 
 Page({
   data: {
-    
-    imgUrls: [
-      "../../image/book_image.jpeg",
-      "../../image/gpa.jpg",
-      "../../image/gpa_qr.jpg"
-    ],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
@@ -116,7 +110,7 @@ Page({
 
   //搜索方程 （待接课程编码）
   query: function (e) {
-    var url = "http://138.51.32.192:8000/search/byBook?BookTitle=val3";//查询数据的URL
+    var url = "http://localhost:8000/search/byBook?BookTitle=val3";//查询数据的URL
     var that = this;
     if (that.data.coursecode == undefined
       || that.data.coursecode == null
