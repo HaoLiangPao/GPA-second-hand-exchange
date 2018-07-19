@@ -1,5 +1,9 @@
 /**index.wxss**/
 
+page{
+  background-color: lightcyan;
+}
+
 .row {
     display: flex;
     flex-direction: row;
@@ -27,5 +31,6 @@
     font-size: 18px;
     align-content: flex-end;
     margin-top: 15rpx;
-    margin-bottom: 15rpx
+    margin-bottom: 15rpx;
+    color: darkblue;
 }

@@ -107,23 +107,28 @@ Page({
   //照片查书(硬编码未完成)
   scan: function (e) {
     var that = this;
-    wx.scanCode({
-      success: function (res) {
-        that.setData({
-          barcode: res.result
-        });
-        that.query(e);
-      },
-      fail: function () {
-        that.setData({
-          barcode: "",
-          hiddenData: true
-        });
-      },
-      complete: function () {
+    wx.showToast({
+      title: '功能敬请期待',
+      image: '/image/pig.jpg',
+      duration: 2000
+    });
+    //wx.scanCode({
+    //  success: function (res) {
+    //    that.setData({
+    //      barcode: res.result
+    //    });
+    //    that.query(e);
+    //  },
+    //  fail: function () {
+    //    that.setData({
+    //      barcode: "",
+    //      hiddenData: true
+    //    });
+    //  },
+    //  complete: function () {
         // complete
-      }
-    })
+    //  }
+    //})
   },
 
   //搜索方程 （待接课程编码）

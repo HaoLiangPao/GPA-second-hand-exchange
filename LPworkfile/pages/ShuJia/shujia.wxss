@@ -1,1 +1,75 @@
 /* pages/ShuJia/shujia.wxss */
+page {
+    height: 100%;
+}
+
+.rack {
+    height: 100%;
+    position: relative;
+}
+
+.mybook {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 8%;
+    left: 12%;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.item_size {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 200rpx;
+}
+
+.img {
+    width: 96rpx;
+    height: 96rpx;
+    margin-top: 100rpx
+}
+
+.text {
+    font-size: 18px;
+    align-content: flex-end;
+    margin-top: 15rpx;
+    margin-bottom: 15rpx;
+    color: darkblue;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+}
+
+.txt {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+}
+
+.plus {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 80%;
+  left: 15%;
+}
+
+.minus {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 80%;
+  left: 75%;
+}

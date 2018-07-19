@@ -1,3 +1,6 @@
+page{
+  background-color: lightcyan;
+}
 
 .container {
   display: flex;
