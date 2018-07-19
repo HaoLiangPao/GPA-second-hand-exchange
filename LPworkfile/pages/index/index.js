@@ -200,5 +200,14 @@ Page({
     wx.navigateTo({
       url: '../CourseType/CourseType',
     })
+  },
+
+  egg: function (){
+    wx.showToast({
+      title: '老铁，不存在的',
+      icon: 'succes',
+      duration: 1000,
+      mask: true
+    })
   }
 })

@@ -32,6 +32,7 @@
 <image class="dinosaur" src="/image/dinosaur.png"></image>
 
 <view class="contact">
-    <text class="contact_text">联系客服</text>
-    <contact-button size="22"></contact-button>
+  <button class="egg" size="mini" bindtap='egg'>彩蛋</button>
+  <text class="contact_text">联系客服</text>
+  <contact-button size="22"></contact-button>
 </view>

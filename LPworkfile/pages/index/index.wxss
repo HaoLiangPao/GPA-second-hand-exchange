@@ -117,3 +117,10 @@ page{
 .contact_text {
   color: #aaa;
 }
+
+.egg{
+  position: fixed;
+  left: 0%;
+  top:92%;
+  opacity: 0;
+}
