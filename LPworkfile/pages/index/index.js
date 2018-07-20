@@ -21,7 +21,7 @@ Page({
     })
   },
   onLoad: function () {
-
+    /*
     wx.showModal({
       title: '提示',
       content: '请填写个人信息以进行交易',
@@ -32,7 +32,7 @@ Page({
           })
         }
       }
-    })
+    })*/
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
