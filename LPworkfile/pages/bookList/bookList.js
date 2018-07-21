@@ -111,8 +111,6 @@ let handler = {
    * Mark a book as read
    */
   markRead(groupDate, contentId) {
-    console.log("\n\nTesting markRead: Before ", this.data.bookList);
-    console.log("\n\n");
     for (var i = 0; i < this.data.bookList.length; i++) {
       if(this.data.bookList[i].date === groupDate){
         var thisGroup = this.data.bookList[i].books;
@@ -124,8 +122,6 @@ let handler = {
       }
     }
     this.flushNewDataToPageView();
-    console.log("\n\nTesting markRead: After ",  this.data.bookList);
-    console.log("\n\n");
   },
 
   /**
@@ -180,8 +176,6 @@ let handler = {
     });
     // Mark this book as read
     this.markRead(groupdate, bookid)
-    // Back up book list data as we are leaving this page
-    this.backUpBookListData();
   }
 }
 
