@@ -1,49 +1,51 @@
 <!--pages/userinfo/info.wxml-->
-<view class="userinfo">
-  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+<view class="welcome">
+  <text> Welcome </text>
 </view>
 
-<form bindsubmit='submit_in'>
-  <view class="basic_info">
-    <text>您的姓名</text>
-    <input type="text" class="sdinput" placeholder="姓名" name="full_name" />
-  </view>
-  <view class="basic_info">
-    <text>您的微信号</text>
-    <input type="text" class="sdinput" placeholder="微信" name="full_name" />
-  </view>
-  <view class="basic_info">
-    <text>您的入学日期</text>
-      <picker mode="date" value="{{date}}" start="2015-09-01" end="2019-09-01" bindchange="bindDateChange">
-      <text class="weui-input">{{date}}</text>
+<view class="form">
+  <form bindsubmit='submit_in'>
+    <view class="basic_info">
+      <text>您的姓名</text>
+      <input type="text" class="sdinput" placeholder="姓名" name="full_name" />
+    </view>
+    <view class="basic_info">
+      <text>您的微信号</text>
+      <input type="text" class="sdinput" placeholder="微信" name="full_name" />
+    </view>
+    <view class="basic_info">
+      <text>您的入学年份</text>
+      <picker mode="date" value="{{date}}" start="2015-09-01" end="2019-09-01" fields="year" bindchange="bindDateChange">
+        <text class="weui-input">{{date}}</text>
       </picker>
     </view>
-  <view class="basic_info">
-    <text>您的邮箱</text>
-    <input type="text" class="sdinput" placeholder="EX:aaaa@gmail.com" name="email" />
-  </view>
-  <view class="basic_info">
-    <text>您的电话号码</text>
-    <input type="text" class="sdinput" placeholder="EX:123456789" name="phone" />
-  </view>
-  <view class="basic_info">
-    <text>您的Program</text>
-    <input type="text" class="sdinput" placeholder="EX:STA Major" name="program" />
-  </view>
-    <checkbox-group bindchange="checkboxChange">
-      <view class="page-section page-section-gap">
+    <view class="basic_info">
+      <text>您的邮箱</text>
+      <input type="text" class="sdinput" placeholder="EX:aaaa@mail.utoronto.com" name="email" />
+    </view>
+    <view class="basic_info">
+      <text>您的电话号码</text>
+      <input type="text" class="sdinput" placeholder="EX:6479965681" name="phone" />
+    </view>
+    <view class="basic_info">
+      <text>您的Program</text>
+      <input type="text" class="sdinput" placeholder="EX:STA Major" name="program" />
+    </view>
+    <view class="basic_info">
+      <checkbox-group bindchange="checkboxChange">
         <radio-group name="radio">
-          <label><radio value="radio1"/>GP学生</label>
-          <label><radio value="radio2"/>非GP学生</label>
+          <label class='lable'>
+            <radio value="radio1" />GP学生</label>
+          <label class='lable'>
+            <radio value="radio2" />非GP学生</label>
         </radio-group>
-      </view>
-    </checkbox-group>
-    <button style="margin:30rpx;" bindtap="chooseimage">上传您的QR_Code</button>
-  <button type="primary" style="margin:30rpx;" bindtap="submit" form-type='submit'>确认修改</button>
-</form>
-
-<!-- how to get qrCode[0] from the server? but not under same package -->
-<view class="image_container">
-  <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+      </checkbox-group>
+    </view>
+  </form>
+</view>
+<view class='button1'>
+  <button type="default" bindtap="chooseimage">上传您的QR_Code</button>
+</view>
+<view class='button2'>
+  <button type="primary" bindtap="submit" form-type='submit'>确认修改</button>
 </view>

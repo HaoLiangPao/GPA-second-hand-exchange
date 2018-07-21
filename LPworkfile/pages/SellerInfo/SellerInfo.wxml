@@ -1,4 +1,4 @@
-<!--pages/userDis.wxml-->
+<!--pages/SellerInfo.wxml-->
 <view class="container">
 
   <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -21,10 +21,10 @@
 
   <view class="row">
     <text>📮 邮箱：</text>
-    <text class="email">weisiyi2@gmail.com</text>
+    <text class="email"> {{email}}</text>
   </view>
   
-  <button bindtap="edit" class="eidt">  编辑个人信息  </button>
+  <button bindtap="call" class="call">  Call  </button>
 
   <view class="row">
     <text> ⬇️ 下拉加载二维码 ⬇️ </text>
@@ -34,4 +34,3 @@
   <view class="image_container">
     <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit"></image>
   </view>
-
