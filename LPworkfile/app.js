@@ -1,15 +1,16 @@
 import util from './utils/bookList';
+import * as Mock from './utils/mock'
 let handler = {
   // initialize the mini program
   onLaunch() {
-    console.log('app init...')
+    console.log('app init...');
     /*
      store some local storage data
      
     */
-    util.getStorageData('visited', (data) => {
+    util.getStorageDataSync('visited', (data) => {
       this.globalData.visitedBooks = data;
-    })
+    });
   },
   // global data
   globalData: {
@@ -17,27 +18,21 @@ let handler = {
       name: '',
       avator: ''
     },
+    bookData: [{}],
     visitedBooks: ''
   }
 };
 App(handler);
 
+/*
 //app.js
 App(
-  handler,
-  {
-  onLaunch: function () {
+  {onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -56,10 +51,14 @@ App(
             }
           })
         }
+        else {
+
+        }
       }
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: []
   }
 })
+*/

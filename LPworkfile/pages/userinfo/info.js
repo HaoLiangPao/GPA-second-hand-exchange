@@ -16,7 +16,7 @@ Page({
     phone: '',
     program: '',
     index: 0,
-    date: '0000-00-00',
+    date: '0000',
     // remember to upload the QR_Code to the server
     qrCode: {},
     userInfo: {},
@@ -50,6 +50,7 @@ Page({
         }
       })
     }
+    console.log("QR_Code path is :", qrCode[0]);
   },
 
   /**
@@ -126,6 +127,7 @@ Page({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: [type],
+      // get the local file Pass - need to upload to and get from the server
       success: function (res) {
         console.log(res);
         that.setData({

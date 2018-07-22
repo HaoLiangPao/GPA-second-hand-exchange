@@ -7,123 +7,80 @@ let isDEV = config.isDev;
 // 后继的代码都会放在此对象中
 let handler = {
   data: {
-    page: 1, //当前加载第几页的数据
-    totalPage: 4,
-    pageSize:4,
     hasMore: true,// 用来判断下拉加载更多内容操作
     bookList: [], // 存放文章列表数据，与视图相关联
     defaultImg: config.defaultImg
   },
+
   onLoad(options) {
-    this.requestBook()
-    this.setData({
-      hiddenLoading: false
-    })
+    this.requestBook(50);
+    this.showLoading();
   },
-  /*
-   * request book information
+
+  onReady(){
+    this.hideLoading();
+  },
+
+  onReachBottom() {
+    // hasMore is defaulted to be true, only update under cases that request fails
+    if (this.data.hasMore) {
+      this.requestBook(50);
+    }
+  },
+
+  /**
+   * From database, retrieve information of the first n books in descending order of upload date and ascending order of ID
+   * 
+   * TODO: Do real database request
    */
-  requestBook() {
-    // request for mock data stored in list
+  requestBook(n) {
+    // request for mock(if testing)/real data
     util.request({
-      url: 'list',
+      url: 'mockData',
       mock: true,
-      data: {
-        tag: 'U of T',
-        start: this.data.page || 1,
+    }).then(this.resolveSuccessBookRequest, this.resolveFailureBookRequest);
+
+  },
+
+  resolveSuccessBookRequest(res){
+      this.showLoading();
+
+      // Update the book list with new data (res.data)
+      if (res && res.status === 0 && res.data && res.data.length) {
+        var bookData = res.data;
+        this.generateFormattedDates(bookData); // bookData -- array of JSON where each JSON is a group
+        this.data.bookList = bookData;
+        this.data.hasMore = res.hasMore;
+        this.flushNewDataToPageView();
+      }
+      else if(res.status === 1){ // Some error, ignore for now
+        return;
       }
 
-    })
-      .then(res => {
-        console.log("requestBook -- res.data is :", res.data );
-        console.log("requestBook -- this.data is :", this.data);
-        console.log("requestBook -- res.data.page is :", this.data.page);
-        console.log("RequestData - res.data.length is :", res.data.length);
-        if (res && res.status === 0 && res.data && res.data.length) {
-          // get original data
-          let bookData = res.data;
-          // format original data
-          let formatData = this.formatBookData(bookData);
-          console.log("requestBook -- format data is:", bookData);
-          // append book to the bookList
-          this.renderBook(formatData)
-
-
-        }
-        /*
-        * 1. no data after request:
-              a) no books in the database
-              b) unknow error
-        * Sent alert message
-        * Mute onReachBottom function
-        */
-        else if (this.data.page === 1 && res.data && res.data.length === 0) {
-          util.alert();
-          this.setData({
-            hasMore: false
-          });
-        }
-        /*
-        * 1. "no more data"
-        * 2. mute onReachBottom
-        */
-        else if (this.data.page !== 1 && res.data && res.data.length === 0) {
-          this.setData({
-            hasMore: false
-          });
-        }
-        /*
-        * Unknow Error
-        * Show error message sent back from back end, mute onReachBottom
-        */
-        else {
-          util.alert('提示', res);
-          this.setData({
-            hasMore: false
-          });
-          return null;
-        }
-        console.log("requestBook -- this.data is :", this.data);
-      });
+      this.hideLoading();
   },
+
+  resolveFailureBookRequest(res){
+    util.alert("错误", "抱歉，数据加载失败了。请您重试或者联系客服。");
+  },
+
   /*
-  * Format original data for coding purpose
+  * data -- Newly requested book data from database (array of goup data in JSON)
   *
-  * Task:
-  * 1. formate date of posted
-  * 2. valid if visited
-  * 
+  * Generates a new property formatedDate for each group data object (JSON) based on the existing property date.
   */
-  formatBookData(data) {
-    let formatData = undefined;
-    // when data is valid and it has a length
+  generateFormattedDates(data) {
     if (data && data.length) {
-      // change format of data to each group member
-      formatData = data.map((group) => {
-        // 格式化日期
-        group.formateDate = this.dateConvert(group.date);
-        // when group is valid and it has books in it
-        if (group && group.books) {
-          // go through each book in groups
-          // group.books is either an empty list or formatedBooks
-          let formatBookItems = group.books.map((item) => {
-            // 判断是否已经访问过
-            item.hasVisited = this.isVisited(item.contentId);
-            console.log("formatBookData - a newly checked book is: ", item);
-            return item;
-          }) || [];
-          group.books = formatBookItems;
-          console.log("formatBookData - the formatGroup is: ", formatBookItems);
-        }
-        return group
-      })
+      for (var i = 0; i < data.length; i++) {
+        var thisGroup = data[i];
+        thisGroup.formattedDate = this.dateConvert(thisGroup.date);
+      }
     }
-    return formatData;
   },
+
   /*
-  * format the date from '2017-06-12'
-  * to
-  * return '今日' / 08-21 / 2017-06-12
+  * Given a date in format: 'YEAR-MONTH-DAY' e.g. '2017-06-12'
+  * Return '今日' (If it is today) / '08-21' (If it is in the current year) / '2017-06-12' (If it is in any past year)
   */
   dateConvert(dateStr) {
     if (!dateStr) {
@@ -146,55 +103,48 @@ let handler = {
     }
     return convertStr;
   },
-  /*
-  * see if the bookID is in local storage
-  * if it has index in the contentList(a list for readed books -- local storage)
-  * (globalData.visitedBooks can be get from local storage)
-  */
-  isVisited(contentId) {
-    let visitedBooks = app.globalData && app.globalData.visitedBooks || '';
-    // help debug message
-    console.log("the index of the contentID is: ", visitedBooks.indexOf(`${contentId}`));
-    return visitedBooks.indexOf(`${contentId}`) > -1;
+
+  /**
+   * groupDate -- the date info of the group the book belongs to
+   * contentId -- contentId of the book
+   * 
+   * Mark a book as read
+   */
+  markRead(groupDate, contentId) {
+    for (var i = 0; i < this.data.bookList.length; i++) {
+      if(this.data.bookList[i].date === groupDate){
+        var thisGroup = this.data.bookList[i].books;
+        for (var j = 0; j < thisGroup.length; j++) {
+          if (thisGroup[j].contentId === contentId) {
+            thisGroup[j].isVisited = 1;
+          }
+        }
+      }
+    }
+    this.flushNewDataToPageView();
   },
 
-  /*
-  * append requested book to the bookList
-  *
-  */
-  renderBook(data) {
-    // if data exist
-    if (data && data.length) {
-      console.log("renderBook - newly appended data is: ", data);
-      console.log("renderBook - length is: ", data.length);
-
-      // append new book groups to a list and update the old list
-      let newList = this.data.bookList.concat(data);
-      this.setData({
-        bookList: newList,
-        hiddenLoading: true,
-      })
-      console.log("renderBook - the newList is : ", newList);
-      console.log("renderBook -- this.data is: ", this.data);
-    }
+  /**
+   * Update page view with the current book list data
+   * Also update the 'hasMore' flag which marks if there's more books to display
+   */
+  flushNewDataToPageView() {
+    this.setData({
+      bookList: this.data.bookList,
+      hasMore: this.data.hasMore
+    })
   },
 
-  /*
-  * the user will call onReachBotton by themselves so dont have to call when compile
-  */
-  onReachBottom() {
-    // hasMore is defaulted to be true, only update under cases that request fails
-    if (this.data.hasMore) {
-      console.log("the data is: ", this.data);
-      // keep track on the page nubmer for #books references
-      let nextPage = this.data.page + 1;
-      console.log("onReachBottom -- the next page is: ", nextPage);
-      this.setData({
-        page: nextPage
-      });
-      console.log("\n onReachBottom -- the page is: \n ", this.data.page);
-      this.requestBook();
-    }
+  showLoading(){
+    this.setData({
+      hiddenLoading: false
+    })
+  },
+
+  hideLoading(){
+    this.setData({
+      hiddenLoading: true
+    })
   },
 
   /*
@@ -215,70 +165,18 @@ let handler = {
   },
 
   /*
-  * change to another page for LayOut2 when users want to see details
+  * Navigates to book detail page
   */
-  showDetail(book) {
-    let dataset = book.currentTarget.dataset
-    console.log("\n showDetail -- dataset is: \n", dataset);
-    let item = dataset && dataset.item
-    console.log("\n showDetail -- item is: \n", item);
-    // default the ID to be 0
-    let contentId = item.contentId || 0
-    // varify the "visited" function
-    this.markRead(contentId)
+  showDetail(target) {
+    var dataset = target.currentTarget.dataset
+    var bookid = dataset && dataset.bookid;
+    var groupdate = dataset && dataset.pubdate.substring(0, 10);
     wx.navigateTo({
-      url: `../detail/detail?contentId=${contentId}`
+      url: `../detail/detail?contentId=${bookid}`
     });
-  },
-
-
-  /*
-  * 如果我们只是把阅读过的文章contentId保存在globalData中，则重新打开小程序后，记录就不存在了
-  * 所以，如果想要实现下次进入小程序依然能看到阅读标识，我们还需要在缓存中保存同样的数据
-  * 当进入小程序时候，从缓存中查找，如果有缓存数据，就同步到 globalData 中
-  */
-  markRead(contentId) {
-    //先从缓存中查找 visited 字段对应的所有文章 contentId 数据
-    util.getStorageData('visited', (data) => {
-      let newStorage = data;
-      if (data) {
-        // if no visited data, it is the first time this user ever open it, add data into it
-        // 如果当前的文章 contentId 不存在，也就是还没有阅读，就把当前的文章 contentId 拼接进去
-        if (data.indexOf(contentId) === -1) {
-          newStorage = `${data},${contentId}`;
-        }
-        console.log("markRead add content: newStorage is ", newStorage);
-      }
-      // 如果还没有阅读 visited 的数据，那说明当前的文章是用户阅读的第一篇，直接赋值就行了 
-      else {
-        newStorage = `${contentId}`;
-        console.log("markRead add content / first: newStorage is ", newStorage);
-      }
-
-      /*
-      * if data and newStorage are different
-      * we need to update the global data (local storage) 
-      */
-      if (data !== newStorage) {
-        console.log("markRead / data-newStorage different: data is ", data);
-        console.log("markRead / data-newStorage different: newStorage is ", newStorage);
-        if (app.globalData) {
-          app.globalData.visitedBooks = newStorage;
-        }
-        util.setStorageData('visited', newStorage, () => {
-          this.resetBooks();
-        });
-      }
-    });
-  },
-
-  // reset the book to the final updated visited version
-  resetBooks() {
-    let old = this.data.bookList;
-    let newBooks = this.formatBookData(old);
-    this.setData({
-      bookList: newBooks
-    });
-  },
+    // Mark this book as read
+    this.markRead(groupdate, bookid)
+  }
 }
+
 Page(handler)

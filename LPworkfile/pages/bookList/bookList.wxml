@@ -5,11 +5,11 @@
     <!--repeat-->
     <view wx:for="{{ bookList }}" wx:for-item="group" wx:key="{{ group.date }}" class="group">
         <view class="group-bar">
-            <view class="group-title {{ group.formateDate === '今日' ? 'on' : ''}}">{{ group.formateDate }}</view>
+            <view class="group-title {{ group.formattedDate === '今日' ? 'on' : ''}}">{{ group.formattedDate }}</view>
         </view>
         <view class="group-content">
             <!--repeat-->
-            <view wx:for="{{ group.books }}" wx:for-item="item" wx:key="{{ item.contentId }}" data-item="{{ item }}" bindtap="showDetail" class="group-content-item {{ item.hasVisited ? 'visited' : '' }}">
+            <view wx:for="{{ group.books }}" wx:for-item="item" wx:key="{{ item.contentId }}" data-bookid="{{ item.contentId }}" data-pubdate="{{ item.pubdate }}" bindtap="showDetail" class="group-content-item {{ item.isVisited === 1 ? 'visited' : '' }}">
                 <view class="group-content-item-desc ellipsis-multi-line ellipsis-line-3">{{ item.title }}</view>
                 <view class="group-content-price">售价「{{ item.price || 0 }}」</view>
                 <image mode="aspectFill" class="group-content-item-img" src="{{ item.cover || defaultImg.coverImg }}" ></image>

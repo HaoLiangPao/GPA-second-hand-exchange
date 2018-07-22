@@ -1,3 +1,4 @@
+/* pages/SellerInfo/SellerInfo.wxss */
 .container {
   display: flex;
   flex-direction: column;
@@ -25,7 +26,7 @@
   justify-content: center
 } 
 
-.edit{
+.call{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,7 +34,6 @@
   width: 128rpx;
   opacity: 0.8;
 }
-
 
 .phoneNumber{
   flex: 5
