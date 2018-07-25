@@ -1,4 +1,4 @@
-import util from './utils/bookList';
+import util from './utils/bookListUtil';
 import * as Mock from './utils/mock'
 let handler = {
   // initialize the mini program

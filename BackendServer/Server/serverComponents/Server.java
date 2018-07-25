@@ -30,6 +30,7 @@ public class Server {
 		server.createContext("/search/byCourseID", new SearchByCourseIDHandler());
 		server.createContext("/search/byOwner", new SearchByOwnerHandler());
 		server.createContext("/search/byBook", new SearchByBookHandler());
+		server.createContext("/searchAllInfo/byBookID", new SearchAllInfoByBookID());
 		server.createContext("/post/create", new CreatePostHandler());
 		server.createContext("/post/update", new UpdatePostHandler());
 		server.createContext("/post/delete", new DeletePostHandler());

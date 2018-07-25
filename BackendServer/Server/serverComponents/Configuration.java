@@ -10,7 +10,7 @@ public class Configuration {
 	
 	// Connection configuration
 	public static final int PORT = 8000;
-	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC";
+	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC&useSSL=false";
 	public static final String MYSQL_DB = "test";
 	public static final String MYSQL_USER = "root";
 	public static final String MYSQL_PWD = "Wang971001";
@@ -99,10 +99,18 @@ public class Configuration {
 	public static final String QRY_SEARCH_POST_BY_OWNER_ID = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s=?",
 			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
 			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, TBL_POST, COL_POST_OWNER_ID);
-			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status FROM POST WHERE OwnerID LIKE=?
+			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status FROM POST WHERE OwnerID=?
 	
 	public static final String QRY_SEARCH_POST_BY_BOOK_TITLE = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s LIKE ?",
 			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
 			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, TBL_POST, COL_POST_BOOK_TITLE);
 			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status FROM POST WHERE BookTitle LIKE ?
+	
+	public static final String QRY_GET_ALL_POST_INFO_BY_POST_ID = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
+			+ " FROM %s JOIN %s on %s.%s=%s.%s WHERE %s.%s=?",
+			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
+			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, COL_USER_USER_NAME, COL_USER_USER_PWD, COL_USER_WECHAT_INFO, COL_USER_PHONE_NUMBER,
+			COL_USER_EMAIL, COL_USER_PROGRAM, TBL_POST, TBL_USER, TBL_POST, COL_POST_OWNER_ID, TBL_USER, COL_USER_USER_ID, TBL_POST, COL_POST_POST_ID);
+			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status, UserName, Password, WeChatInfo,
+			//PhoneNumber, Email, Program FROM POST JOIN USER ON POST.OwnerID=USER.UserID WHERE POST.PostID=?
 }

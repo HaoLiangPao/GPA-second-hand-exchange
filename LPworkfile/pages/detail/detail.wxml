@@ -1,5 +1,5 @@
 
-<scroll-view scroll-y="true" scroll-top="{{ scrollTop }}" enable-back-to-top="true" class="root-wrap">
+<scroll-view scroll-y="true" enable-back-to-top="true" class="root-wrap">
   <view class="wrapper">
     <view class="info">
       <view class="info-title">{{ detailData.title }}</view>

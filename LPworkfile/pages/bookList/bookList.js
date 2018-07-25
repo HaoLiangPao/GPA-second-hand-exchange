@@ -1,19 +1,23 @@
-import util from '../../utils/bookList';
+import utilOLD from '../../utils/bookListUtil'
 import config from '../../utils/config';
+const util = require('../../utils/util.js');
 
 let app = getApp();
 let isDEV = config.isDev;
+const numOfNewBooksOnReachBottom = 4;
 
 // 后继的代码都会放在此对象中
 let handler = {
   data: {
     hasMore: true,// 用来判断下拉加载更多内容操作
     bookList: [], // 存放文章列表数据，与视图相关联
+    numOfBooksOnPage: 0,
+    idOldestBookOnPage: 0,
     defaultImg: config.defaultImg
   },
 
   onLoad(options) {
-    this.requestBook(50);
+    this.requestFirstNBooks(numOfNewBooksOnReachBottom);
     this.showLoading();
   },
 
@@ -22,9 +26,8 @@ let handler = {
   },
 
   onReachBottom() {
-    // hasMore is defaulted to be true, only update under cases that request fails
     if (this.data.hasMore) {
-      this.requestBook(50);
+      this.requestNextNBooks(idOldestBookOnPage, numOfNewBooksOnReachBottom);
     }
   },
 
@@ -32,14 +35,29 @@ let handler = {
    * From database, retrieve information of the first n books in descending order of upload date and ascending order of ID
    * 
    * TODO: Do real database request
+   * 
    */
-  requestBook(n) {
-    // request for mock(if testing)/real data
-    util.request({
+  requestFirstNBooks(n){
+    utilOLD.requestMock({
       url: 'mockData',
+      numOfBooks: n,
+      idStartFrom: undefined,
       mock: true,
     }).then(this.resolveSuccessBookRequest, this.resolveFailureBookRequest);
+  },
 
+  /**
+   * From database, retrieve information of the next N books in descending order of upload date and ascending order of ID, where N = numOfNewBooksOnReachBottom.
+   * 
+   * TODO: Do real database request
+   */
+  requestNextNBooks(idStartFrom, n) {
+    utilOLD.requestMock({
+      url: 'mockData',
+      numOfBooks: n,
+      idStartFrom: idStartFrom,
+      mock: true,
+    }).then(this.resolveSuccessBookRequest, this.resolveFailureBookRequest);
   },
 
   resolveSuccessBookRequest(res){
@@ -171,11 +189,36 @@ let handler = {
     var dataset = target.currentTarget.dataset
     var bookid = dataset && dataset.bookid;
     var groupdate = dataset && dataset.pubdate.substring(0, 10);
-    wx.navigateTo({
-      url: `../detail/detail?contentId=${bookid}`
-    });
+    //util.alert("提示", "抱歉，这本书刚刚下架了~"); TODO: Do database request here to check if the book no longer exists
+    bookid = "val1"; // FAKE!!!! 
+    this.goToBookDetailPage(bookid);
     // Mark this book as read
     this.markRead(groupdate, bookid)
+  },
+
+  /**
+   * Get a book's information by book ID, then navigates to the detailed information page rendered by it.
+   */
+  goToBookDetailPage(bookID){
+    var url = "http://" + config.serverURL + "/searchAllInfo/byBookID";
+    var data = { PostID: bookID };
+    var result = undefined;
+    var success_cb = function (res) {
+      if(res.header.Status == 1){
+        util.alert("提示", "抱歉，这本书刚刚下架了~");
+      }
+      else{
+        result = res.data; // result should be a JSON array and should have only one object
+        var detailPageURL = "../detail/detail?";
+        console.log(result);
+        console.log();
+        wx.navigateTo({
+          url: util.buildURL(detailPageURL, JSON.parse(result)[0])
+        });
+      }
+    };
+    var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
+    util.doGET(url, data, success_cb, failure_cb)
   }
 }
 

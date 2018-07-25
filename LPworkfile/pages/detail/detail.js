@@ -1,32 +1,44 @@
-import util from '../../utils/bookList';
+import util from '../../utils/bookListUtil';
 import config from '../../utils/config';
-
 
 let app = getApp();
 
 Page({
 
   data: {
-    // set the distance to the top to be 0
-    scrollTop: 0,
-    detailData: {
-
-    }
   },
 
+  /**
+   * Update the page view with current book data
+   */
+  flushNewDataToPageView(){
+    this.setData({
+      detailData: this.data.detailData
+    })
+  },
 
+  /**
+   * option contains:
+   * 
+   * option.PostID -- book id
+   * option.OwnerID -- owner
+   * option.BookTitle -- book title
+   * option.BookPhoto -- book photo URL
+   * option.CourseID -- course code (CSCA08, MATA37...)
+   * option.Instructor -- instructor name
+   * option.TakeYear -- the year in which the owner took the course
+   * option.Description -- book description
+   * option.Price -- price
+   */
   onLoad(option) {
-    /*
-    * 函数 `onLoad` 会在页面初始化时候加载运行，其内部的 `option` 是路由跳转过来后的参数对象。
-    * 我们从 `option` 中解析出文章参数 `contendId`，然后通过调用 `util` 中封装好的 `request` 函数来获取 `mock` 数据。 
-    */
-    let id = option.contentId || 0;
+    console.log(option);
+    let id = option.PostID || 0;
+    console.log(id);
     // to indicate how the users get to this place
     this.setData({
       isFromShare: !!option.share
     });
     this.init(id);
-
   },
 
 
@@ -34,8 +46,6 @@ Page({
   init(contentId) {
     // only do the following process when contentID exists
     if (contentId) {
-      // set the default read status to be TOP
-      this.goTop()
       this.requestDetail(contentId)
         // print the message out for debug purpose
         .then(data => {
@@ -49,7 +59,7 @@ Page({
 
   // request for detail information
   requestDetail(contentId) {
-    return util.request({
+    return util.requestMock({
       url: 'detail',
       mock: true,
       data: {
@@ -82,6 +92,7 @@ Page({
       });
       //设置标题
       let title = this.data.detailData.title || config.defaultBarTitle
+      //title = "哈哈哈哈哈哈哈哈哈哈"
       wx.setNavigationBarTitle({
         title: title
       })
@@ -98,16 +109,16 @@ Page({
       })
   },
   requestNextContentId() {
-    let pubDate = this.data.detailData && this.data.detailData.lastUpdateTime || ''
+    //let pubDate = this.data.detailData && this.data.detailData.lastUpdateTime || ''
     let contentId = this.data.detailData && this.data.detailData.contentId || 0
-    return util.request({
+    return util.requestMock({
       url: 'detail',
       mock: true,
       data: {
-        tag: '微信热门',
-        pubDate: pubDate,
+        //tag: '微信热门',
+        //pubDate: pubDate,
         contentId: contentId,
-        langs: config.appLang || 'en'
+        //langs: config.appLang || 'en'
       }
     })
       .then(res => {
@@ -120,15 +131,6 @@ Page({
         }
       })
   },
-
-
-  // a help function which will be called when initialization
-  goTop() {
-    this.setData({
-      scrollTop: 0
-    })
-  },
-
 
   // share function
   onShareAppMessage() {
@@ -157,6 +159,7 @@ Page({
     let sdkVersion = device && device.SDKVersion || '1.0.0';
     return /1\.0\.0|1\.0\.1|1\.1\.0|1\.1\.1/.test(sdkVersion);
   },
+
   share() {
     if (this.notSupportShare()) {
       wx.showModal({

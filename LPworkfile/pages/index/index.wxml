@@ -11,7 +11,7 @@
       <view class="search-section">
 
         <view class="search-input-wrapper ">
-          <input bindinput="bindBarcodeInput" bindconfirm="query" bindfocus="bindFocus" bindblur="bindBlur" class="search-input" placeholder="输入课号吧..." value="{{coursecode}}" confirm-type="search" auto-focus='true'auto-height='true' />
+          <input bindconfirm="query" class="search-input" placeholder="输入课号吧..." value="{{coursecode}}" confirm-type="search" auto-focus='true'auto-height='true' />
         </view>
 
         <view class="search-button-wrapper">
@@ -21,7 +21,7 @@
       </view>
 
     <!-- 搜索框下面的3个按钮 -->
-    <view class="option-buttons" hidden="{{hiddenDropdown}}">
+    <view class="option-buttons">
       <button class="option-button" size="mini" bindtap="CourseType">按类找书</button>
       <button class="option-button" size="mini" bindtap="BookList">最新上架</button>
       <button class="option-button" size="mini" bindtap="scan">照片查书</button>

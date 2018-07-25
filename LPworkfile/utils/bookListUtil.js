@@ -17,10 +17,15 @@ const DEFAULT_REQUEST_OPTIONS = {
 let util = {
   // 判断是否是开发反应
   isDEV: config.isDev,
+  
   log() {
     this.isDEV && console.log(...arguments)
   },
-  // 
+
+  /**
+   * title -- alert title
+   * content -- alert message
+   */ 
   alert(title = '提示', content = config.defaultAlertMsg) {
     if ('object' === typeof content) {
       content = this.isDEV && JSON.stringify(content) || config.defaultAlertMsg
@@ -68,25 +73,75 @@ let util = {
     })
   },
   
+  /**
+   * Wrapper for wx.request()
+   * 
+   * Return a Promise object
+   */
+  request(url, data, isMockRequest){
+    var that = this;
+    return new Promise((resolve, reject) => {
+      if(isMockRequest){ // Mock request for testing
+        console.log("\n\nMOCKING REQUEST\n\n");
+      }
+      else{
+        wx.request({
+          url: url,
+          data: data,
+          header: DEFAULT_REQUEST_OPTIONS.header,
+          method: DEFAULT_REQUEST_OPTIONS.method,
+          dataType: DEFAULT_REQUEST_OPTIONS.dataType,
+          success: function (res) {
+            if (res && res.statusCode == 200 && res.data) {
+              resolve(res.data);
+            } else {
+              that.alert('提示', res);
+              reject(res);
+            }
+          },
+          fail: function (err) {
+            that.log(err);
+            that.alert('提示', err);
+            reject(err);
+          }
+        })
+      }
+    });
+  },
+
   // 网络请求
-  request(opt) {
+  requestMock(opt) {
     let options = Object.assign({}, DEFAULT_REQUEST_OPTIONS, opt)
-    let { url, data, header, method, dataType, mock = false } = options
+    console.log(options);
+    let { url, data, header, method, dataType, numOfBooks, idStartFrom, mock = false } = options
     let self = this
     return new Promise((resolve, reject) => {
+      let res = undefined;
       if (mock) {
-        let res = {
-          statusCode: 200,
-          data: Mock[url].data,
-          hasMore: false,
-          status: 0 // 0 marks success request; 1 marks success request but no more data to read from database; 2 marks failure / errors
+        if (idStartFrom) { // Request next n books -- For testing purpose just get all the mock data
+          res = {
+            statusCode: 200,
+            data: Mock[url].data,
+            hasMore: false, // For testing purpose just marks no more data
+            status: 0 // 0 marks success request; 1 marks success request but no more data to read from database; 2 marks failure / errors
+          }
+        }
+        else{ // Request first n books -- For testing purpose just get all the mock data
+          res = {
+            statusCode: 200,
+            data: Mock[url].data,
+            hasMore: false, // For testing purpose just marks no more data
+            status: 0 // 0 marks success request; 1 marks success request but no more data to read from database; 2 marks failure / errors
+          }
         }
         if (res && res.statusCode == 200 && res.data && res.status != 2) {
           resolve(res);
         } else {
           reject(res);
         }
-      }else{
+      }
+      /* TODO: do real database request
+      else{
         wx.request({
           url: url,
           data: data,
@@ -107,7 +162,7 @@ let util = {
             reject(err);
           }
         })
-      }
+      }*/
     })
   }
 
