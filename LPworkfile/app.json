@@ -9,7 +9,8 @@
     "pages/detail/detail",
     "pages/bookList/bookList",
     "pages/CourseType/CourseType",
-    "pages/userDis/userDis"
+    "pages/userDis/userDis",
+    "pages/SellerInfo/SellerInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

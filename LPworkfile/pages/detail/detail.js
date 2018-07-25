@@ -6,6 +6,8 @@ let app = getApp();
 Page({
 
   data: {
+    detailData: {},
+    fromSale: false,
   },
 
   /**
@@ -184,8 +186,8 @@ Page({
   },
 
   sellerInfo: function (event){
-    wx.switchTab({
-      url: '../userDis/userDis'
+    wx.navigateTo({
+      url: '../SellerInfo/SellerInfo'
     })
   }
 })
