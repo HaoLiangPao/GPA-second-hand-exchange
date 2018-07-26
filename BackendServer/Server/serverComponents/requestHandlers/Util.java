@@ -273,7 +273,8 @@ public class Util {
 	 * @throws IOException
 	 */
 	protected static void doSuccessResponse(StringBuilder response, HttpExchange arg0, OutputStream os) throws IOException{
-		arg0.sendResponseHeaders(200, response.length());
+		byte[] response_in_bytes = response.toString().getBytes();
+		arg0.sendResponseHeaders(200, response_in_bytes.length);
 		os.write(response.toString().getBytes());
 		os.close();
 	}
@@ -306,7 +307,8 @@ public class Util {
 		response.append("Error message: " + err_msg);
 		System.out.println("Exception: " + err_msg);
 		e.printStackTrace();
-		arg0.sendResponseHeaders(500, response.length());
+		byte[] response_in_bytes = response.toString().getBytes();
+		arg0.sendResponseHeaders(500, response_in_bytes.length);
 		os.write(response.toString().getBytes());
 		os.close();
 	}

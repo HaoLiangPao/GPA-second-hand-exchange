@@ -1,12 +1,15 @@
 import util from '../../utils/bookListUtil';
+import commonUtil from '../../utils/util.js';
 import config from '../../utils/config';
 
 let app = getApp();
+const NA = "N/A";
 
 Page({
 
   data: {
-    detailData: {},
+    detailData: {
+      BookTitle: NA, Instructor: NA, formatedUpdateTime: NA, Description: NA, Instructor: NA, Price: NA, TakeYear: NA, CourseID: NA, PostID: NA, OwnerID: NA, BookPhoto: NA, UploadTime: NA, share: NA, PhoneNumber: NA, Email: NA, Program: NA, Year: NA, QRCodeURL: NA, WeChatInfo: NA},
     fromSale: false,
   },
 
@@ -31,21 +34,38 @@ Page({
    * option.TakeYear -- the year in which the owner took the course
    * option.Description -- book description
    * option.Price -- price
+   * option.UploadTime -- The time this post is created
+   * 
+   * option.PhoneNumber -- Owner's phone number
+   * option.Email -- Owner's email
+   * option.Program -- Owner's program
+   * option.Year -- The year in which the owner attented UTSC
+   * option.QRCodeURL -- owner's QR code URL
+   * option.WeChatInfo -- owner's wechat ID
    */
   onLoad(option) {
+    console.log(commonUtil.EYE_CATCHER + "\ndetail.js page parameters:");
     console.log(option);
-    let id = option.PostID || 0;
-    console.log(id);
+    console.log("\n" + commonUtil.EYE_CATCHER);
+    //let id = option.PostID || 0;
+    //console.log(id);
     // to indicate how the users get to this place
     this.setData({
       isFromShare: !!option.share
     });
-    this.init(id);
+    for (var property in option) {
+      this.data.detailData[property] = option[property];
+    }
+    console.log(commonUtil.EYE_CATCHER + "\nDEBUG: Updated data:");
+    console.log(this.data.detailData);
+    console.log("\n" + commonUtil.EYE_CATCHER);
+    this.flushNewDataToPageView();
+    //this.init(id);
   },
 
 
   // work as a constructor
-  init(contentId) {
+  /*init(contentId) {
     // only do the following process when contentID exists
     if (contentId) {
       this.requestDetail(contentId)
@@ -56,11 +76,11 @@ Page({
           util.log(data)
         })
     }
-  },
+  },*/
 
 
   // request for detail information
-  requestDetail(contentId) {
+  /*requestDetail(contentId) {
     return util.requestMock({
       url: 'detail',
       mock: true,
@@ -69,24 +89,24 @@ Page({
       }
     })
       .then(res => {
-        let formateUpdateTime = this.formateTime(res.data.lastUpdateTime)
+        let formatedUpdateTime = this.formatTime(res.data.lastUpdateTime)
         // 格式化后的时间
-        res.data.formateUpdateTime = formateUpdateTime
+        res.data.formatedUpdateTime = formatedUpdateTime
         return res.data
       })
-  },
+  },*/
 
   // 更改时间格式
-  formateTime(timeStr = '') {
+  /*formatTime(timeStr = '') {
     let year = timeStr.slice(0, 4),
       month = timeStr.slice(5, 7),
       day = timeStr.slice(8, 10);
     return `${year}/${month}/${day}`;
-  },
+  },*/
 
 
   // change title with the changed data
-  configPageData(data) {
+  /*configPageData(data) {
     if (data) {
       // 同步数据到 Model 层，Model 层数据发生变化的话，视图层会自动渲染
       this.setData({
@@ -99,7 +119,7 @@ Page({
         title: title
       })
     }
-  },
+  },*/
 
 
   // enable "next book" function
@@ -171,9 +191,9 @@ Page({
     }
   },
 
-  // help function to be called when user wants to go back to the previous page
   /**
-   * if user access this page by sharing, back will navigate to index page
+   * Go back to the page which we navigated from.
+   * A shared page will navigate to index page.
    */
   back() {
     if (this.data.isFromShare) {

@@ -190,7 +190,7 @@ let handler = {
     var bookid = dataset && dataset.bookid;
     var groupdate = dataset && dataset.pubdate.substring(0, 10);
     //util.alert("提示", "抱歉，这本书刚刚下架了~"); TODO: Do database request here to check if the book no longer exists
-    bookid = "val1"; // FAKE!!!! 
+    bookid = "（假）书号"; // FAKE!!!! 
     this.goToBookDetailPage(bookid);
     // Mark this book as read
     this.markRead(groupdate, bookid)

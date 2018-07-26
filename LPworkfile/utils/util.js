@@ -93,5 +93,6 @@ module.exports = {
   formatTime: formatTime,
   buildURL: buildURL,
   doGET: doGET,
-  alert: alert
+  alert: alert,
+  EYE_CATCHER: EYE_CATCHER
 }
