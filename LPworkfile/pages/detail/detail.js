@@ -205,6 +205,9 @@ Page({
     }
   },
 
+  /**
+   * Go to the page which shows the seller's information
+   */
   sellerInfo: function (event){
     wx.navigateTo({
       url: '../SellerInfo/SellerInfo'

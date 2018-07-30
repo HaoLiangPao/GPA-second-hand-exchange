@@ -275,7 +275,7 @@ public class Util {
 	protected static void doSuccessResponse(StringBuilder response, HttpExchange arg0, OutputStream os) throws IOException{
 		byte[] response_in_bytes = response.toString().getBytes();
 		arg0.sendResponseHeaders(200, response_in_bytes.length);
-		os.write(response.toString().getBytes());
+		os.write(response_in_bytes);
 		os.close();
 	}
 
@@ -309,7 +309,7 @@ public class Util {
 		e.printStackTrace();
 		byte[] response_in_bytes = response.toString().getBytes();
 		arg0.sendResponseHeaders(500, response_in_bytes.length);
-		os.write(response.toString().getBytes());
+		os.write(response_in_bytes);
 		os.close();
 	}
 }
