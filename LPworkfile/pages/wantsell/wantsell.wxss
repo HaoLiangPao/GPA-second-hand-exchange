@@ -1,36 +1,79 @@
 /* pages/wantsell/wantsell.wxss */
+.wholePage{
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(63,189,14, 0.7)), to(rgba(231,245,121, 0.7)));
+  height: 1800rpx;
+}
+
 .title{
   display: flex;
+  font-size: 35rpx;
   flex-direction: row;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  padding: 5%;
 }
 
 .image_container{
-  font-size-adjust: 0;
-  height:auto;
+  padding: 5%;
   width:100%;
-  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+
+  
+}
+
+
+.single_image{
+  width: 150rpx;
+  height: 150rpx;
+  padding: 20rpx;
+  display: flex;
+}
+
+.BigForm{
+  width:91%;
+  align-self: center;
+  border-radius: 5%;
+  box-shadow: 10rpx 10rpx 10rpx 10rpx -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(29,209,158, 0.7)), to(rgba(80,209,29, 0.7)));
+  padding: 2.5%;
+  margin-left: 2%;
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(231,245,121, 0.7)), to(rgba(63,189,14, 0.7)));
+  height: 1600rpx;
 }
 
 .sdinput{
-  border: lightgreen;
+  border: gainsboro;
   border-style: solid;
-  border-width: 1px;
-  font-size: 14px;
-  border-radius: 5px;
-  height: 31px;
-  padding-left: 10px;
+  font-size: 28rpx;
+  border-radius: 5%;
+  height: 28rpx;
+  padding-left: 10rpx;
+  background: gainsboro;
+  margin-bottom: 1%;
 }
 
 .description{
   width:99%;
-  border: lightgreen;
+  border: gainsboro;
   border-style: solid;
-  border-width: 1px;
-  font-size: 14px;
-  border-radius: 5px;
-  height: 200px;
+  border-width: 1rpx;
+  font-size: 28rpx;
+  border-radius: 5%;
+  height: 200rpx;
+  background: gainsboro;
+
+}
+
+.weui-input{
+  background: gainsboro;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5%;
 }
 
 .book_info{
@@ -39,3 +82,12 @@
 .name{
   display:flex;
 }
+
+.lable{
+  padding: 5%;
+}
+
+
+
+
+
