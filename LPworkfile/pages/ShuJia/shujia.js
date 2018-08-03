@@ -1,7 +1,7 @@
 // pages/ShuJia/shujia.js
 var app = getApp()
-var my_book = ["Book1"]
-var arr_link = [1]
+var my_book = ["Books1","Books2","Book3s","Books4"]
+var arr_link = [1,2,3,4]
 var file = ""
 
 Page({
@@ -14,7 +14,26 @@ Page({
       id: "1",
       src: "../../image/pig.jpg",
       text: my_book[0]
-    },],
+    },
+      {
+        id: "2",
+        src: "../../image/pig.jpg",
+        text: my_book[1]
+      },
+
+      {
+        id: "3",
+        src: "../../image/pig.jpg",
+        text: my_book[2]
+      },
+
+      {
+        id: "4",
+        src: "../../image/pig.jpg",
+        text: my_book[3]
+      },
+    
+    ],
     url: file,
   },
 

@@ -11,6 +11,14 @@
           </view>
       </navigator>
     </view>
+    <view class="mybook2">
+      <navigator wx:for="{{items}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
+          <view class="item_size">
+              <image class="img" src="{{item.src}}"></image>
+              <text class="text">{{item.text}}</text>
+          </view>
+      </navigator>
+    </view>
     <image class="plus" src="../../image/plus.png" bindtap="wantsell">我要卖书</image>
     <image class="minus" src="../../image/trash.png" bindtap="history">卖书历史</image>
 
