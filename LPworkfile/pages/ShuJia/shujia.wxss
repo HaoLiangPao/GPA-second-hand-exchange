@@ -37,8 +37,12 @@ page {
   padding-right:3ch;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
+.deleteBox{
+  padding:0%;
+}
 .img {
     width: 96rpx;
     height: 96rpx;
@@ -49,8 +53,8 @@ page {
     font-size: 16px;
     align-content: flex-end;
     margin-top: 15rpx;
-    margin-bottom: 15rpx;
     color: darkblue;
+    padding-bottom: 0%;
 }
 
 .background {

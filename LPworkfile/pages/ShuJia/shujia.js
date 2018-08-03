@@ -13,7 +13,7 @@ Page({
     items: [{
       id: "1",
       src: "../../image/pig.jpg",
-      text: my_book[0]
+      text: my_book[0],
     },
       {
         id: "2",
@@ -108,5 +108,17 @@ Page({
     wx.navigateTo({
       url: '../history/history'
     })
-  }
+  },
+
+  /**
+   * delete button
+   * 
+   * change it to 
+   * 
+   */
+
+
+
+
+
 })

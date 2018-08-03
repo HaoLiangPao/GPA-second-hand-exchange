@@ -8,6 +8,7 @@
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
+              <checkbox class='deleteBox'> </checkbox>
           </view>
       </navigator>
     </view>
