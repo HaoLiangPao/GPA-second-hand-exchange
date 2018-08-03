@@ -1,11 +1,11 @@
 
-<scroll-view scroll-y="true" scroll-top="{{ scrollTop }}" enable-back-to-top="true" class="root-wrap">
+<scroll-view scroll-y="true" enable-back-to-top="true" class="root-wrap">
   <view class="wrapper">
     <view class="info">
-      <view class="info-title">{{ detailData.title }}</view>
+      <view class="info-title">{{ detailData.BookTitle }}</view>
       <view class="info-desc cf">
-        <text class="info-desc-author fl">{{ detailData.author }}</text>
-        <text class="info-desc-date fr">{{ detailData.formateUpdateTime}}</text>
+        <text class="info-desc-author fl">{{ detailData.Instructor }}</text>
+        <text class="info-desc-date fr">{{ detailData.formatedUpdateTime}}</text>
       </view>
       <view class="info-line under-line"></view>
     </view>

@@ -1,40 +1,73 @@
-import util from '../../utils/bookList';
+import util from '../../utils/bookListUtil';
+import commonUtil from '../../utils/util.js';
 import config from '../../utils/config';
 
-
 let app = getApp();
+const NA = "N/A";
 
 Page({
 
   data: {
-    // set the distance to the top to be 0
-    scrollTop: 0,
-    detailData: {},
+    detailData: {
+      BookTitle: NA, Instructor: NA, formatedUpdateTime: NA, Description: NA, Instructor: NA, Price: NA, TakeYear: NA, CourseID: NA, PostID: NA, OwnerID: NA, BookPhoto: NA, UploadTime: NA, share: NA, PhoneNumber: NA, Email: NA, Program: NA, Year: NA, QRCodeURL: NA, WeChatInfo: NA},
     fromSale: false,
   },
 
+  /**
+   * Update the page view with current book data
+   */
+  flushNewDataToPageView(){
+    this.setData({
+      detailData: this.data.detailData
+    })
+  },
 
+  /**
+   * option contains:
+   * 
+   * option.PostID -- book id
+   * option.OwnerID -- owner
+   * option.BookTitle -- book title
+   * option.BookPhoto -- book photo URL
+   * option.CourseID -- course code (CSCA08, MATA37...)
+   * option.Instructor -- instructor name
+   * option.TakeYear -- the year in which the owner took the course
+   * option.Description -- book description
+   * option.Price -- price
+   * option.UploadTime -- The time this post is created
+   * 
+   * option.PhoneNumber -- Owner's phone number
+   * option.Email -- Owner's email
+   * option.Program -- Owner's program
+   * option.Year -- The year in which the owner attented UTSC
+   * option.QRCodeURL -- owner's QR code URL
+   * option.WeChatInfo -- owner's wechat ID
+   */
   onLoad(option) {
-    /*
-    * 函数 `onLoad` 会在页面初始化时候加载运行，其内部的 `option` 是路由跳转过来后的参数对象。
-    * 我们从 `option` 中解析出文章参数 `contendId`，然后通过调用 `util` 中封装好的 `request` 函数来获取 `mock` 数据。 
-    */
-    let id = option.contentId || 0;
+    console.log(commonUtil.EYE_CATCHER + "\ndetail.js page parameters:");
+    console.log(option);
+    console.log("\n" + commonUtil.EYE_CATCHER);
+    //let id = option.PostID || 0;
+    //console.log(id);
     // to indicate how the users get to this place
     this.setData({
       isFromShare: !!option.share
     });
-    this.init(id);
-
+    for (var property in option) {
+      this.data.detailData[property] = option[property];
+    }
+    console.log(commonUtil.EYE_CATCHER + "\nDEBUG: Updated data:");
+    console.log(this.data.detailData);
+    console.log("\n" + commonUtil.EYE_CATCHER);
+    this.flushNewDataToPageView();
+    //this.init(id);
   },
 
 
   // work as a constructor
-  init(contentId) {
+  /*init(contentId) {
     // only do the following process when contentID exists
     if (contentId) {
-      // set the default read status to be TOP
-      this.goTop()
       this.requestDetail(contentId)
         // print the message out for debug purpose
         .then(data => {
@@ -43,12 +76,12 @@ Page({
           util.log(data)
         })
     }
-  },
+  },*/
 
 
   // request for detail information
-  requestDetail(contentId) {
-    return util.request({
+  /*requestDetail(contentId) {
+    return util.requestMock({
       url: 'detail',
       mock: true,
       data: {
@@ -56,24 +89,24 @@ Page({
       }
     })
       .then(res => {
-        let formateUpdateTime = this.formateTime(res.data.lastUpdateTime)
+        let formatedUpdateTime = this.formatTime(res.data.lastUpdateTime)
         // 格式化后的时间
-        res.data.formateUpdateTime = formateUpdateTime
+        res.data.formatedUpdateTime = formatedUpdateTime
         return res.data
       })
-  },
+  },*/
 
   // 更改时间格式
-  formateTime(timeStr = '') {
+  /*formatTime(timeStr = '') {
     let year = timeStr.slice(0, 4),
       month = timeStr.slice(5, 7),
       day = timeStr.slice(8, 10);
     return `${year}/${month}/${day}`;
-  },
+  },*/
 
 
   // change title with the changed data
-  configPageData(data) {
+  /*configPageData(data) {
     if (data) {
       // 同步数据到 Model 层，Model 层数据发生变化的话，视图层会自动渲染
       this.setData({
@@ -81,11 +114,12 @@ Page({
       });
       //设置标题
       let title = this.data.detailData.title || config.defaultBarTitle
+      //title = "哈哈哈哈哈哈哈哈哈哈"
       wx.setNavigationBarTitle({
         title: title
       })
     }
-  },
+  },*/
 
 
   // enable "next book" function
@@ -97,16 +131,16 @@ Page({
       })
   },
   requestNextContentId() {
-    let pubDate = this.data.detailData && this.data.detailData.lastUpdateTime || ''
+    //let pubDate = this.data.detailData && this.data.detailData.lastUpdateTime || ''
     let contentId = this.data.detailData && this.data.detailData.contentId || 0
-    return util.request({
+    return util.requestMock({
       url: 'detail',
       mock: true,
       data: {
-        tag: '微信热门',
-        pubDate: pubDate,
+        //tag: '微信热门',
+        //pubDate: pubDate,
         contentId: contentId,
-        langs: config.appLang || 'en'
+        //langs: config.appLang || 'en'
       }
     })
       .then(res => {
@@ -119,15 +153,6 @@ Page({
         }
       })
   },
-
-
-  // a help function which will be called when initialization
-  goTop() {
-    this.setData({
-      scrollTop: 0
-    })
-  },
-
 
   // share function
   onShareAppMessage() {
@@ -156,6 +181,7 @@ Page({
     let sdkVersion = device && device.SDKVersion || '1.0.0';
     return /1\.0\.0|1\.0\.1|1\.1\.0|1\.1\.1/.test(sdkVersion);
   },
+
   share() {
     if (this.notSupportShare()) {
       wx.showModal({
@@ -165,9 +191,9 @@ Page({
     }
   },
 
-  // help function to be called when user wants to go back to the previous page
   /**
-   * if user access this page by sharing, back will navigate to index page
+   * Go back to the page which we navigated from.
+   * A shared page will navigate to index page.
    */
   back() {
     if (this.data.isFromShare) {
@@ -179,6 +205,9 @@ Page({
     }
   },
 
+  /**
+   * Go to the page which shows the seller's information
+   */
   sellerInfo: function (event){
     wx.navigateTo({
       url: '../SellerInfo/SellerInfo'

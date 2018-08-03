@@ -1,4 +1,4 @@
-//index.js
+//CourseType.js
 //获取应用实例
 var app = getApp()
 var arr_name = ["CSC", "MAT", "MGE", "STA", "MGT", "LIN", "EES", "BIO",

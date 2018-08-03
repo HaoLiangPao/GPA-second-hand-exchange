@@ -27,6 +27,9 @@ const defaultImg = {
   articleImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_c8GvctTkm_DnPpyymdN8BRp7lHWeKZk81SZCE90ka1tDqBBm',
   coverImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_c8GvctTkm_DnPpyymdN8BRp7lHWeKZk81SZCE90ka1tDqBBm'
 };
+
+const serverURL = "localhost:8000";
+
 let core = {
   env: env,
   defaultBarTitle: defaultBarTitle['en'],
@@ -34,6 +37,7 @@ let core = {
   defaultAlertMsg: defaultAlertMessage,
   defaultShareText: defaultShareText['en'],
   isDev: env === 'dev',
-  isProduction: env === 'production'
+  isProduction: env === 'production',
+  serverURL: serverURL
 };
 export default core;

@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+
 import com.sun.net.httpserver.HttpExchange;
 
 import serverComponents.Server;
@@ -36,6 +41,7 @@ public class Util {
 	 * @throws IOException
 	 */
 	protected static void oneQueryHandler(HttpExchange arg0, String[] ordered_qry_tokens, String ps_template) throws IOException{
+		System.out.println("Incoming request...");
 		final StringBuilder response = new StringBuilder();
 		OutputStream os = arg0.getResponseBody();
 		// Assumed query tokens (Has to be in this particular order)
@@ -66,7 +72,10 @@ public class Util {
         try {
 			ps.execute();
 			rs = ps.getResultSet();
-			Util.writeRsIntoStringBuilder(rs, response);
+			if( !Util.writeRsIntoStringBuilderAsJSON(rs, response) ){
+				System.out.println("YES");
+				arg0.getResponseHeaders().add("status", "1");
+			}
 			Util.doSuccessResponse(response, arg0, os);
 		} catch (Exception e) {
 			Util.doSQLError(e, response, arg0, os);
@@ -145,11 +154,55 @@ public class Util {
     	}
 	}
 	
+	
+	/**
+	 * String format:
+	 * 
+	 * [
+	 * {colName1: row1col1, colName2: row1col2, colName3: row1col3 ... }, -- JSON1
+	 * {colName1: row2col1, colName2: row2col2, colName3: row2col3 ... }, -- JSON2
+	 * ...
+	 * ]
+	 * 
+	 * @param rs
+	 * @param sb
+	 * @return boolean -- false if empty result; else true
+	 * @throws SQLException 
+	 */
+	protected static boolean writeRsIntoStringBuilderAsJSON(ResultSet rs, StringBuilder sb) throws Exception{
+		if( rs != null ){
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int num_cols = rsmd.getColumnCount();
+			
+			JsonArray json_arr;
+			JsonArrayBuilder json_arr_builder = Json.createArrayBuilder();
+			
+			int num_rows = 0;
+			while ( rs.next() ){
+				JsonObjectBuilder json_builder = Json.createObjectBuilder();
+				
+				for ( int i = 1; i <= num_cols; i++ ){
+					String property_name = rsmd.getColumnName(i);
+					json_builder.add(property_name, rs.getString(i));
+				}
+				
+				json_arr_builder.add(json_builder);
+				num_rows++;
+			}
+			rs.close();
+			
+			json_arr = json_arr_builder.build();
+			sb.append(json_arr);
+			return num_rows != 0;
+		}
+		return false;
+	}
+	
 	/**
 	 * String format:
 	 * 
 	 * col1Name,col2Name,col3Name,col4Name......
-	 * row1col1,row2col2,row3col3,row4col4......
+	 * row1col1,row1col2,row1col3,row1col4......
 	 * row2col1,row2col2,row2col3,row2col4......
 	 * ...... (No spaces, one row per line)
 	 * 
@@ -157,6 +210,7 @@ public class Util {
 	 * @param sb
 	 * @throws SQLException 
 	 */
+	@Deprecated
 	protected static void writeRsIntoStringBuilder(ResultSet rs, StringBuilder sb) throws Exception{
 		if( rs != null ){
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -219,8 +273,9 @@ public class Util {
 	 * @throws IOException
 	 */
 	protected static void doSuccessResponse(StringBuilder response, HttpExchange arg0, OutputStream os) throws IOException{
-		arg0.sendResponseHeaders(200, response.length());
-		os.write(response.toString().getBytes());
+		byte[] response_in_bytes = response.toString().getBytes();
+		arg0.sendResponseHeaders(200, response_in_bytes.length);
+		os.write(response_in_bytes);
 		os.close();
 	}
 
@@ -252,8 +307,9 @@ public class Util {
 		response.append("Error message: " + err_msg);
 		System.out.println("Exception: " + err_msg);
 		e.printStackTrace();
-		arg0.sendResponseHeaders(500, response.length());
-		os.write(response.toString().getBytes());
+		byte[] response_in_bytes = response.toString().getBytes();
+		arg0.sendResponseHeaders(500, response_in_bytes.length);
+		os.write(response_in_bytes);
 		os.close();
 	}
 }
