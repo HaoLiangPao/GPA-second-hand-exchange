@@ -10,8 +10,8 @@ public class Configuration {
 	
 	// Connection configuration
 	public static final int PORT = 8000;
-	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC&useSSL=false";
-	public static final String MYSQL_DB = "test";
+	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC";
+	public static final String MYSQL_DB = "test2";
 	public static final String MYSQL_USER = "root";
 	public static final String MYSQL_PWD = "Wang971001";
 	
@@ -36,81 +36,80 @@ public class Configuration {
 	public static final int MAX_STATEMENTS_PER_CONNECTION = 12;
 	
 	// Database structure: TBL_* are table names; COL_* are column names
+	
+	// CREATE TABLE USER(UserID varchar(30) primary key, FullName varchar(30), WeChatID varchar(30), PhoneNumber varchar(30), Email varchar(30),
+	// Program varchar(30), Campus varchar(30), Year varchar(30), CreateDate varchar(30), IsGP varchar(30), QRCodeURL varchar(200))
 	public static final String TBL_USER = "USER";
-	public static final String COL_USER_USER_ID = "UserID"; // primary key
-	public static final String COL_USER_USER_NAME = "UserName";
-	public static final String COL_USER_USER_PWD = "Password";
-	public static final String COL_USER_WECHAT_INFO = "WeChatInfo";
+	public static final String COL_USER_USER_ID = "UserID"; // primary key; Should be open ID on WeChat front end side
+	public static final String COL_USER_USER_NAME = "FullName";
+	public static final String COL_USER_WECHAT_ID = "WeChatID";
 	public static final String COL_USER_PHONE_NUMBER = "PhoneNumber";
 	public static final String COL_USER_EMAIL = "Email";
 	public static final String COL_USER_PROGRAM = "Program";
+	public static final String COL_USER_CAMPUS = "Campus";
+	public static final String COL_USER_YEAR = "Year";
+	public static final String COL_USER_CREATE_DATE = "CreateDate";
+	public static final String COL_USER_IS_GP = "IsGP";
+	public static final String COL_USER_QRCODE_URL = "QRCodeURL";
 	
+	// CREATE TABLE POST(OwnerID varchar(30), BookTitle varchar(30), BookPhotoURL varchar(30), CourseCode varchar(30), Instructor varchar(30), TakeYear varchar(30),
+	// Description varchar(600), Price varchar(30), CreateDate varchar(30), HasNotes varchar(30), PRIMARY KEY (OwnerID, BookTitle))
 	public static final String TBL_POST = "POST";
-	public static final String COL_POST_POST_ID = "PostID"; // primary key
+	// (OwnerID, BookTitle) -- primary key
 	public static final String COL_POST_OWNER_ID = "OwnerID"; // foreign key references USER.UserID
 	public static final String COL_POST_BOOK_TITLE = "BookTitle";
-	public static final String COL_POST_BOOK_PHOTO = "BookPhoto";
-	public static final String COL_POST_COURSE_ID = "CourseID";
+	public static final String COL_POST_BOOK_PHOTO_URL = "BookPhotoURL";
+	public static final String COL_POST_COURSE_CODE = "CourseCode";
 	public static final String COL_POST_INSTRUCTOR = "Instructor";
 	public static final String COL_POST_TAKE_YEAR = "TakeYear";
 	public static final String COL_POST_DESCRIPTION = "Description";
 	public static final String COL_POST_PRICE = "Price";
-	public static final String COL_POST_STATUS = "Status";
+	public static final String COL_POST_CREATE_DATE = "CreateDate";
+	public static final String COL_POST_HAS_NOTES = "HasNotes";
 	
 	// PreparedStatements
-	public static final String QRY_CREATE_USER = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s, %s )"
-			+ " VALUES ( ?, ?, ?, ?, ?, ?, ? )", TBL_USER, COL_USER_USER_ID, COL_USER_USER_NAME, COL_USER_USER_PWD,
-			COL_USER_WECHAT_INFO, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM);
-			// INSERT INTO USER ( UserID, UserName, Password, WeChatInfo, PhoneNumber, Email, Program ) VALUES ( ?, ?, ?, ?, ?, ?, ? )
+	public static final String QRY_CREATE_USER = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+			+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", TBL_USER, COL_USER_USER_ID, COL_USER_USER_NAME,
+			COL_USER_WECHAT_ID, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM, COL_USER_CAMPUS, 
+			COL_USER_YEAR, COL_USER_CREATE_DATE, COL_USER_IS_GP, COL_USER_QRCODE_URL);
+			// INSERT INTO USER (UserID, FullName, WeChatID, PhoneNumber, Email, Program, Campus, Year, CreateDate, IsGP, QRCodeURL) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	
-	public static final String QRY_UPDATE_USER = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=? "
-			+ "WHERE %s=?", TBL_USER, COL_USER_USER_NAME, COL_USER_USER_PWD,
-			COL_USER_WECHAT_INFO, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM, COL_USER_USER_ID);
-			// UPDATE USER SET UserName=?, Password=?, WeChatInfo=?, PhoneNumber=?, Email=?, Program=? WHERE UserID=?
+	public static final String QRY_UPDATE_USER = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? )"
+			+ "WHERE %s=?", TBL_USER, COL_USER_USER_ID, COL_USER_USER_NAME,
+			COL_USER_WECHAT_ID, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM, COL_USER_CAMPUS, 
+			COL_USER_YEAR, COL_USER_CREATE_DATE, COL_USER_IS_GP, COL_USER_QRCODE_URL, COL_USER_USER_ID);
+			// UPDATE USER SET UserID=?, FullName=?, WeChatID=?, PhoneNumber=?, Email=?, Program=?, Campus=?, Year=?, CreateDate=?, IsGP=?, QRCodeURL=? WHERE UserID=?
 	
 	public static final String QRY_CREAT_POST = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )"
-			+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", TBL_POST, COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO,
-			COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR, COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS);
-			// INSERT INTO POST ( PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
+			+ "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", TBL_POST, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL,
+			COL_POST_COURSE_CODE, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR, COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_CREATE_DATE, COL_POST_HAS_NOTES);
+			// INSERT INTO POST ( OwnerID, BookTitle, BookPhotoURL, CourseCode, Instructor, TakeYear, Description, Price, CreateDate, HasNotes ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 	
-	public static final String QRY_UPDATE_POST = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? "
-			+ "WHERE %s=?", TBL_POST, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO,
-			COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR, COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, COL_POST_POST_ID);
-			// UPDATE POST SET OwnerID=?, BookTitle=?, BookPhoto=?, CourseID=?, Instructor=?, TakeYear=?, Description=?, Price=?, Status=? WHERE PostID=?
+	public static final String QRY_UPDATE_POST = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?"
+			+ "WHERE %s=? and %s=?", TBL_POST, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL,
+			COL_POST_COURSE_CODE, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR, COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_CREATE_DATE, COL_POST_HAS_NOTES, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE);
+			// UPDATE POST SET OnwerID=?, BookTitle=?, BookPhotoURL=?, CourseCode=?, Instructor=?, TakeYear=?, Description=?, Price=?, CreateDate=?, HasNotes=?
 	
-	public static final String QRY_DELETE_POST = String.format("DELETE FROM %s WHERE %s=?", TBL_POST, COL_POST_POST_ID);
-	// DELETE FROM POST WHERE PostID=?
+	public static final String QRY_DELETE_POST = String.format("DELETE FROM %s WHERE %s=? and %s=?", TBL_POST, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE);
+			// DELETE FROM POST WHERE OwnerID=? and BookTitle=?
 	
-	public static final String QRY_GET_USER_INFO_BY_CREDENTIALS = String.format("SELECT %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s=? AND %s=?",
-			COL_USER_USER_ID, COL_USER_USER_NAME, COL_USER_USER_PWD, COL_USER_WECHAT_INFO, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM,
-			TBL_USER, COL_USER_USER_NAME, COL_USER_USER_PWD);
-			// SELECT UserID, UserName, Password, WeChatInfo, PhoneNumber, Email, Program FROM USER WHERE UserName=? AND Password=?
+	public static final String QRY_GET_USER_INFO_BY_USER_ID = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s=?",
+			COL_USER_USER_ID, COL_USER_USER_NAME, COL_USER_WECHAT_ID, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM, COL_USER_CAMPUS, 
+			COL_USER_YEAR, COL_USER_CREATE_DATE, COL_USER_IS_GP, COL_USER_QRCODE_URL, TBL_USER, COL_USER_USER_ID);
+			// SELECT UserID, FullName, WeChatID, PhoneNumber, Email, Program, Campus, Year, CreateDate, IsGP, QPCodeURL FROM USER WHERE UserID=?
 	
-	public static final String QRY_GET_USER_INFO_BY_WECHAT_INFO = String.format("SELECT %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s=?",
-			COL_USER_USER_ID, COL_USER_USER_NAME, COL_USER_USER_PWD, COL_USER_WECHAT_INFO, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM,
-			TBL_USER, COL_USER_WECHAT_INFO);
-			// SELECT UserID, UserName, Password, WeChatInfo, PhoneNumber, Email, Program FROM USER WHERE WeChatInfo=?
+	public static final String QRY_GET_POST_BY_PRIMARY_KEY = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s=? and %s=?",
+			COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL,
+			COL_POST_COURSE_CODE, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR, COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_CREATE_DATE, COL_POST_HAS_NOTES,
+			TBL_POST, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE);
+			// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Instructor, TakeYear, Description, Price, CreateDate, HasNotes FROM POST WHERE OwnerID=? and BookTitle=?
 	
-	public static final String QRY_SEARCH_POST_BY_COURSE_ID = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s LIKE ?",
-			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
-			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, TBL_POST, COL_POST_COURSE_ID);
-			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status FROM POST WHERE CourseID LIKE ?
+	public static final String QRY_GET_ALL_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s ORDER BY %s", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_CREATE_DATE);
+			// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST ORDER BY CreateDate
 	
-	public static final String QRY_SEARCH_POST_BY_OWNER_ID = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s=?",
-			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
-			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, TBL_POST, COL_POST_OWNER_ID);
-			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status FROM POST WHERE OwnerID=?
+	public static final String QRY_GET_USER_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s=? ORDER BY %s", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_OWNER_ID, COL_POST_CREATE_DATE);
+	// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST WHERE OwnerID=? ORDER BY CreateDate 
 	
-	public static final String QRY_SEARCH_POST_BY_BOOK_TITLE = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s FROM %s WHERE %s LIKE ?",
-			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
-			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, TBL_POST, COL_POST_BOOK_TITLE);
-			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status FROM POST WHERE BookTitle LIKE ?
-	
-	public static final String QRY_GET_ALL_POST_INFO_BY_POST_ID = String.format("SELECT %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
-			+ " FROM %s JOIN %s on %s.%s=%s.%s WHERE %s.%s=?",
-			COL_POST_POST_ID, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO, COL_POST_COURSE_ID, COL_POST_INSTRUCTOR, COL_POST_TAKE_YEAR,
-			COL_POST_DESCRIPTION, COL_POST_PRICE, COL_POST_STATUS, COL_USER_USER_NAME, COL_USER_USER_PWD, COL_USER_WECHAT_INFO, COL_USER_PHONE_NUMBER,
-			COL_USER_EMAIL, COL_USER_PROGRAM, TBL_POST, TBL_USER, TBL_POST, COL_POST_OWNER_ID, TBL_USER, COL_USER_USER_ID, TBL_POST, COL_POST_POST_ID);
-			// SELECT PostID, OwnerID, BookTitle, BookPhoto, CourseID, Instructor, TakeYear, Description, Price, Status, UserName, Password, WeChatInfo,
-			//PhoneNumber, Email, Program FROM POST JOIN USER ON POST.OwnerID=USER.UserID WHERE POST.PostID=?
+	public static final String QRY_GET_COURSE_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s like ? ORDER BY %s", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_COURSE_CODE, COL_POST_CREATE_DATE);
+	// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST WHERE OwnerID=? ORDER BY CreateDate 
 }

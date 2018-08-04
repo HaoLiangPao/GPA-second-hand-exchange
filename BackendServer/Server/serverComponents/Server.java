@@ -25,12 +25,12 @@ public class Server {
 		
 		// Routing
 		server.createContext("/user/create", new CreateUserAccountHandler());
-		server.createContext("/user/logIn", new LogInHandler());
+		server.createContext("/user/getInfo", new GetUserInfoHandler());
 		server.createContext("/user/update", new UpdateUserInfoHandler());
-		server.createContext("/search/byCourseID", new SearchByCourseIDHandler());
-		server.createContext("/search/byOwner", new SearchByOwnerHandler());
-		server.createContext("/search/byBook", new SearchByBookHandler());
-		server.createContext("/searchAllInfo/byBookID", new SearchAllInfoByBookID());
+		server.createContext("/search/display/all", new SearchAllHandler());
+		server.createContext("/search/display/user", new SearchUserAllHandler());
+		server.createContext("/search/display/course", new SearchCourseAllHandler());
+		server.createContext("/search/detail", new SearchByBookHandler());
 		server.createContext("/post/create", new CreatePostHandler());
 		server.createContext("/post/update", new UpdatePostHandler());
 		server.createContext("/post/delete", new DeletePostHandler());
