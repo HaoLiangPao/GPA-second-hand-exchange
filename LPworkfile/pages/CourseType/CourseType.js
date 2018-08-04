@@ -1,99 +1,480 @@
-//index.js
+//CourseType.js
 //获取应用实例
 var app = getApp()
 var arr_name = ["CSC", "MAT", "MGE", "STA", "MGT", "LIN", "EES", "BIO",
-                "PSY", "CHM", "ANT", "ENG", "HIS", "MDS", "ECT",
-                "LGG", "VPM", "其它", "PHY", "NME", "CTL"]
+  "PSY", "CHM", "ANT", "MDS", "其它"]
 var arr_link = [1, 10, 15, 52, 62, 68, 75, 82, 98, 112, 147, 161, 218, 166, 182,
-                188, 192, 197, 202, 205, 212, 227, 132]
+  188, 192, 197, 202, 205, 212, 227, 132]
 var file = "../../image/"
 Page({
-    data: {
-        items: [{
-            id: "1",
-            src: "../../image/csc.jpg",
-            text: arr_name[0]
-        }, {
-            id: "10",
-            src: "../../image/mat.jpg",
-            text: arr_name[1]
-        }, {
-            id: "15",
-            src: "../../image/pig.jpg",
-            text: arr_name[2]
-        }, {
-            id: "52",
-            src: "../../image/pig.jpg",
-            text: arr_name[3]
-        }, {
-            id: "62",
-            src: "../../image/pig.jpg",
-            text: arr_name[4]
-        }, {
-            id: "68",
-            src: "../../image/pig.jpg",
-            text: arr_name[5]
-        }, {
-            id: "75",
-            src: "../../image/pig.jpg",
-            text: arr_name[6]
-        }, {
-            id: "82",
-            src: "../../image/pig.jpg",
-            text: arr_name[7]
-        }, {
-            id: "98",
-            src: "../../image/pig.jpg",
-            text: arr_name[8]
-        }, {
-            id: "112",
-            src: "../../image/pig.jpg",
-            text: arr_name[9]
-        }, {
-            id: "147",
-            src: "../../image/pig.jpg",
-            text: arr_name[10]
-        }, {
-            id: "161",
-            src: "../../image/pig.jpg",
-            text: arr_name[11]
-        }, {
-            id: "218",
-            src: "../../image/pig.jpg",
-            text: arr_name[12]
-        }, {
-            id: "166",
-            src: "../../image/pig.jpg",
-            text: arr_name[13]
-        }, {
-            id: "182",
-            src: "../../image/pig.jpg",
-            text: arr_name[14]
-        }, {
-            id: "188",
-            src: "../../image/pig.jpg",
-            text: arr_name[15]
-        }, {
-            id: "192",
-            src: "../../image/pig.jpg",
-            text: arr_name[16]
-        }, {
-            id: "197",
-            src: "../../image/pig.jpg",
-            text: arr_name[17]
-        }, {
-            id: "202",
-            src: "../../image/pig.jpg",
-            text: arr_name[18]
-        }, {
-            id: "205",
-            src: "../../image/pig.jpg",
-            text: arr_name[19]
-        }, {
-            id: "212",
-            src: "../../image/pig.jpg",
-            text: arr_name[20]
-        }],
-        url:file,
-    },
+  data: {
+    navLeftItems: [{
+      id: "1",
+      src: "../../image/csc.jpg",
+      text: arr_name[0],
+    }, {
+      id: "10",
+      src: "../../image/mat.jpg",
+      text: arr_name[1]
+    }, {
+      id: "15",
+      src: "../../image/pig.jpg",
+      text: arr_name[2]
+    }, {
+      id: "52",
+      src: "../../image/pig.jpg",
+      text: arr_name[3]
+    }, {
+      id: "62",
+      src: "../../image/pig.jpg",
+      text: arr_name[4]
+    }, {
+      id: "68",
+      src: "../../image/pig.jpg",
+      text: arr_name[5]
+    }, {
+      id: "75",
+      src: "../../image/pig.jpg",
+      text: arr_name[6]
+    }, {
+      id: "82",
+      src: "../../image/pig.jpg",
+      text: arr_name[7]
+    }, {
+      id: "98",
+      src: "../../image/pig.jpg",
+      text: arr_name[8]
+    }, {
+      id: "112",
+      src: "../../image/pig.jpg",
+      text: arr_name[9]
+    }, {
+      id: "147",
+      src: "../../image/pig.jpg",
+      text: arr_name[10]
+    }, {
+      id: "161",
+      src: "../../image/pig.jpg",
+      text: arr_name[11]
+    }, {
+      id: "218",
+      src: "../../image/pig.jpg",
+      text: arr_name[12]
+    }, {
+      id: "166",
+      src: "../../image/pig.jpg",
+      text: arr_name[13]
+    }, {
+      id: "182",
+      src: "../../image/pig.jpg",
+      text: arr_name[14]
+    }, {
+      id: "188",
+      src: "../../image/pig.jpg",
+      text: arr_name[15]
+    }, {
+      id: "192",
+      src: "../../image/pig.jpg",
+      text: arr_name[16]
+    }, {
+      id: "197",
+      src: "../../image/pig.jpg",
+      text: arr_name[17]
+    }, {
+      id: "202",
+      src: "../../image/pig.jpg",
+      text: arr_name[18]
+    }, {
+      id: "205",
+      src: "../../image/pig.jpg",
+      text: arr_name[19]
+    }, {
+      id: "212",
+      src: "../../image/pig.jpg",
+      text: arr_name[20]
+    }],
+    cateItems: [
+      {
+        cate_id: 1,
+        cate_name: arr_name[0],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '洁面皂',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 2,
+            name: '卸妆',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 3,
+            name: '洁面乳',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 4,
+            name: '面部祛角质',
+            image: "../../image/pig.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 2,
+        cate_name: arr_name[1],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '气垫bb',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 2,
+            name: '修容/高光',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 3,
+            name: '遮瑕',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 4,
+            name: '腮红',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 5,
+            name: '粉饼',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 6,
+            name: '粉底',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153817721.jpg"
+          },
+          {
+            child_id: 7,
+            name: '蜜粉/散粉',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153819354.jpg"
+          },
+          {
+            child_id: 8,
+            name: '隔离霜',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161215/148179053369.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 3,
+        cate_name: arr_name[2],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 4,
+        cate_name: arr_name[3],
+        ishaveChild: false,
+        children: []
+      },
+      {
+        cate_id: 5,
+        cate_name: arr_name[4],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 6,
+        cate_name: arr_name[5],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 7,
+        cate_name: arr_name[6],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 8,
+        cate_name: arr_name[7],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 9,
+        cate_name: arr_name[8],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 10,
+        cate_name: arr_name[9],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 11,
+        cate_name: arr_name[10],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 12,
+        cate_name: arr_name[11],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+      {
+        cate_id: 13,
+        cate_name: arr_name[12],
+        ishaveChild: true,
+        children:
+        [
+          {
+            child_id: 1,
+            name: '淡香水EDT',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+          },
+          {
+            child_id: 2,
+            name: '浓香水EDP',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+          },
+          {
+            child_id: 3,
+            name: '香体走珠',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+          },
+          {
+            child_id: 4,
+            name: '古龙香水男士的最爱',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          }
+        ]
+      },
+    ],
+    curNav: 1,
+    curIndex: 0
+  },
+
+  //事件处理函数  
+  switchRightTab: function (e) {
+    // 获取item项的id，和数组的下标值  
+    let id = e.target.dataset.id,
+      index = parseInt(e.target.dataset.index);
+    // 把点击到的某一项，设为当前index  
+    this.setData({
+      curNav: id,
+      curIndex: index
+    })
+  },
+
+  // 进入分类函数
+  goToCourse: function (e) {
+
+  }
 })

@@ -8,6 +8,15 @@
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
+              <checkbox class='deleteBox'> </checkbox>
+          </view>
+      </navigator>
+    </view>
+    <view class="mybook2">
+      <navigator wx:for="{{items}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
+          <view class="item_size">
+              <image class="img" src="{{item.src}}"></image>
+              <text class="text">{{item.text}}</text>
           </view>
       </navigator>
     </view>
