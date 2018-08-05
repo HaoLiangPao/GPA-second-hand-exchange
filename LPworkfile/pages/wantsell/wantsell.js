@@ -1,5 +1,5 @@
 // pages/wantsell/wantsell.js
-import util from '../../utils/bookList';
+import util from '../../utils/bookListUtil';
 
 Page({
 
@@ -10,7 +10,7 @@ Page({
     openid:'',
     ImagePaths: [],
     bookname:'',
-    bookyear:'',
+    booktime:'',
     instructor:'',
     description:'',
     course_code:'',
@@ -27,10 +27,7 @@ Page({
     console.log("the length of ImagePaths is:", this.data.ImagePaths.length);
     // default a placeholder picture for uploading
     //if (this.data.ImagePaths === []){
-
     //}
-
-
   },
 
   /**

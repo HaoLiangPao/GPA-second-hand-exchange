@@ -8,7 +8,7 @@
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
-              <checkbox class='deleteBox'> </checkbox>
+              <checkbox class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
           </view>
       </navigator>
     </view>
@@ -17,10 +17,11 @@
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
+              <checkbox class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
           </view>
       </navigator>
     </view>
-    <image class="plus" src="../../image/plus.png" bindtap="wantsell">我要卖书</image>
-    <image class="minus" src="../../image/trash.png" bindtap="history">卖书历史</image>
+    <image class="plus" src="{{showView?'../../image/plus.png':'../../image/red_confirm.png'}}" bindtap="{{showView?'wantsell':'delete'}}">我要卖书</image>
+    <image class="minus" src="{{showView?'../../image/trash.png':'../../image/arrows.png'}}" bindtap="switch">卖书历史</image>
 
 </view>

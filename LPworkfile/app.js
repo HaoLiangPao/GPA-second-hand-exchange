@@ -8,6 +8,25 @@ let handler = {
      store some local storage data
      
     */
+
+    //获取用户暂时登陆凭证code以获取进一步openid
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          console.log(res.code);
+          //发起网络请求
+          wx.request({
+            url: 'https://test.com/onLogin',
+            data: {
+              code: res.code
+            }
+          })
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+        }
+      }
+    });
+
     util.getStorageDataSync('visited', (data) => {
       this.globalData.visitedBooks = data;
     });

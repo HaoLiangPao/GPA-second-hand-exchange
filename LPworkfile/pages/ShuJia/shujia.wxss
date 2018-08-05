@@ -40,9 +40,16 @@ page {
   align-items: center;
 }
 
-.deleteBox{
+.deleteBox_hide{
+  display:none;
   padding:0%;
 }
+
+.deleteBox{
+  display:block;
+  padding:0%;
+}
+
 .img {
     width: 96rpx;
     height: 96rpx;

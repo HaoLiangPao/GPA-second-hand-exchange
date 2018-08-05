@@ -35,13 +35,15 @@ Page({
     
     ],
     url: file,
+    showView: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this
+    showView: (that.data.showView == "true" ? true : false)
   },
 
   /**
@@ -99,26 +101,17 @@ Page({
     })
   },
 
-  history:function (){
-    wx.showToast({
-      title: '选择下架',
-      image: '/image/info.png',
-      duration: 2000
-    });
-    wx.navigateTo({
-      url: '../history/history'
+  switch:function (){
+    var that = this
+    that.setData({
+      showView: (!that.data.showView)
     })
   },
-
-  /**
-   * delete button
-   * 
-   * change it to 
-   * 
-   */
-
-
-
-
-
+  
+  delete:function (){
+    wx.showToast({
+      title:"删除选中书本",
+      duration:3000
+    })
+  }
 })

@@ -9,6 +9,7 @@ Page({
    * tempData
    */
   data: {
+    openid:'',
     full_name: '',
     wechat_name: '',
     email: '',
@@ -17,6 +18,7 @@ Page({
     program: '',
     index: 0,
     date: '0000',
+    campus:'UTSC',
     // remember to upload the QR_Code to the server
     qrCode: {},
     userInfo: {},
@@ -76,7 +78,7 @@ Page({
 
   submit_in: function (e) {
     const that = this;
-    that.setData({
+    /*that.setData({
       full_name: e.detail.value.full_name,
       wechat_name: e.detail.value.wechat_name,
       email: e.detail.value.email,
@@ -84,6 +86,23 @@ Page({
       program: e.detail.value.program,
       qrCode: e.detail.value.qrCode,
       year: e.detail.value.year
+    })*/
+    var upload = {
+      openid:this.data.openid,
+      full_name:this.data.full_name,
+      wechat_name:this.data.wechat_name,
+      email:this.data.email,
+      year:this.data.year,
+      phone:this.data.phone,
+      program:this.data.program,
+      data:this.data.date,
+      qrCode:this.data.qrCode,
+      campus:this.data.campus,
+      GP:this.data.GP
+    }
+    wx.request({
+      url: 'http://localhost:8000/user/create',
+      data:upload
     })
     //wx.navigateTo({url:'../success_submit/success'})
     //在检查通过后对db进行update/insert
