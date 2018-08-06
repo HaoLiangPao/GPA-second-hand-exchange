@@ -9,7 +9,7 @@ import serverComponents.Configuration;
 public class SearchByBookHandler extends SearchHandler {
 	
 	/*
-	 * Example URL: http://localhost:8000?/search/detail?OwnerID=val1&BookTitle=val2
+	 * Example URL: http://localhost:8000/search/detail?OwnerID=val1&BookTitle=val2
 	 */
 	
 	@Override

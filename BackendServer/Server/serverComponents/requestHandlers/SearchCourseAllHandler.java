@@ -9,7 +9,7 @@ import serverComponents.Configuration;
 public class SearchCourseAllHandler extends SearchHandler {
 	
 	/*
-	 * Example URL: http://localhost:8000/search/display/course?CourseCode=?
+	 * Example URL: http://localhost:8000/search/display/course?CourseCode=val4
 	 */
 	
 	@Override
