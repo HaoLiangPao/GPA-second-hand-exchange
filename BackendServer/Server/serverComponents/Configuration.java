@@ -75,7 +75,7 @@ public class Configuration {
 			COL_USER_YEAR, COL_USER_CREATE_DATE, COL_USER_IS_GP, COL_USER_QRCODE_URL);
 			// INSERT INTO USER (UserID, FullName, WeChatID, PhoneNumber, Email, Program, Campus, Year, CreateDate, IsGP, QRCodeURL) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	
-	public static final String QRY_UPDATE_USER = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? )"
+	public static final String QRY_UPDATE_USER = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? "
 			+ "WHERE %s=?", TBL_USER, COL_USER_USER_ID, COL_USER_USER_NAME,
 			COL_USER_WECHAT_ID, COL_USER_PHONE_NUMBER, COL_USER_EMAIL, COL_USER_PROGRAM, COL_USER_CAMPUS, 
 			COL_USER_YEAR, COL_USER_CREATE_DATE, COL_USER_IS_GP, COL_USER_QRCODE_URL, COL_USER_USER_ID);
