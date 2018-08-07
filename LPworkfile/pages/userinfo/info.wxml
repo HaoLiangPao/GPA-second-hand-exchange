@@ -11,7 +11,7 @@
     </view>
     <view class="basic_info">
       <text>您的微信号</text>
-      <input type="text" class="sdinput" placeholder="微信" name="full_name" />
+      <input type="text" class="sdinput" placeholder="微信" name="wechat_name" />
     </view>
     <view class="basic_info">
       <text>您的入学年份</text>
@@ -41,11 +41,11 @@
         </radio-group>
       </checkbox-group>
     </view>
+    <view class='button1'>
+      <button type="default" bindtap="chooseimage">上传您的QR_Code</button>
+    </view>
+    <view class='button2'>
+      <button type="primary" bindtap="submit" form-type='submit'>确认修改           </button>
+    </view>
   </form>
-</view>
-<view class='button1'>
-  <button type="default" bindtap="chooseimage">上传您的QR_Code</button>
-</view>
-<view class='button2'>
-  <button type="primary" bindtap="submit_in" form-type='submit'>确认修改</button>
 </view>

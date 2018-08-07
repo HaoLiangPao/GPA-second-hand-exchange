@@ -8,7 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phonecall: '1234567891',
+    phonecall: '未填写',
+    program:'未填写',
+    email:'未填写',
+    year:'未填写',
     userInfo: {},
     // if the page is entered from bookList -- seller info
     qrCode: {},

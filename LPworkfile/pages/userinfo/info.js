@@ -1,4 +1,5 @@
 // pages/userinfo/info.js
+import util from '../../utils/util';
 
 const app = getApp()
 
@@ -9,7 +10,7 @@ Page({
    * tempData
    */
   data: {
-    openid:'',
+    openid: '',
     full_name: '',
     wechat_name: '',
     email: '',
@@ -26,13 +27,22 @@ Page({
       { name: 'GP_Student', value: 'ture'},
       { name: 'Non_GP', value: 'false' },
     ],
-    GP: ''
+    GP: '',
+    createDate:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    //加载创建用户时间
+    var time = util.formatTime(new Date());
+    this.setData({
+      createDate: time
+    });
+
+    // 再通过setData更改Page()里面的data，动态更新页面的数据
     //加载db里的账户信息并作显示
     if (app.globalData.userInfo) {
       this.setData({
@@ -52,7 +62,11 @@ Page({
         }
       })
     }
-    console.log("QR_Code path is :", qrCode[0]);
+    //加载数据库信息
+    
+    //测试信息
+    console.log("QR_Code path is :", qrCode);
+    console.log("The time now is :", this.data.createDate);
   },
 
   /**
@@ -76,34 +90,57 @@ Page({
   
   },
 
-  submit_in: function (e) {
-    const that = this;
-    /*that.setData({
-      full_name: e.detail.value.full_name,
-      wechat_name: e.detail.value.wechat_name,
-      email: e.detail.value.email,
-      phone: e.detail.value.phone,
-      program: e.detail.value.program,
-      qrCode: e.detail.value.qrCode,
-      year: e.detail.value.year
-    })*/
-    var upload = {
-      openid:this.data.openid,
-      full_name:this.data.full_name,
-      wechat_name:this.data.wechat_name,
-      email:this.data.email,
-      year:this.data.year,
-      phone:this.data.phone,
-      program:this.data.program,
-      data:this.data.date,
-      qrCode:this.data.qrCode,
-      campus:this.data.campus,
-      GP:this.data.GP
-    }
-    wx.request({
-      url: 'http://localhost:8000/user/create',
-      data:upload
+  toast:function(title){
+    wx.showToast({
+      title: title,
+      duration: 1500
     })
+  },
+
+  submit_in: function (e) {
+    var that = this;
+    var email_ex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    if (e.detail.value.full_name == ''){that.toast('姓名不能为空')}
+    else if (e.detail.value.wechat_name == ''){that.toast('微信不能为空')}
+    else if (e.detail.value.phone == ''){that.toast('手机不能为空')}
+    else if (e.detail.value.phone.length != 10) { that.toast('手机格式错误') }
+    else if (e.detail.value.email == '') { that.toast('邮箱不能为空') }
+    else if (!email_ex.test(e.detail.value.email)) { that.toast('邮箱格式错误') }
+    else if (e.detail.value.program == '') { that.toast('专业不能为空') }
+    else if (e.detail.value.year == '0000') { that.toast('入学年不能为空') }
+    else{
+      that.setData({
+        openid: Math.random().toString(36).substr(2, 15),
+        full_name: e.detail.value.full_name,
+        wechat_name: e.detail.value.wechat_name,
+        phone: e.detail.value.phone,
+        email: e.detail.value.email,
+        program: e.detail.value.program,
+        campus: this.data.campus,
+        year: this.data.year,
+        createDate: this.data.createDate,
+        GP: this.data.GP,
+      })
+
+      var upload = {
+        UserID:this.data.openid,
+        FullName:this.data.full_name,
+        WeChatID:this.data.wechat_name,
+        PhoneNumber: this.data.phone,
+        Email:this.data.email,
+        Program: this.data.program,
+        Campus: this.data.campus,
+        Year:this.data.year,
+        CreateDate: this.data.createDate,
+        IsGP: this.data.GP,
+        QRCodeURL:this.data.qrCode
+      }
+
+      wx.request({
+        url: 'http://localhost:8000/user/create',
+        data:upload
+      })
+    }
     //wx.navigateTo({url:'../success_submit/success'})
     //在检查通过后对db进行update/insert
   },

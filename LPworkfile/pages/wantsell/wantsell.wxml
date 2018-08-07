@@ -24,14 +24,10 @@
         <text>讲师姓名</text>
         <input type="text" class="sdinput" placeholder='EX:Anna Bretscher' name="instructor" />
       </view>
-
-
       <view class="book_info">
         <text>书本描述</text>
         <textarea type="text" class="description" placeholder="须少于200字" name="description" maxlength='220' />
       </view>
-
-
       <view class="book_info">
         <checkbox-group bindchange="checkboxChange">
           <radio-group name="radio">
@@ -42,9 +38,6 @@
           </radio-group>
         </checkbox-group>
       </view>
-
-
-
 
       <view class="image_container">
         <!-- why this block can not be shown? -->

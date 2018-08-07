@@ -33,6 +33,7 @@ let handler = {
   },
   // global data
   globalData: {
+    openid:'1',
     user: {
       name: '',
       avator: ''

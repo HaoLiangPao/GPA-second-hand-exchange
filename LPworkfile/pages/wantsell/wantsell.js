@@ -10,7 +10,7 @@ Page({
     openid:'',
     ImagePaths: [],
     bookname:'',
-    booktime:'',
+    bookyear:'',
     instructor:'',
     description:'',
     course_code:'',
@@ -188,7 +188,6 @@ Page({
       instructor: e.detail.value.instructor,
       description: e.detail.value.description
     })
-      //wx.navigateTo({url:'../success_submit/success'})
   },
 
   check:function(){

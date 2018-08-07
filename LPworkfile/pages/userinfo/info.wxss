@@ -59,7 +59,7 @@ page{
   border-radius: 15%;
   width: 60%;
   align-self: center;
-  margin-top: 2%;
+  margin-top: 10%;
   margin-left: 20%;
   margin-bottom: 2%;
 }

@@ -7,12 +7,12 @@
 
   <view class="row">
     <text>📖 专业：</text>
-    <text class="program">Statistics</text>
+    <text class="program">{{program}}</text>
   </view>
 
   <view class="row">
     <text>🏫 入学年份：</text>
-    <text class="program">2016</text>
+    <text class="year">{{year}}</text>
   </view>
 
   <view class="row">
@@ -21,7 +21,7 @@
 
   <view class="row">
     <text>📮 邮箱：</text>
-    <text class="email">weisiyi2@gmail.com</text>
+    <text class="email">{{email}}</text>
   </view>
 
   <button bindtap="edit" class="eidt"> 编辑个人信息 </button>
