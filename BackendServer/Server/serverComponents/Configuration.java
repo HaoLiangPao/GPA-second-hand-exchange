@@ -13,7 +13,7 @@ public class Configuration {
 	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC";
 	public static final String MYSQL_DB = "test2";
 	public static final String MYSQL_USER = "root";
-	public static final String MYSQL_PWD = "Wang971001";
+	public static final String MYSQL_PWD = "rootroot";
 	
 	// Connection pool configuration
 	
@@ -37,6 +37,7 @@ public class Configuration {
 	
 	// Database structure: TBL_* are table names; COL_* are column names
 	
+	//UserID is the openid in wechat program, WeChatID is the wechat name that the user using.
 	// CREATE TABLE USER(UserID varchar(30) primary key, FullName varchar(30), WeChatID varchar(30), PhoneNumber varchar(30), Email varchar(30),
 	// Program varchar(30), Campus varchar(30), Year varchar(30), CreateDate varchar(30), IsGP varchar(30), QRCodeURL varchar(200))
 	public static final String TBL_USER = "USER";
