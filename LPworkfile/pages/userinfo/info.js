@@ -35,7 +35,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     //加载创建用户时间
     var time = util.formatTime(new Date());
     this.setData({
@@ -107,10 +106,11 @@ Page({
     else if (!email_ex.test(e.detail.value.email)) { that.toast('邮箱格式错误') }
     else if (e.detail.value.program == '') { that.toast('专业不能为空') }
     else if (e.detail.value.year == '0000') { that.toast('入学年不能为空') }
-    
+
     else{
       that.setData({
-        openid: Math.random().toString(36).substr(2, 15),
+        openid: app.globalData.user.UserID,
+        //Math.random().toString(36).substr(2, 15),
         full_name: e.detail.value.full_name,
         wechat_name: e.detail.value.wechat_name,
         phone: e.detail.value.phone,
@@ -135,11 +135,18 @@ Page({
         IsGP: this.data.GP,
         QRCodeURL:this.data.qrCode
       }
-
-      wx.request({
-        url: 'http://localhost:8000/user/create',
-        data:upload
-      })
+      if(app.globalData.user.HaveUser){
+        wx.request({
+          url: 'http://localhost:8000/user/update',
+          data: upload
+        })
+      }else{
+        console.log(app.globalData.user.HaveUser)
+        wx.request({
+          url: 'http://localhost:8000/user/create',
+          data: upload
+        })
+      }
     }
     //wx.navigateTo({url:'../success_submit/success'})
     //在检查通过后对db进行update/insert
