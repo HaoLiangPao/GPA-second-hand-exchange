@@ -50,7 +50,6 @@ Page({
         hasUserInfo: true
       })
     } else {
-      console.log("lalala");
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
@@ -66,7 +65,6 @@ Page({
     
     //测试信息
     console.log("QR_Code path is :", qrCode);
-    console.log("The time now is :", this.data.createDate);
   },
 
   /**
@@ -99,6 +97,7 @@ Page({
 
   submit_in: function (e) {
     var that = this;
+    //格式检查
     var email_ex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     if (e.detail.value.full_name == ''){that.toast('姓名不能为空')}
     else if (e.detail.value.wechat_name == ''){that.toast('微信不能为空')}
@@ -108,6 +107,7 @@ Page({
     else if (!email_ex.test(e.detail.value.email)) { that.toast('邮箱格式错误') }
     else if (e.detail.value.program == '') { that.toast('专业不能为空') }
     else if (e.detail.value.year == '0000') { that.toast('入学年不能为空') }
+    
     else{
       that.setData({
         openid: Math.random().toString(36).substr(2, 15),
@@ -117,9 +117,9 @@ Page({
         email: e.detail.value.email,
         program: e.detail.value.program,
         campus: this.data.campus,
-        year: this.data.year,
+        year: '1234',
         createDate: this.data.createDate,
-        GP: this.data.GP,
+        GP: 'true',
       })
 
       var upload = {

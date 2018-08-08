@@ -1,6 +1,7 @@
 // pages/userDis/userDis.js
 
 const app = getApp()
+const util = require('../../utils/util.js');
 
 Page({
 
@@ -8,10 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    phonecall: '未填写',
-    program:'未填写',
-    email:'未填写',
-    year:'未填写',
+    phonecall: app.globalData.user.PhoneNumber,
+    program: app.globalData.user.Program,
+    email: app.globalData.user.Email,
+    year: app.globalData.user.Year,
     userInfo: {},
     // if the page is entered from bookList -- seller info
     qrCode: {},
@@ -22,6 +23,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //get the user info and try to display
+    this.setData({
+      phonecall: app.globalData.user.PhoneNumber,
+      program: app.globalData.user.Program,
+      email: app.globalData.user.Email,
+      year: app.globalData.user.Year,
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
