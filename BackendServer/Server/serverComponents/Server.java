@@ -30,10 +30,13 @@ public class Server {
 		server.createContext("/search/display/all", new SearchAllHandler());
 		server.createContext("/search/display/user", new SearchUserAllHandler());
 		server.createContext("/search/display/course", new SearchCourseAllHandler());
+		server.createContext("/search/display/nextN", new SearchNextNHandler());
 		server.createContext("/search/detail", new SearchByBookHandler());
 		server.createContext("/post/create", new CreatePostHandler());
 		server.createContext("/post/update", new UpdatePostHandler());
 		server.createContext("/post/delete", new DeletePostHandler());
+		server.createContext(Configuration.IMAGE_UPLOAD_ROUTE, new UploadBookImageHandler());
+		server.createContext(Configuration.IMAGE_DOWNLOAD_ROUTE, new DownloadBookImageHandler());
 		
 		server.setExecutor(null); // Default way of managing threads
 		System.out.println("About to start HTTP server at port " + Configuration.PORT);

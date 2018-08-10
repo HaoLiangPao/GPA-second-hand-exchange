@@ -8,12 +8,19 @@ package serverComponents;
  */
 public class Configuration {
 	
+	public static final String DOMAIN_NAME = "localhost:8000";
+	
+	// Constants for image download/upload API
+	public static final String IMAGE_DIR = "/Users/ken/Desktop/tempFolder";
+	public static final String IMAGE_UPLOAD_ROUTE = "/bookImage/upload";
+	public static final String IMAGE_DOWNLOAD_ROUTE = "/bookImage/download";
+	
 	// Connection configuration
 	public static final int PORT = 8000;
-	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC";
+	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC&useSSL=false";
 	public static final String MYSQL_DB = "test2";
 	public static final String MYSQL_USER = "root";
-	public static final String MYSQL_PWD = "rootroot";
+	public static final String MYSQL_PWD = "Wang971001";
 	
 	// Connection pool configuration
 	
@@ -105,12 +112,16 @@ public class Configuration {
 			TBL_POST, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE);
 			// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Instructor, TakeYear, Description, Price, CreateDate, HasNotes FROM POST WHERE OwnerID=? and BookTitle=?
 	
-	public static final String QRY_GET_ALL_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s ORDER BY %s", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_CREATE_DATE);
+	public static final String QRY_GET_ALL_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s ORDER BY %s DESC", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_CREATE_DATE);
 			// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST ORDER BY CreateDate
 	
-	public static final String QRY_GET_USER_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s=? ORDER BY %s", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_OWNER_ID, COL_POST_CREATE_DATE);
+	public static final String QRY_GET_USER_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s=? ORDER BY %s DESC", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_OWNER_ID, COL_POST_CREATE_DATE);
 	// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST WHERE OwnerID=? ORDER BY CreateDate 
 	
-	public static final String QRY_GET_COURSE_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s like ? ORDER BY %s", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_COURSE_CODE, COL_POST_CREATE_DATE);
+	public static final String QRY_GET_COURSE_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s like ? ORDER BY %s DESC", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST, COL_POST_COURSE_CODE, COL_POST_CREATE_DATE);
 	// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST WHERE OwnerID=? ORDER BY CreateDate 
+	
+	public static final String QRY_GET_NEXT_N_POST_DISPLAY_INFO_ORDER_BY_DATE = String.format("SELECT %s, %s, %s, %s, %s, %s FROM %s WHERE %s > ? and %s > ? and %s > ? ORDER BY %s DESC, %s DESC, %s DESC LIMIT ?", COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_BOOK_PHOTO_URL, COL_POST_COURSE_CODE, COL_POST_PRICE, COL_POST_CREATE_DATE, TBL_POST,
+			COL_POST_OWNER_ID, COL_POST_BOOK_TITLE, COL_POST_CREATE_DATE, COL_POST_CREATE_DATE, COL_POST_OWNER_ID, COL_POST_BOOK_TITLE);
+	// SELECT OwnerID, BookTitle, BookPhotoURL, CourseCode, Price, CreateDate FROM POST WHERE OwnerID=? and BookTitle=? and CreateDate=? ORDER BY CreateDate DESC, OwnerID DESC, BookTitle DESC LIMIT ?
 }

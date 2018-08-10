@@ -40,18 +40,17 @@ public class Util {
 	 * @param ps_template
 	 * @throws IOException
 	 */
-	protected static void oneQueryHandler(HttpExchange arg0, String[] ordered_qry_tokens, String ps_template) throws IOException{
+	protected static Map<String, String> oneQueryHandler(HttpExchange arg0, String[] ordered_qry_tokens, String ps_template) throws IOException{
 		System.out.println("Incoming request...");
 		final StringBuilder response = new StringBuilder();
-		OutputStream os = arg0.getResponseBody();
 		// Assumed query tokens (Has to be in this particular order)
         final Map<String, String> parameters = new HashMap<String, String>();
         Util.initParamMap(ordered_qry_tokens, parameters);
         try {
 			Util.parseQuery(arg0.getRequestURI().getRawQuery(), parameters);
 		} catch (Exception e) {
-			Util.doParseQueryError(e, response, arg0, os);
-			return;
+			Util.doParseQueryError(e, response, arg0);
+			return null;
 		}
 		// Generate sql queries
         Connection pooledConn = null;
@@ -61,10 +60,10 @@ public class Util {
 			ps = pooledConn.prepareStatement(ps_template);
 			Util.setPsParams(ordered_qry_tokens, ps, parameters);
 		} catch (SQLException e) {
-			Util.doSQLError(e, response, arg0, os);
+			Util.doSQLError(e, response, arg0);
 			Util.returnStatementToPool(ps);
 			Util.returnConnectionToPool(pooledConn);
-			return;
+			return null;
 		}
         // Execute generated queries against the mysql database
         // Collecting query results and write into response
@@ -76,10 +75,11 @@ public class Util {
 				System.out.println("YES");
 				arg0.getResponseHeaders().add("status", "1");
 			}
-			Util.doSuccessResponse(response, arg0, os);
+			Util.doSuccessResponse(response, arg0);
+			return parameters;
 		} catch (Exception e) {
-			Util.doSQLError(e, response, arg0, os);
-			return;
+			Util.doSQLError(e, response, arg0);
+			return null;
 		} finally {
 			Util.returnStatementToPool(ps);
 			Util.returnConnectionToPool(pooledConn);
@@ -170,30 +170,35 @@ public class Util {
 	 * @throws SQLException 
 	 */
 	protected static boolean writeRsIntoStringBuilderAsJSON(ResultSet rs, StringBuilder sb) throws Exception{
-		if( rs != null ){
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int num_cols = rsmd.getColumnCount();
-			
-			JsonArray json_arr;
-			JsonArrayBuilder json_arr_builder = Json.createArrayBuilder();
-			
-			int num_rows = 0;
-			while ( rs.next() ){
-				JsonObjectBuilder json_builder = Json.createObjectBuilder();
+		try{
+			if( rs != null ){
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int num_cols = rsmd.getColumnCount();
 				
-				for ( int i = 1; i <= num_cols; i++ ){
-					String property_name = rsmd.getColumnName(i);
-					json_builder.add(property_name, rs.getString(i));
+				JsonArray json_arr;
+				JsonArrayBuilder json_arr_builder = Json.createArrayBuilder();
+				
+				int num_rows = 0;
+				while ( rs.next() ){
+					JsonObjectBuilder json_builder = Json.createObjectBuilder();
+					
+					for ( int i = 1; i <= num_cols; i++ ){
+						String property_name = rsmd.getColumnName(i);
+						json_builder.add(property_name, rs.getString(i));
+					}
+					
+					json_arr_builder.add(json_builder);
+					num_rows++;
 				}
 				
-				json_arr_builder.add(json_builder);
-				num_rows++;
+				json_arr = json_arr_builder.build();
+				sb.append(json_arr);
+				return num_rows != 0;
 			}
-			rs.close();
-			
-			json_arr = json_arr_builder.build();
-			sb.append(json_arr);
-			return num_rows != 0;
+		} finally {
+			if( rs != null ){
+				rs.close();
+			}
 		}
 		return false;
 	}
@@ -212,35 +217,40 @@ public class Util {
 	 */
 	@Deprecated
 	protected static void writeRsIntoStringBuilder(ResultSet rs, StringBuilder sb) throws Exception{
-		if( rs != null ){
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int num_cols = rsmd.getColumnCount();
-			// Print column names
-			int j;
-			for ( j = 1; j <= num_cols; j++ ){
-				sb.append(rsmd.getColumnName(j));
-				if ( j != num_cols ){
-					sb.append(",");
-				}
-				else{
-					sb.append("\n");
-				}
-			}
-			
-			// Print rows
-			int i;
-			while ( rs.next() ){
-				for ( i = 1; i <= num_cols; i++ ){
-					sb.append(rs.getString(i));
-					if ( i != num_cols ){
+		try{
+			if( rs != null ){
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int num_cols = rsmd.getColumnCount();
+				// Print column names
+				int j;
+				for ( j = 1; j <= num_cols; j++ ){
+					sb.append(rsmd.getColumnName(j));
+					if ( j != num_cols ){
 						sb.append(",");
 					}
 					else{
 						sb.append("\n");
 					}
 				}
+				
+				// Print rows
+				int i;
+				while ( rs.next() ){
+					for ( i = 1; i <= num_cols; i++ ){
+						sb.append(rs.getString(i));
+						if ( i != num_cols ){
+							sb.append(",");
+						}
+						else{
+							sb.append("\n");
+						}
+					}
+				}
 			}
-			rs.close();
+		} finally {
+			if( rs != null ){
+				rs.close();
+			}
 		}
 	}
 	
@@ -269,24 +279,24 @@ public class Util {
 	 * 
 	 * @param response
 	 * @param arg0
-	 * @param os
 	 * @throws IOException
 	 */
-	protected static void doSuccessResponse(StringBuilder response, HttpExchange arg0, OutputStream os) throws IOException{
+	protected static void doSuccessResponse(StringBuilder response, HttpExchange arg0) throws IOException{
+		OutputStream os = arg0.getResponseBody();
 		byte[] response_in_bytes = response.toString().getBytes();
 		arg0.sendResponseHeaders(200, response_in_bytes.length);
 		os.write(response_in_bytes);
 		os.close();
 	}
 
-	protected static void doParseQueryError(Exception e, StringBuilder response, HttpExchange arg0, OutputStream os)  throws IOException {
+	protected static void doParseQueryError(Exception e, StringBuilder response, HttpExchange arg0)  throws IOException {
 		final String msg = "Error occured when parsing query!";
-		doError(e, response, arg0, os, msg);
+		doError(e, response, arg0, msg);
 	}
 	
-	protected static void doSQLError(Exception e, StringBuilder response, HttpExchange arg0, OutputStream os) throws IOException {
+	protected static void doSQLError(Exception e, StringBuilder response, HttpExchange arg0) throws IOException {
 		final String msg = "Error occured when talking to database!";
-		doError(e, response, arg0, os, msg);
+		doError(e, response, arg0, msg);
 	}
 	
 	/**
@@ -297,11 +307,11 @@ public class Util {
 	 * @param e
 	 * @param response
 	 * @param arg0
-	 * @param os
 	 * @param msg
 	 * @throws IOException
 	 */
-	private static void doError(Exception e, StringBuilder response, HttpExchange arg0, OutputStream os, String msg) throws IOException{
+	protected static void doError(Exception e, StringBuilder response, HttpExchange arg0, String msg) throws IOException{
+		OutputStream os = arg0.getResponseBody();
 		response.append(msg + "\n");
 		String err_msg = e.getMessage();
 		response.append("Error message: " + err_msg);
