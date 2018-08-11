@@ -1,15 +1,15 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/ShuJia/shujia",
+    "pages/userDis/userDis",
     "pages/logs/logs",
     "pages/wantsell/wantsell",
     "pages/history/history",
     "pages/userinfo/info",
-    "pages/ShuJia/shujia",
     "pages/detail/detail",
     "pages/bookList/bookList",
     "pages/CourseType/CourseType",
-    "pages/userDis/userDis",
     "pages/SellerInfo/SellerInfo"
   ],
   "window": {

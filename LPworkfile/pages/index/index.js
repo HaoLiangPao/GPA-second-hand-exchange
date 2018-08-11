@@ -11,14 +11,15 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    searchInput: "",
     tempFilePaths: ''
   },
-  //事件处理函数
+  /*//事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
-  },
+  },*/
   onLoad: function () {
     //读取数据库中用户信息并存在globaldata中
     var upload = {
@@ -27,6 +28,7 @@ Page({
     var url = 'http://localhost:8000/user/getInfo';
     var result = undefined;
     var success_cb = function (res) {
+      // The content of 'res': res.data, res.header, res.statusCode, res.errMsg
       if (res.header.Status == 1) {
         console.log("数据库中未找到此用户")
       }
@@ -56,21 +58,8 @@ Page({
   },
 
   //页面加载完成
-  onReady: function () {
-    //提示用户填写信息
-    if (app.globalData.user.HaveUser == false) {
-      wx.showModal({
-        title: '提示',
-        content: '请填写个人信息以进行交易',
-        success: function (res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../userinfo/info'
-            })
-          }
-        }
-      })
-    }
+  onReady: function(){
+    util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
   },
 
   getUserInfo: function (e) {
@@ -112,22 +101,28 @@ Page({
     //  }
     //})
   },
+  getInput: function(e) {
+    this.data.searchInput = e.detail.value
+  },
 
   //搜索方程 （待接课程编码）
   query: function (e) {
-    var url = "http://localhost:8000/search/byBook";//查询数据的URL
-    console.log("YES!")
+    wx.navigateTo({
+      url: '../bookList/bookList?mode=search&value=' + this.data.searchInput
+    })
+    //var url = "http://localhost:8000/search/byBook";//查询数据的URL
+    //console.log("YES!")
     // 搜索：获取数据库书本数据
-    util.doGET(url, { BookTitle: "val3" }, function (res) {
-      wx.navigateTo({
-        url: util.buildURL('../detail/detail?', res.data[0]),
-      })
-    }, function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e))})
+    //util.doGET(url, { BookTitle: "val3" }, function (res) {
+      //wx.navigateTo({
+        //url: util.buildURL('../detail/detail?', res.data[0]),
+      //})
+    //}, function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e))})
   },
 
   BookList: function () {
     wx.navigateTo({
-      url: '../bookList/bookList',
+      url: '../bookList/bookList?mode=newBook',
     })
   },
 

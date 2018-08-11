@@ -30,7 +30,7 @@
       </view>
       <view class="book_info">
         <checkbox-group bindchange="checkboxChange">
-          <radio-group name="radio" bindchange="checkboxChange">
+          <radio-group name="hasNote" bindchange="checkboxChange">
             <label class='lable'>
               <radio value="true" />附加笔记</label>
             <label class='lable'>

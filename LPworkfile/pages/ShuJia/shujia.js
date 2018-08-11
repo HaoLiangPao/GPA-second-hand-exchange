@@ -1,6 +1,6 @@
 // pages/ShuJia/shujia.js
 var app = getApp()
-var my_book = ["Books1","Books2","Book3s","Books4"]
+var my_book = ["Book1","Book2","Book3","Book4"]
 var arr_link = [1,2,3,4]
 var file = ""
 
@@ -10,11 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: [{
+    items: [
+
+      {
       id: "1",
       src: "../../image/pig.jpg",
       text: my_book[0],
-    },
+      },
+
       {
         id: "2",
         src: "../../image/pig.jpg",

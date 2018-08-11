@@ -62,7 +62,7 @@ Page({
     //加载数据库信息
     
     //测试信息
-    console.log("QR_Code path is :", qrCode);
+    console.log("QR_Code path is :", this.data.qrCode);
   },
 
   /**
@@ -77,6 +77,11 @@ Page({
    */
   onShow: function () {
   
+  },
+
+  onUnload: function() {
+    // Verify again if the user has updated his info
+    util.checkIfUserExistsIfNotForceInfoUpdate();
   },
 
   /**

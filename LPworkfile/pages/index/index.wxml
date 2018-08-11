@@ -11,7 +11,7 @@
       <view class="search-section">
 
         <view class="search-input-wrapper ">
-          <input bindconfirm="query" class="search-input" placeholder="输入课号吧..." value="{{coursecode}}" confirm-type="search" auto-focus='true'auto-height='true' />
+          <input bindconfirm="getInput" class="search-input" placeholder="例：CSC, CSCA08等" value="{{searchInput}}" confirm-type="search" auto-focus='true'auto-height='true' />
         </view>
 
         <view class="search-button-wrapper">

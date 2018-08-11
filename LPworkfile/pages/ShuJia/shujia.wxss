@@ -69,15 +69,26 @@ page {
     height: 100%;
 }
 
-.txt {
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
+.txtTop {
+    width: 250rpx;
+    height: 20rpx;
+    line-height: 20rpx;
     text-align: center;
-    color: #fff;
+    color: #8B5A2B;
     position: absolute;
-    top: 40%;
-    left: 50%;
+    top: 10%;
+    left: 33%;
+}
+
+.txtBottom {
+    width: 250rpx;
+    height: 20rpx;
+    line-height: 20rpx;
+    text-align: center;
+    color: #8B5A2B;
+    position: absolute;
+    top: 82%;
+    left: 33%;
 }
 
 .plus {

@@ -2,7 +2,7 @@
 
 <view class="rack">
     <image class="background" src="../../image/bookrack.jpg"></image>
-    <text class="txt">我的上架书目</text>
+    <text class="txtTop">我的上架书目</text>
     <view class="mybook">
       <navigator wx:for="{{items}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
           <view class="item_size">
@@ -22,6 +22,7 @@
       </navigator>
     </view>
     <image class="plus" src="{{showView?'../../image/plus.png':'../../image/red_confirm.png'}}" bindtap="{{showView?'wantsell':'delete'}}">我要卖书</image>
+    <text class="txtBottom">(最多8本哦)</text>
     <image class="minus" src="{{showView?'../../image/trash.png':'../../image/arrows.png'}}" bindtap="switch">卖书历史</image>
 
 </view>
