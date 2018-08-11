@@ -1,4 +1,5 @@
-import util from './utils/bookListUtil';
+import bookListUtil from './utils/bookListUtil';
+import util from './utils/util';
 import * as Mock from './utils/mock'
 let handler = {
   // initialize the mini program
@@ -26,7 +27,7 @@ let handler = {
       }
     });
 
-    util.getStorageDataSync('visited', (data) => {
+    bookListUtil.getStorageDataSync('visited', (data) => {
       this.globalData.visitedBooks = data;
     });
   },
@@ -34,7 +35,7 @@ let handler = {
   globalData: {
     user: {
       HaveUser:false,
-      UserID: '0grkj19wcq7',//should be the openid which will be set at the index page
+      UserID: 'val1',//should be the openid which will be set at the index page
       FullName: '',
       WeChatID: '',
       PhoneNumber: '未填写',

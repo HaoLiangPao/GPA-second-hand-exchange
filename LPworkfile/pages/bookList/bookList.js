@@ -3,7 +3,6 @@ import config from '../../utils/config';
 const util = require('../../utils/util.js');
 
 let app = getApp();
-let isDEV = config.isDev;
 const numOfNewBooksOnReachBottom = 4;
 
 // 后继的代码都会放在此对象中
@@ -64,14 +63,14 @@ let handler = {
       this.showLoading();
 
       // Update the book list with new data (res.data)
-      if (res && res.status === 0 && res.data && res.data.length) {
+      if (res && res.Status === 0 && res.data && res.data.length) {
         var bookData = res.data;
         this.generateFormattedDates(bookData); // bookData -- array of JSON where each JSON is a group
         this.data.bookList = bookData;
         this.data.hasMore = res.hasMore;
         this.flushNewDataToPageView();
       }
-      else if(res.status === 1){ // Some error, ignore for now
+      else if(res.Status === 1){ // Some error, ignore for now
         return;
       }
 

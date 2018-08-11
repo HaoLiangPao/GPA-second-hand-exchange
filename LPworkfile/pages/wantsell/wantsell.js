@@ -192,6 +192,7 @@ Page({
 
   submit_in: function (e) {
     var that = this;
+    console.log(e);
     //格式检查
     var email_ex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     if (e.detail.value.course_code == '') { that.toast('课程代码不能为空') }
