@@ -14,11 +14,10 @@ Page({
     full_name: '',
     wechat_name: '',
     email: '',
-    year: '',
     phone: '',
     program: '',
     index: 0,
-    date: '0000',
+    date: '2000',
     campus:'UTSC',
     // remember to upload the QR_Code to the server
     qrCode: {},
@@ -105,7 +104,7 @@ Page({
     else if (e.detail.value.email == '') { that.toast('邮箱不能为空') }
     else if (!email_ex.test(e.detail.value.email)) { that.toast('邮箱格式错误') }
     else if (e.detail.value.program == '') { that.toast('专业不能为空') }
-    else if (e.detail.value.year == '0000') { that.toast('入学年不能为空') }
+    else if (e.detail.value.date == '2000') { that.toast('请设置入学年份') }
 
     else{
       that.setData({
@@ -117,9 +116,9 @@ Page({
         email: e.detail.value.email,
         program: e.detail.value.program,
         campus: this.data.campus,
-        year: '1234',
+        //year
         createDate: this.data.createDate,
-        GP: e.detail.value,
+        //GP
       })
 
       var upload = {
@@ -130,7 +129,7 @@ Page({
         Email:this.data.email,
         Program: this.data.program,
         Campus: this.data.campus,
-        Year:this.data.year,
+        Year:this.data.date,
         CreateDate: this.data.createDate,
         IsGP: this.data.GP,
         QRCodeURL:this.data.qrCode

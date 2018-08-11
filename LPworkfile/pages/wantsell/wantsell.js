@@ -16,11 +16,12 @@ Page({
       "/image/book-flat.png",
       "/image/book-open-flat.png"],
     bookname:'',
-    bookyear:'',
+    //bookyear:'',
+    index: 0,
     instructor:'',
     description:'',
     course_code:'',
-    year: '0000',
+    year: '2000',
     // the maximum number of photo uploaded
     maxPhoto: 6,
     notes: 'false',
@@ -203,10 +204,10 @@ Page({
       that.setData({
         course_code: e.detail.value.course_code,
         bookname: e.detail.value.bookname,
-        bookyear: e.detail.value.bookyear,
+        //bookyear: e.detail.value.bookyear,
         instructor: e.detail.value.instructor,
         description: e.detail.value.description,
-        notes: e.detail.value
+        //notes: e.detail.value
       })
 
       var upload = {
@@ -215,11 +216,11 @@ Page({
         BookTitle: this.data.bookname,
         // BookPhotoURL: ''
         // 使用年份，非书本年份
-        TakeYear: this.bookyear,
+        TakeYear: this.data.year,
         CreateDate: this.data.createDate,
         Description: this.data.description,
         Price: '待定',
-        HasNotes: this.data.notes
+        HasNotes: this.notes
 
       }
       if (app.globalData.user.HaveUser) {
@@ -252,7 +253,7 @@ Page({
 
   bindDateChange: function (e) {
     this.setData({
-      date: e.detail.value
+      year: e.detail.value
     })
   },
 
