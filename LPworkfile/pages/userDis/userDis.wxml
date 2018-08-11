@@ -1,41 +1,41 @@
 <!--pages/userDis.wxml-->
-<view class="container">
+<view class='pageView'>
+  <view class="container">
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
 
-  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
 
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <view class="row">
+      <text>📖 专业：</text>
+      <text class="program">{{program}}</text>
+    </view>
 
-  <view class="row">
-    <text>📖 专业：</text>
-    <text class="program">{{program}}</text>
+    <view class="row">
+      <text>🏫 入学年份：</text>
+      <text class="year">{{year}}</text>
+    </view>
+
+    <view class="row">
+      <text class="phoneNumber">☎️ 电话号码：{{phonecall}}</text>
+    </view>
+
+    <view class="row">
+      <text>📮 邮箱：</text>
+      <text class="email">{{email}}</text>
+    </view>
+
+    <view>
+      <button wx:if="{{fromSale}} == false" bindtap="edit" class="eidt"> 编辑个人信息 </button>
+      <button wx:if="{{fromSale}} == ture" bindtap='call' class="edit"> </button>
+    </view>
+
+
+    <view class="row">
+      <text> ⬇️ 下拉加载二维码 ⬇️ </text>
+    </view>
   </view>
 
-  <view class="row">
-    <text>🏫 入学年份：</text>
-    <text class="year">{{year}}</text>
+  <view class="image_container">
+    <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit"></image>
   </view>
-
-  <view class="row">
-    <text class="phoneNumber">☎️ 电话号码：{{phonecall}}</text>
-  </view>
-
-  <view class="row">
-    <text>📮 邮箱：</text>
-    <text class="email">{{email}}</text>
-  </view>
-
-<view>
-  <button wx:if="{{fromSale}} == false" bindtap="edit" class="eidt"> 编辑个人信息 </button>
-  <button wx:if="{{fromSale}} == ture" bindtap='call' class="edit"> </button>
-</view>
-
-
-  <view class="row">
-    <text> ⬇️ 下拉加载二维码 ⬇️ </text>
-  </view>
-</view>
-
-
-<view class="image_container">
-  <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit"></image>
 </view>

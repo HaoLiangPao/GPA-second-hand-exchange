@@ -1,32 +1,55 @@
 /* pages/userinfo/info.wxss */
-page{
-  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(12, 205, 137, 0.7)), to(rgba(0,0,0, 0)));
+
+.pageView{
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(231,245,121, 0.7)), to(rgba(63,189,14, 0.7)));
+  height: 1000rpx;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  padding-bottom: 100rpx;
+  
+}
+
+/*
+  整体表单
+*/
+.pageView .BigForm{
+  width:91%;
+  align-self: center;
+  border-radius: 5%;
+  box-shadow: 10rpx 10rpx 10rpx 10rpx -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(29,209,158, 0.7)), to(rgba(80,209,29, 0.7)));
+  padding: 2.5%;
+  margin-left: 2%;
+  height: 1000rpx;
 }
 
 /*
  入学年份
  */
 
-.weui-input{
+.pageView .BigForm .weui-input{
   background: gainsboro;
   display:flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 5%;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
 }
 
 /*
   待填写空白
   */
 
-.sdinput{
+.pageView .BigForm .sdinput{
   border: gainsboro;
   border-style: solid;
-  font-size: 14px;
+  font-size: 28rpx;
   border-radius: 5%;
   height: 28rpx;
-  padding-left: 10rpx;
   background: gainsboro;
   margin-bottom: 1%;
 }
@@ -34,64 +57,70 @@ page{
 /*
   空白信息提示
   */
-.basic_info{
+.pageView .BigForm .basic_info{
   background: inherit;
-}
-
-/*
-  整体表单
-*/
-.form{
-  width:80%;
-  align-self: center;
-  border-radius: 5%;
-  box-shadow: 6rpx 6rpx 6rpx 6rpx -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(29,209,158, 0.7)), to(rgba(80,209,29, 0.7)));
-  padding: 5%;
-  margin-left: 5%;
-  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(231,245,121, 0.7)), to(rgba(63,189,14, 0.7)));
-  height: 65%;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
 }
 
 /*
   QR Code 按钮
 */
-.button1{
+.pageView .BigForm .button1{
   border-radius: 15%;
-  width: 60%;
+  width: 80%;
   align-self: center;
   margin-top: 10%;
-  margin-left: 20%;
+  margin-left: 10%;
   margin-bottom: 2%;
 }
 
 /*
   submit 按钮
 */
-.button2{
+.pageView .BigForm .button2{
   border-radius: 30%;
-  width: 60%;
+  width: 80%;
   align-self: center;
-  margin-left: 20%;
+  margin-left: 10%;
 }
 
 /*
   GP 选择lable
 */
-.lable{
+.pageView .BigForm .lable{
   padding: 5%;
 }
 
-.userinfo-nickname {
+.pageView .BigForm .userinfo-nickname {
   color: #aaa;
 }
 
 /*
   置顶 Welcome 字样
+  title logo
 */
-.welcome{
-  font-size: 70rpx;
+.title{
+  align-items: center;
+  height: 275rpx;
+  width: 100%;
+  font-size: 35rpx;
   font-weight: 900;
-  font-style: italic;
-  align-self: center;
-  margin-left: 30%;
+  background: inherit;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 5rpx;
+  padding-left: 250rpx;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(63,189,14, 0.7)), to(rgba(231,245,121, 0.7)));
 }
+
+.title .image{
+  width: 250rpx;
+  height: 200rpx;
+  display: flex;
+}
+
+.title .text{
+  padding-left: 60rpx;
+}
+
