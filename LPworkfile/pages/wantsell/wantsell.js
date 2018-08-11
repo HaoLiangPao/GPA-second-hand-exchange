@@ -9,6 +9,12 @@ Page({
   data: {
     openid:'',
     ImagePaths: [],
+    ImagePathsDefault: ["/image/book-flat.png",
+      "/image/book-open-flat.png",
+      "/image/book-flat.png",
+      "/image/book-open-flat.png",
+      "/image/book-flat.png",
+      "/image/book-open-flat.png"],
     bookname:'',
     bookyear:'',
     instructor:'',
@@ -26,8 +32,8 @@ Page({
   onLoad: function (options) {
     console.log("the length of ImagePaths is:", this.data.ImagePaths.length);
     // default a placeholder picture for uploading
-    //if (this.data.ImagePaths === []){
-    //}
+    if (this.data.ImagePaths === []){
+    }
   },
 
   /**
@@ -166,7 +172,7 @@ Page({
         let image_path = that.data.ImagePaths.concat(res.tempFilePaths);
         console.log("impage path is :", image_path);
         // check if maximum number of photo is reached
-        if (image_path.length < that.data.maxPhoto){
+        if (image_path.length <= that.data.maxPhoto){
           that.setData({
             ImagePaths: image_path
           });

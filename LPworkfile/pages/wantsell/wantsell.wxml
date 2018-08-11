@@ -40,19 +40,12 @@
       </view>
 
       <view class="image_container">
-        <!-- why this block can not be shown? -->
-        <view wx:if="{{ ImagePaths.lentgh === 0}}">
-          <image class="single_image" src="/image/book-flat.png"> </image>
-          <image class="single_image" src="/image/book-open-flat.png"> </image>
-          <image class="single_image" src="/imgae/images.jpeg"> </image>
+        <!-- why hidden does not work here? -->
+        <view wx:hidden='{{ImagePaths.length}} > 0' wx:for="{{ ImagePathsDefault }}" wx:for-item="defaultImage">
+          <image class='single_image' src="{{defaultImage}}" catchTap="chooseImageTap" mode="aspectFit"></image>
         </view>
-        <!-- Repeat -->
-        <image class="single_image" src="/image/book-flat.png" mode="aspectFit"> </image>
-        <image class="single_image" src="/image/book-open-flat.png" mode="aspectFit"> </image>
-        <image class="single_image" src="/image/open-book.png" mode="aspectFit"> </image>
-        <image class="single_image" src="/image/images.jpeg" mode="aspectFit"> </image>
 
-        <view wx: else wx:for="{{ ImagePaths }}" wx:for-item="image" class="single_image_container">
+        <view wx:hidden='{{ ImagePaths.lentgh }} === 0' wx:for="{{ ImagePaths }}" wx:for-item="image">
           <image src="{{ image }}" catchTap="chooseImageTap" mode="aspectFit" class="single_image"> </image>
         </view>
       </view>
