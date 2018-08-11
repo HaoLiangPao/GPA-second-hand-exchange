@@ -2,7 +2,7 @@
 
 <!-- Logo -->
 <view class="logo-view">
-    <image mode='aspectFit' class="logo" src="/image/GPA-LOGO-basic.jpeg"></image>
+    <image mode='aspectFit' class="logo" src="/image/GreenPathAssociationT.png"></image>
 </view>
 
 <view class="search-wrapper">

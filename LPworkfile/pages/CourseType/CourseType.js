@@ -102,24 +102,59 @@ Page({
         [
           {
             child_id: 1,
-            name: '洁面皂',
+            name: 'CSCA08H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 2,
-            name: '卸妆',
+            name: 'CSCA20H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 3,
-            name: '洁面乳',
+            name: 'CSCA48H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 4,
-            name: '面部祛角质',
+            name: 'CSCA67H3',
             image: "../../image/pig.jpg"
-          }
+          },
+          {
+            child_id: 5,
+            name: 'CSCB07H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 6,
+            name: 'CSCB09H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 7,
+            name: 'CSCB20H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 8,
+            name: 'CSCB36H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 9,
+            name: 'CSCB29H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 10,
+            name: 'CSCB58H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 11,
+            name: 'CSCB63H3',
+            image: "../../image/pig.jpg"
+          },
         ]
       },
       {
@@ -130,44 +165,64 @@ Page({
         [
           {
             child_id: 1,
-            name: '气垫bb',
+            name: 'MATA02H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 2,
-            name: '修容/高光',
+            name: 'MATA23H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 3,
-            name: '遮瑕',
+            name: 'MATA29H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 4,
-            name: '腮红',
+            name: 'MATA30H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 5,
-            name: '粉饼',
+            name: 'MATA31H3',
             image: "../../image/pig.jpg"
           },
           {
             child_id: 6,
-            name: '粉底',
+            name: 'MATA32H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153817721.jpg"
           },
           {
             child_id: 7,
-            name: '蜜粉/散粉',
+            name: 'MATA33H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153819354.jpg"
           },
           {
             child_id: 8,
-            name: '隔离霜',
+            name: 'MATA35H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161215/148179053369.jpg"
-          }
+          },
+          {
+            child_id: 9,
+            name: 'MATA36H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 10,
+            name: 'MATA37H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 11,
+            name: 'MATA67H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 12,
+            name: 'MATB24H3',
+            image: "../../image/pig.jpg"
+          },
         ]
       },
       {

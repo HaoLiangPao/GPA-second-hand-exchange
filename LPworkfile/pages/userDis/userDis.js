@@ -30,6 +30,7 @@ Page({
       email: app.globalData.user.Email,
       year: app.globalData.user.Year,
     })
+    // WeChat name and WeChat profile picture
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -61,11 +62,13 @@ Page({
     if (this.qrCode === undefined){
       console.log("this user did not have any QR_Code uploaded.");
       this.setData({
-        qrCode: { 0: "/image/Hao_QR_Code.jpg" },
+        qrCode: { 0: "/image/image_notyetavailable.jpg" },
       })
     }
     else{
       // request data from the server -- get the qrCode URL
+
+      
     }
   },
 

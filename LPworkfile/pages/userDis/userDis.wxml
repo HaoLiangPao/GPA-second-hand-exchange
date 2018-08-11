@@ -24,7 +24,11 @@
     <text class="email">{{email}}</text>
   </view>
 
-  <button bindtap="edit" class="eidt"> 编辑个人信息 </button>
+<view>
+  <button wx:if="{{fromSale}} == false" bindtap="edit" class="eidt"> 编辑个人信息 </button>
+  <button wx:if="{{fromSale}} == ture" bindtap='call' class="edit"> </button>
+</view>
+
 
   <view class="row">
     <text> ⬇️ 下拉加载二维码 ⬇️ </text>
