@@ -9,9 +9,9 @@
 	<classpathentry kind="lib" path="lib/c3p0-0.9.5.2.jar"/>
 	<classpathentry kind="lib" path="lib/mchange-commons-java-0.2.11.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.11.jar"/>
-	<classpathentry kind="lib" path="/Users/ken/Desktop/BackendServer/lib/javax.json-1.0.4.jar"/>
-	<classpathentry kind="lib" path="/Users/ken/Desktop/TEST/GPA-second-hand-exchange/BackendServer/lib/commons-fileupload-1.3.3.jar"/>
-	<classpathentry kind="lib" path="/Users/ken/Desktop/TEST/GPA-second-hand-exchange/BackendServer/lib/javax.servlet.jar"/>
-	<classpathentry kind="lib" path="/Users/ken/Desktop/TEST/GPA-second-hand-exchange/BackendServer/lib/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/commons-fileupload-1.3.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/javax.json-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
