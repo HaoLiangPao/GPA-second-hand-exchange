@@ -33,11 +33,11 @@
     </view>
     <view class="basic_info">
       <checkbox-group bindchange="checkboxChange">
-        <radio-group name="radio">
+        <radio-group name="radio" bindchange="checkboxChange">
           <label class='lable'>
-            <radio value="radio1" />GP学生</label>
+            <radio value="true" />GP学生</label>
           <label class='lable'>
-            <radio value="radio2" />非GP学生</label>
+            <radio value="false" />非GP学生</label>
         </radio-group>
       </checkbox-group>
     </view>

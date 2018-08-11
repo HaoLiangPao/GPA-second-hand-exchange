@@ -24,7 +24,7 @@ Page({
     qrCode: {},
     userInfo: {},
     checkItems: [
-      { name: 'GP_Student', value: 'ture'},
+      { name: 'GP_Student', value: 'true'},
       { name: 'Non_GP', value: 'false' },
     ],
     GP: '',
@@ -119,7 +119,7 @@ Page({
         campus: this.data.campus,
         year: '1234',
         createDate: this.data.createDate,
-        GP: 'true',
+        GP: e.detail.value,
       })
 
       var upload = {
@@ -202,10 +202,16 @@ Page({
 
   // how to define the checked item??
   checkboxChange: function (e) {
-    const that = this;
-    that.setData({
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
+
+    var checkItems = this.data.checkItems;
+    for (var i = 0, len = checkItems.length; i < len; ++i) {
+      checkItems[i].checked = checkItems[i].value == e.detail.value
+    }
+
+    this.setData({
+      checkItems: checkItems,
       GP: e.detail.value
-    })
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    });
   }
 })

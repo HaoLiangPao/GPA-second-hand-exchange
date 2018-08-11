@@ -23,7 +23,11 @@ Page({
     year: '0000',
     // the maximum number of photo uploaded
     maxPhoto: 6,
-    notes: '',
+    notes: 'false',
+    checkItems: [
+      { name: ' 附加笔记', value: 'true' },
+      { name: '不附加笔记', value: 'false' },
+    ],
   },
 
   /**
@@ -185,15 +189,54 @@ Page({
     })
   },
 
-  submit_in: function(e){
-    const that = this;
-    that.setData({
-      course_code:e.detail.value.course_code,
-      bookname: e.detail.value.bookname,
-      bookyear: e.detail.value.bookyear,
-      instructor: e.detail.value.instructor,
-      description: e.detail.value.description
-    })
+  submit_in: function (e) {
+    var that = this;
+    //格式检查
+    var email_ex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    if (e.detail.value.course_code == '') { that.toast('课程代码不能为空') }
+    else if (e.detail.value.bookname == '') { that.toast('课程名称不能为空') }
+    else if (e.detail.value.bookyear == '') { that.toast('使用年份不能为空') }
+    else if (e.detail.value.instructor == '') { that.toast('讲师姓名不能为空') }
+    else if (e.detail.value.description == '' && e.detail.value.description.length > 200) { that.toast('书本描述不合法') }
+
+    else {
+      that.setData({
+        course_code: e.detail.value.course_code,
+        bookname: e.detail.value.bookname,
+        bookyear: e.detail.value.bookyear,
+        instructor: e.detail.value.instructor,
+        description: e.detail.value.description,
+        notes: e.detail.value
+      })
+
+      var upload = {
+        OwnerID: this.data.openid,
+        CourseCode: this.course_code,
+        BookTitle: this.data.bookname,
+        // BookPhotoURL: ''
+        // 使用年份，非书本年份
+        TakeYear: this.bookyear,
+        CreateDate: this.data.createDate,
+        Description: this.data.description,
+        Price: '待定',
+        HasNotes: this.data.notes
+
+      }
+      if (app.globalData.user.HaveUser) {
+        wx.request({
+          url: 'http://localhost:8000/user/update',
+          data: upload
+        })
+      } else {
+        console.log(app.globalData.user.HaveUser)
+        wx.request({
+          url: 'http://localhost:8000/user/create',
+          data: upload
+        })
+      }
+    }
+    //wx.navigateTo({url:'../success_submit/success'})
+    //在检查通过后对db进行update/insert
   },
 
   check:function(){
@@ -215,10 +258,16 @@ Page({
 
   // how to define the checked item??
   checkboxChange: function (e) {
-    const that = this;
-    that.setData({
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
+
+    var checkItems = this.data.checkItems;
+    for (var i = 0, len = checkItems.length; i < len; ++i) {
+      checkItems[i].checked = checkItems[i].value == e.detail.value
+    }
+
+    this.setData({
+      checkItems: checkItems,
       notes: e.detail.value
-    })
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    });
   }
 })
