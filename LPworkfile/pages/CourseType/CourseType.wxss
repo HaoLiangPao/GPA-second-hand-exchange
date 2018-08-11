@@ -24,16 +24,16 @@ page{
 }  
 /*左侧栏list的item*/  
 .nav_left .nav_left_items{  
-  /*每个高30px*/  
-  height: 40px;  
+  /*每个高55rpx*/  
+  height: 60rpx;  
   /*垂直居中*/  
-  line-height: 40px;  
+  line-height: 60rpx;  
   /*再设上下padding增加高度，总高42px*/  
-  padding: 6px 0;  
+  padding: 12rpx 0;  
   /*只设下边线*/  
-  border-bottom: 1px solid #dedede;  
+  border-bottom: 5rpx solid #dedede;  
   /*文字14px*/  
-  font-size: 14px; 
+  font-size: 28rpx; 
 }  
 /*左侧栏list的item被选中时*/  
 .nav_left .nav_left_items.active{  
@@ -50,8 +50,8 @@ page{
   flex: 1;  
   /*宽度75%，高度占满，并使用百分比布局*/  
   width: 75%;  
-  height: 1000px;  
-  padding: 10px;  
+  height: 1000rpx;  
+  padding: 10rpx;  
   box-sizing: border-box;  
   background: #fff;  
 }  
@@ -61,20 +61,20 @@ page{
   float: left;  
   /*每个item设置宽度是33.33%*/  
   width: 33.33%;  
-  height: 120px;  
+  height: 240rpx;  
   text-align: center;  
 }  
 .nav_right .nav_right_items image{  
   /*被图片设置宽高*/  
-  width: 60px;  
-  height: 60px;  
-  margin-top: 15px;  
+  width: 120rpx;  
+  height: 120rpx;  
+  margin-top: 30rpx;  
 }  
 .nav_right .nav_right_items text{  
   /*给text设成块级元素*/  
   display: block;  
-  margin-top: 15px;  
-  font-size: 14px;  
+  margin-top: 30rpx;  
+  font-size: 28rpx;  
   color: black;
   /*设置文字溢出部分为...*/  
   overflow: hidden;  
@@ -84,6 +84,6 @@ page{
 .nodata_text
 {
   color: black;
-  font-size: 14px;  
+  font-size: 28rpx;  
   text-align: center;  
 }

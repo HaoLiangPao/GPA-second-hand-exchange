@@ -223,6 +223,31 @@ Page({
             name: 'MATB24H3',
             image: "../../image/pig.jpg"
           },
+          {
+            child_id: 13,
+            name: 'MATB41H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 14,
+            name: 'MATB42H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 15,
+            name: 'MATB43H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 16,
+            name: 'MATB44H3',
+            image: "../../image/pig.jpg"
+          },
+          {
+            child_id: 17,
+            name: 'MATB61H3',
+            image: "../../image/pig.jpg"
+          },
         ]
       },
       {
@@ -233,31 +258,101 @@ Page({
         [
           {
             child_id: 1,
-            name: '淡香水EDT',
+            name: 'MGAB01H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
           },
           {
             child_id: 2,
-            name: '浓香水EDP',
+            name: 'MGAB02H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
           },
           {
             child_id: 3,
-            name: '香体走珠',
+            name: 'MGAB03H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
           },
           {
             child_id: 4,
-            name: '古龙香水男士的最爱',
+            name: 'MGFB10H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
-          }
+          },
+          {
+            child_id: 5,
+            name: 'MGIA01H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 6,
+            name: 'MGFB10H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 7,
+            name: 'MGIB01H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 8,
+            name: 'MGIB02H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 9,
+            name: 'MGIB12H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 10,
+            name: 'MGMA01H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 11,
+            name: 'MGMB01H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
         ]
       },
       {
         cate_id: 4,
         cate_name: arr_name[3],
         ishaveChild: false,
-        children: []
+        children: 
+        [
+          {
+          child_id: 1,
+          name: 'STAA57H3',
+          image: "../../image/pig.jpg"},
+          {
+          child_id: 2,
+          name: 'STAB22H3',
+          image: "../../image/pig.jpg"
+          },
+          {
+          child_id: 3,
+          name: 'STAB23H3',
+          image: "../../image/pig.jpg"
+          },
+          {
+          child_id: 4,
+          name: 'STAB27H3',
+          image: "../../image/pig.jpg"
+          },
+          {
+          child_id: 5,
+          name: 'STAB41H3',
+          image: "../../image/pig.jpg"
+          },
+          {
+          child_id: 6,
+          name: 'STAB52H3',
+          image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153817721.jpg"
+          },
+          {
+          child_id: 7,
+          name: 'STAB57H3',
+          image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153819354.jpg"
+          }]
       },
       {
         cate_id: 5,
@@ -295,24 +390,54 @@ Page({
         [
           {
             child_id: 1,
-            name: '淡香水EDT',
+            name: 'LINA01H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
           },
           {
             child_id: 2,
-            name: '浓香水EDP',
+            name: 'LINA02H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
           },
           {
             child_id: 3,
-            name: '香体走珠',
+            name: 'LINB04H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
           },
           {
             child_id: 4,
-            name: '古龙香水男士的最爱',
+            name: 'LINB06H3',
             image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
-          }
+          },
+          {
+            child_id: 5,
+            name: 'LINB09H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 6,
+            name: 'LINB10H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 7,
+            name: 'LINB13H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 8,
+            name: 'LINB18H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 9,
+            name: 'LINB19H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
+          {
+            child_id: 10,
+            name: 'LINB20H3',
+            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+          },
         ]
       },
       {
