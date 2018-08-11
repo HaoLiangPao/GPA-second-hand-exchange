@@ -1,17 +1,38 @@
 /* pages/wantsell/wantsell.wxss */
 .wholePage{
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(63,189,14, 0.7)), to(rgba(231,245,121, 0.7)));
   height: 1800rpx;
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(231,245,121, 0.7)), to(rgba(63,189,14, 0.7)));
 }
 
+/*
+  置顶 Welcome 字样
+  title logo
+*/
 .title{
-  display: flex;
-  font-size: 35rpx;
-  flex-direction: row;
   align-items: center;
+  height: 275rpx;
+  width: 100%;
+  font-size: 35rpx;
+  font-weight: 900;
+  background: inherit;
+  flex-direction: row;
   justify-content: center;
-  padding: 5%;
+  padding-top: 5rpx;
+  padding-left: 250rpx;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(63,189,14, 0.7)), to(rgba(231,245,121, 0.7)));
 }
+
+.title .image{
+  width: 250rpx;
+  height: 200rpx;
+  display: flex;
+}
+
+.title .text{
+  padding-left: 60rpx;
+}
+
+
 
 .image_container{
   padding: 5%;
@@ -21,39 +42,38 @@
   justify-content: flex-start;
   align-items: center;
   display: flex;
+  padding-left: 75rpx;
 }
 
 
-.single_image{
+.image_container .single_image{
   width: 150rpx;
   height: 150rpx;
   padding: 20rpx;
   display: flex;
 }
 
-.BigForm{
-  width:91%;
+
+.wholePage .BigForm{
   align-self: center;
-  border-radius: 5%;
-  box-shadow: 10rpx 10rpx 10rpx 10rpx -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(29,209,158, 0.7)), to(rgba(80,209,29, 0.7)));
+  /*  box-shadow: 10rpx 10rpx 10rpx 10rpx -webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(29,209,158, 0.7)), to(rgba(80,209,29, 0.7)));
+*/
   padding: 2.5%;
-  margin-left: 2%;
-  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(231,245,121, 0.7)), to(rgba(63,189,14, 0.7)));
   height: 1600rpx;
 }
 
-.sdinput{
+.wholePage .BigForm .book_info .sdinput{
   border: gainsboro;
   border-style: solid;
   font-size: 28rpx;
   border-radius: 5%;
   height: 28rpx;
-  padding-left: 10rpx;
   background: gainsboro;
   margin-bottom: 1%;
+  margin-right: 10rpx;
 }
 
-.description{
+.wholePage .BigForm .book_info .description{
   width:99%;
   border: gainsboro;
   border-style: solid;
@@ -62,27 +82,25 @@
   border-radius: 5%;
   height: 200rpx;
   background: gainsboro;
-
+  margin-right: 10rpx;
 }
 
-.weui-input{
+.wholePage .BigForm .book_info .weui-input{
   background: gainsboro;
   display:flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 5%;
+  margin-right: 10rpx;
 }
 
-.book_info{
-  padding:5px;
-}
-.name{
-  display:flex;
+.wholePage .BigForm .book_info{
+  padding:5rpx;
 }
 
-.lable{
-  padding: 5%;
+.wholePage .BigForm .book_info .lable{
+  padding-left: 85rpx;
 }
 
 

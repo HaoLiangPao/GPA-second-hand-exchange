@@ -1,9 +1,10 @@
 <!--pages/wantsell/wantsell.wxml-->
-<view class="wholePage">
+<view class="title">
+  <image mode='aspectFit' class="logo" src="/image/GreenPathAssociationT.png" class='image'></image>
+  <text class='text'> 书本信息 </text>
+</view>
 
-  <view class="title">
-    <text>请填写下列书本信息(必填）</text>
-  </view>
+<view class="wholePage">
   <view class='BigForm'>
     <form bindsubmit='submit_in'>
       <view class="book_info">
@@ -25,6 +26,10 @@
         <input type="text" class="sdinput" placeholder='EX:Anna Bretscher' name="instructor" />
       </view>
       <view class="book_info">
+        <text>价格</text>
+        <input type="text" class="sdinput" placeholder='EX:10$' name="price" />
+      </view>
+      <view class="book_info">
         <text>书本描述</text>
         <textarea type="text" class="description" placeholder="须少于200字" name="description" maxlength='220' />
       </view>
@@ -44,8 +49,7 @@
         <view wx:hidden='{{ImagePaths.length}} > 0' wx:for="{{ ImagePathsDefault }}" wx:for-item="defaultImage">
           <image class='single_image' src="{{defaultImage}}" catchTap="chooseImageTap" mode="aspectFit"></image>
         </view>
-
-        <view wx:hidden='{{ ImagePaths.lentgh }} === 0' wx:for="{{ ImagePaths }}" wx:for-item="image">
+        <view wx:hidden='{{ ImagePaths.length }} === 0' wx:for="{{ ImagePaths }}" wx:for-item="image">
           <image src="{{ image }}" catchTap="chooseImageTap" mode="aspectFit" class="single_image"> </image>
         </view>
       </view>
