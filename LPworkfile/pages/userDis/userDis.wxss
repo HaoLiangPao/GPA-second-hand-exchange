@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(12, 205, 137, 0.7)), to(rgba(0, 0, 0, 0)));
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(3,189,14, 0.7)), to(rgba(231,245,121, 0.76)));
   height: 1150rpx;
-  margin-bottom: 150rpx;
   width: 100%;
 }
 
@@ -44,8 +43,10 @@
 }
 
 .image_container{
-  background-color: rgba(0, 0, 0, 0);
-  background: initial;
+  padding-top: 150rpx;
+  padding-left: 100rpx; 
+  padding-right: 100rpx;
+  background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(231,245,121, 0.76)), to(rgba(3,189,14, 0.7)));
 }
 
 .pageView{

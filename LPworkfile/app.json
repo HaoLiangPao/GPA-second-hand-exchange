@@ -27,20 +27,20 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "image/home_icon.png",
-        "selectedIconPath": "image/home_icon.png",
+        "iconPath": "image/home.jpg",
+        "selectedIconPath": "image/home-highlight.jpg",
         "text": "首页"
       },
       {
         "pagePath": "pages/ShuJia/shujia",
-        "iconPath": "image/book_icon.jpg",
-        "selectedIconPath": "image/book_icon.jpg",
+        "iconPath": "image/book-shelf.png",
+        "selectedIconPath": "image/book-shef-highlight.png",
         "text": "书架"
       },
       {
         "pagePath": "pages/userDis/userDis",
-        "iconPath": "image/self_icon.jpeg",
-        "selectedIconPath": "image/self_icon.jpeg",
+        "iconPath": "image/self.png",
+        "selectedIconPath": "image/self-highlight.png",
         "text": "个人"
       }
     ]

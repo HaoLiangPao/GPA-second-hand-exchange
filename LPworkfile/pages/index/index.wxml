@@ -15,7 +15,7 @@
         </view>
 
         <view class="search-button-wrapper">
-          <image class="search-button" src="/image/search.png" bindtap="query"></image>
+          <image class="search-button" src="/image/search.png" bindtap="query" mode='aspectFit'></image>
         </view>
 
       </view>

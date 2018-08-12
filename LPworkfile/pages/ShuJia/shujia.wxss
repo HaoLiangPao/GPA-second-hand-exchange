@@ -8,7 +8,7 @@ page {
     position: relative;
 }
 
-.mybook {
+.rack .mybook {
     width: 100%;
     height: 100px;
     padding:0px;
@@ -20,7 +20,7 @@ page {
     flex-direction: row;
 }
 
-.mybook2 {
+.rack .mybook2 {
     width: 100%;
     height: 100px;
     padding:0px;
@@ -32,7 +32,7 @@ page {
     flex-direction: row;
 }
 
-.item_size {
+.rack .mybook .item_size {
   position:relative;
   padding-right:3ch;
   display: flex;
@@ -40,23 +40,23 @@ page {
   align-items: center;
 }
 
-.deleteBox_hide{
+.rack .mybook .item_size .deleteBox_hide{
   display:none;
   padding:0%;
 }
 
-.deleteBox{
-  display:block;
+.rack .mybook .item_size .deleteBox{
+  display: block;
   padding:0%;
 }
 
-.img {
+.rack .mybook .item_size .img {
     width: 96rpx;
     height: 96rpx;
     margin-top: 100rpx
 }
 
-.text {
+.rack .mybook .item_size .text {
     font-size: 16px;
     align-content: flex-end;
     margin-top: 15rpx;
@@ -64,12 +64,44 @@ page {
     padding-bottom: 0%;
 }
 
-.background {
+.rack .mybook2 .item_size {
+  position:relative;
+  padding-right:3ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rack .mybook2 .item_size .deleteBox_hide{
+  display:none;
+  padding:0%;
+}
+
+.rack .mybook2 .item_size .deleteBox{
+  display: block;
+  padding:0%;
+}
+
+.rack .mybook2 .item_size .img {
+    width: 96rpx;
+    height: 96rpx;
+    margin-top: 100rpx
+}
+
+.rack .mybook2 .item_size .text {
+    font-size: 16px;
+    align-content: flex-end;
+    margin-top: 15rpx;
+    color: darkblue;
+    padding-bottom: 0%;
+}
+
+.rack .background {
     width: 100%;
     height: 100%;
 }
 
-.txtTop {
+.rack .txtTop {
     width: 250rpx;
     height: 20rpx;
     line-height: 20rpx;
@@ -80,7 +112,7 @@ page {
     left: 33%;
 }
 
-.txtBottom {
+.rack .txtBottom {
     width: 250rpx;
     height: 20rpx;
     line-height: 20rpx;
@@ -91,7 +123,18 @@ page {
     left: 33%;
 }
 
-.plus {
+.rack .refresh {
+    width: 250rpx;
+    height: 50rpx;
+    line-height: 20rpx;
+    text-align: center;
+    color: #8B5A2B;
+    position: absolute;
+    top: 87%;
+    left: 33%;
+}
+
+.rack .plus {
   width: 50px;
   height: 50px;
   position: absolute;
@@ -99,7 +142,7 @@ page {
   left: 15%;
 }
 
-.minus {
+.rack .minus {
   width: 50px;
   height: 50px;
   position: absolute;

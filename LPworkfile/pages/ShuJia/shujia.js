@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: [
+    items1: [
 
       {
       id: "1",
@@ -29,13 +29,30 @@ Page({
         src: "../../image/pig.jpg",
         text: my_book[2]
       },
-
       {
         id: "4",
         src: "../../image/pig.jpg",
         text: my_book[3]
       },
-    
+    ],
+    items2:[
+      {
+        id: "1",
+        src: "../../image/pig.jpg",
+        text: my_book[0],
+      },
+
+      {
+        id: "2",
+        src: "../../image/pig.jpg",
+        text: my_book[1]
+      },
+
+      {
+        id: "3",
+        src: "../../image/pig.jpg",
+        text: my_book[2]
+      },
     ],
     url: file,
     showView: true
@@ -116,5 +133,13 @@ Page({
       title:"删除选中书本",
       duration:3000
     })
-  }
+  },
+
+  refresh: function () {
+    var that = this
+    that.setData({
+      // request the books again
+      
+    })
+  },
 })
