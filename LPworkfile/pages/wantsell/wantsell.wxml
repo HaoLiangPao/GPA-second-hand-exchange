@@ -56,7 +56,7 @@
 
       <!-- buttont for submit picture and form -->
       <button style="margin:30rpx;" bindtap="chooseimage">添加图片</button>
-      <button style="margin:30rpx;" bindtap="submit" form-type='submit'>提交</button>
+      <button style="margin:30rpx;" form-type='submit'>提交</button>
     </form>
   </view>
 

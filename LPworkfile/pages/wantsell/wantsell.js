@@ -1,5 +1,14 @@
 // pages/wantsell/wantsell.js
-import util from '../../utils/bookListUtil';
+import util from '../../utils/util';
+const app = getApp();
+
+
+const ImagePathsDefault = ["/image/book-flat.png",
+  "/image/book-open-flat.png",
+  "/image/book-flat.png",
+  "/image/book-open-flat.png",
+  "/image/book-flat.png",
+  "/image/book-open-flat.png"]
 
 Page({
 
@@ -7,28 +16,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    openid:'',
-    ImagePaths: [],
-    ImagePathsDefault: ["/image/book-flat.png",
-      "/image/book-open-flat.png",
-      "/image/book-flat.png",
-      "/image/book-open-flat.png",
-      "/image/book-flat.png",
-      "/image/book-open-flat.png"],
-    bookname:'',
-    //bookyear:'',
+    updateInfoRequestData: {},
+    ImagePaths: ImagePathsDefault,
     index: 0,
-    instructor:'',
-    description:'',
-    course_code:'',
     year: '2000',
-    // the maximum number of photo uploaded
-    maxPhoto: 6,
-    notes: 'false',
-    checkItems: [
-      { name: ' 附加笔记', value: 'true' },
-      { name: '不附加笔记', value: 'false' },
-    ],
+    // the maximum number of photos to upload
+    maxNumPhotos: 6
   },
 
   /**
@@ -36,9 +29,6 @@ Page({
    */
   onLoad: function (options) {
     console.log("the length of ImagePaths is:", this.data.ImagePaths.length);
-    // default a placeholder picture for uploading
-    if (this.data.ImagePaths === []){
-    }
   },
 
   /**
@@ -91,16 +81,16 @@ Page({
   },
 
   chooseimage: function () {
-    var that = this;
+    var page = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#11110f",
       success: function (res) {
         if (!res.cancel) {
           if (res.tapIndex == 0) {
-            that.chooseWxImage('album')
+            page.chooseWxImage('album')
           } else if (res.tapIndex == 1) {
-            that.chooseWxImage('camera')
+            page.chooseWxImage('camera')
           }
         }
       }
@@ -108,168 +98,161 @@ Page({
 
   },
 
-  chooseWxImage: function (type) {
-    var that = this;
+  chooseWxImage: function (albumOrCamera) {
+    var page = this;
     wx.chooseImage({
       count: 6,
       sizeType: ['original', 'compressed'],
-      sourceType: [type],
+      sourceType: [albumOrCamera],
       success: function (res) {
-        /*
-              // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-      var tempFilePaths = res.tempFilePaths;
-      //启动上传等待中...
-      wx.showToast({
-        title: '正在上传...',
-        icon: 'loading',
-        mask: true,
-        duration: 10000
-      })
-      var uploadImgCount = 0;
-        for (var i = 0, h = tempFilePaths.length; i < h; i++) {
-        wx.uploadFile({
-          url: util.getClientSetting().domainName + '/home/uploadfilenew',
-          filePath: tempFilePaths[i],
-          name: 'uploadfile_ant',
-          formData: {
-            'imgIndex': i
-          },
-          header: {
-            "Content-Type": "multipart/form-data"
-          },
-          success: function (res) {
-            uploadImgCount++;
-            var data = JSON.parse(res.data);
-            //服务器返回格式: { "Catalog": "testFolder", "FileName": "1.jpg", "Url": "https://test.com/1.jpg" }
-            var productInfo = that.data.productInfo;
-            if (productInfo.bannerInfo == null) {
-              productInfo.bannerInfo = [];
-            }
-            productInfo.bannerInfo.push({
-              "catalog": data.Catalog,
-              "fileName": data.FileName,
-              "url": data.Url
-            });
-            that.setData({
-              productInfo: productInfo
-            });
-
-            //如果是最后一张,则隐藏等待中
-            if (uploadImgCount == tempFilePaths.length) {
-              wx.hideToast();
-            }
-          },
-          fail: function (res) {
-            wx.hideToast();
-            wx.showModal({
-              title: '错误提示',
-              content: '上传图片失败',
-              showCancel: false,
-              success: function (res) { }
-            })
-          }
-        });
-      }
-        */
-        console.log("the response data is:", res);
-        console.log("the current that.data is:", that.data);
-        // add the newly added picture's filePath to 
-        let image_path = that.data.ImagePaths.concat(res.tempFilePaths);
-        console.log("impage path is :", image_path);
-        // check if maximum number of photo is reached
-        if (image_path.length <= that.data.maxPhoto){
-          that.setData({
-            ImagePaths: image_path
+        // Record the images' temp file path
+        for (var i = 0; i < res.tempFilePaths.length; i++ ) {
+          page.data.ImagePaths[i] = res.tempFilePaths[i];
+        }
+        // check if maximum number of photos is reached
+        if (page.data.ImagePaths.length <= page.data.maxNumPhotos){
+          page.setData({
+            ImagePaths: page.data.ImagePaths
           });
         }
         else {
           util.alert("错误", "抱歉，当前版本最多支持6张图片请重新选择");
         }
-        console.log("the ImagePath list in global data is :", that.data.ImagePaths);
-      },
+      }
     })
   },
 
   submit_in: function (e) {
-    var that = this;
-    console.log(e);
-    //格式检查
-    var email_ex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-    if (e.detail.value.course_code == '') { that.toast('课程代码不能为空') }
-    else if (e.detail.value.bookname == '') { that.toast('课程名称不能为空') }
-    else if (e.detail.value.bookyear == '') { that.toast('使用年份不能为空') }
-    else if (e.detail.value.instructor == '') { that.toast('讲师姓名不能为空') }
-    else if (e.detail.value.description == '' && e.detail.value.description.length > 200) { that.toast('书本描述不合法') }
+    // DEFAULT e.detail.value: {course_code: "", bookname: "", instructor: "", hasNote: "false", description: "" } TODO: Add price
+    console.log(e.detail.value);
 
-    else {
-      that.setData({
-        course_code: e.detail.value.course_code,
-        bookname: e.detail.value.bookname,
-        //bookyear: e.detail.value.bookyear,
-        instructor: e.detail.value.instructor,
-        description: e.detail.value.description,
-        //notes: e.detail.value
+    /**
+     *  validate input
+     */
+
+    var isCourseCodeValid = /^\w\w\w(\w|\d)\d\d$/.test(e.detail.value.course_code);
+    var isBookNameValid = /^(\w|\s|\d)+$/.test(e.detail.value.bookname) && e.detail.value.bookname.length <= 50;
+    var isInstructorValid = /^(\w|\s)+$/.test(e.detail.value.instructor.length) && e.detail.value.instructor.length <= 50;
+    var isDescriptionValid = e.detail.value.description.length < 200;
+    console.log("================================");
+    console.log(isCourseCodeValid);
+    console.log(isBookNameValid);
+    console.log(isInstructorValid);
+    console.log(isDescriptionValid);
+    console.log("================================");
+    if ( !(isCourseCodeValid && isBookNameValid && isInstructorValid && isDescriptionValid) ) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        confirmText: '好的！',
+        content: '请输入合法数据。要求：'
+          + '（1）课程代码需满足形式"AAAA00"或者“AAA000”'
+          + '（2）书本名称只能包含字母数字和空格，且不超过50个字'
+          + '（3）讲师姓名只能包含字母和空格，且不超过50个字'
+          + '（4）书本描述不能超过200个字'
+          + '（5）很丑，无法空行，对不起😞'
       })
-
-      var upload = {
-        OwnerID: this.data.openid,
-        CourseCode: this.course_code,
-        BookTitle: this.data.bookname,
-        // BookPhotoURL: ''
-        // 使用年份，非书本年份
-        TakeYear: this.data.year,
-        CreateDate: this.data.createDate,
-        Description: this.data.description,
-        Price: '待定',
-        HasNotes: this.notes
-
-      }
-      if (app.globalData.user.HaveUser) {
-        wx.request({
-          url: 'http://localhost:8000/user/update',
-          data: upload
-        })
-      } else {
-        console.log(app.globalData.user.HaveUser)
-        wx.request({
-          url: 'http://localhost:8000/user/create',
-          data: upload
-        })
-      }
     }
-    //wx.navigateTo({url:'../success_submit/success'})
-    //在检查通过后对db进行update/insert
+
+    // User input data
+    this.data.updateInfoRequestData = {
+      OwnerID: app.globalData.user.UserID,
+      BookTitle: e.detail.value.bookname,
+      BookPhotoURL: "",
+      CourseCode: e.detail.value.course_code,
+      Instructor: e.detail.value.instructor,
+      TakeYear: this.data.year,
+      Description: e.detail.value.description,
+      CreateDate: util.formatTime(new Date()),
+      Price: '0.0',
+      HasNotes: e.detail.value.hasNote
+    };
+
+    var doUpdateInfoRequest = function (urlData, concatedURLs) {
+      console.log("\n");
+      console.log("进入doUpdateInfoRequest");
+      console.log("\n")
+      urlData.BookPhotoURL = concatedURLs.join();
+      var successUpdateInfoCb = function (res) {
+        var result = res.data;
+        if (res.statusCode != 200) { // fail
+          util.alert("错误", "更新数据失败 " + JSON.stringify(result));
+        }
+      };
+      var failUpdateInfoCb = function (err) {
+        util.alert("错误", "更新数据失败 " + JSON.stringify(err));
+      };
+      util.doGET("http://localhost:8000/post/create", urlData, successUpdateInfoCb, failUpdateInfoCb);
+    }
+
+    /**
+     *  Upload images and get the image URLs responded from server
+     */
+
+    var concatedURLs = [];
+    var aggErrors = [];
+    var passedUploadingStatus = [];
+    var successImgUploadCustomCb = function (res, aggErrors, concatedURLs) {
+      var result = res.data;
+      if (res.statusCode == 200) { // success
+        var urlArray = JSON.parse(result);
+        var url = urlArray[0].BookPhotoURL;
+        concatedURLs.push(url);
+      } else {
+        aggErrors.push(result);
+      }
+    };
+    var failImgUploadCustomCb = function (err, aggErrors) { aggErrors.push(err) };
+    var uploadImage = function (page, i, aggErrors, concatedURLs, successImgUploadCustomCb, failImgUploadCustomCb) { // "page" is the page object, "i" is the image index in the array page.data.ImagePaths
+      console.log("\n");
+      console.log(i);
+      console.log("\n");
+      if ( i == page.data.ImagePaths.length ) {
+        // All image uploading have finished
+        var ifAllsucceeded = i == concatedURLs.length;
+        if ( ifAllsucceeded ) {
+
+          /**
+           *  Update book info with the input data and responded image URLs
+           */
+
+          doUpdateInfoRequest(page.data.updateInfoRequestData, concatedURLs);
+        }
+        else { // At least one of the image uploading failed
+          util.alert("错误", "上传图片失败。详细信息：" + aggErrors.join());
+          // TODO: Server has to delete all the uploaded images for this book
+        }
+      }
+      else {
+        // Upload this image
+        wx.uploadFile({
+          url: util.buildURL("http://localhost:8000/bookImage/upload?", {
+            OwnerID: app.globalData.user.UserID,
+            BookTitle: e.detail.value.bookname
+          }),
+          filePath: page.data.ImagePaths[i],
+          name: 'whatever',
+          success: function (res) {
+            successImgUploadCustomCb(res, aggErrors, concatedURLs);
+          },
+          fail: function (err) {
+            failImgUploadCustomCb(err, aggErrors);
+          },
+          complete: function () { // TODO: Verify that complete happens after success/fail
+            uploadImage(page, i + 1, aggErrors, concatedURLs, successImgUploadCustomCb, failImgUploadCustomCb); // Upload next image
+          }
+        })
+      }
+    };
+    uploadImage(this, 0, aggErrors, concatedURLs, successImgUploadCustomCb, failImgUploadCustomCb);
   },
 
-  check:function(){
-    
-  },
-    // picker
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    })
-  },
-
+  /**
+   * Picker listener -- record the course taken year information
+   */
   bindDateChange: function (e) {
     this.setData({
       year: e.detail.value
     })
-  },
-
-  // how to define the checked item??
-  checkboxChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
-
-    var checkItems = this.data.checkItems;
-    for (var i = 0, len = checkItems.length; i < len; ++i) {
-      checkItems[i].checked = checkItems[i].value == e.detail.value
-    }
-
-    this.setData({
-      checkItems: checkItems,
-      notes: e.detail.value
-    });
   }
 })

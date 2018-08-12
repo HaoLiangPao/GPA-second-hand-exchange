@@ -60,7 +60,7 @@ public class Configuration {
 	public static final String COL_USER_IS_GP = "IsGP";
 	public static final String COL_USER_QRCODE_URL = "QRCodeURL";
 	
-	// CREATE TABLE POST(OwnerID varchar(30), BookTitle varchar(30), BookPhotoURL varchar(30), CourseCode varchar(30), Instructor varchar(30), TakeYear varchar(30),
+	// CREATE TABLE POST(OwnerID varchar(30), BookTitle varchar(50), BookPhotoURL varchar(2000), CourseCode varchar(30), Instructor varchar(50), TakeYear varchar(30),
 	// Description varchar(600), Price varchar(30), CreateDate varchar(30), HasNotes varchar(30), PRIMARY KEY (OwnerID, BookTitle))
 	public static final String TBL_POST = "POST";
 	// (OwnerID, BookTitle) -- primary key

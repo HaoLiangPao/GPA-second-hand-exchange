@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,6 +116,7 @@ public class Util {
 				if (param.length > 1) {
 					this_value = URLDecoder.decode(param[1], "UTF-8"); // Expected content-type is "application/x-www-form-urlencoded"
 				}													   // From https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html, UTF-8 should be used as the encoding scheme
+				System.out.println("This key-value pair: " + this_key + "-" + this_value);
 				if (parameters.containsKey(this_key)) {
 					parameters.put(this_key, this_value);
 				} else {
@@ -135,7 +137,13 @@ public class Util {
 	protected static void setPsParams(String[] ordered_qry_tokens, PreparedStatement ps, Map<String, String> parameters) throws SQLException{
     	int i;
     	for ( i = 0; i < ordered_qry_tokens.length; i++ ){
-    		ps.setString(i+1, parameters.get(ordered_qry_tokens[i]));
+    		String value = parameters.get(ordered_qry_tokens[i]);
+    		if ( null == value ) {
+    			ps.setNull(i+1, Types.VARCHAR);
+    		}
+    		else {
+        		ps.setString(i+1, parameters.get(ordered_qry_tokens[i]));
+    		}
     	}
 	}
 	

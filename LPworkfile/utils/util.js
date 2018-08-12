@@ -1,15 +1,7 @@
 const config = require('config.js')
 
 const REQUIRED_SDK_VERSION = '2';
-
-// default HTTP request options
-const DEFAULT_HEADER = {
-  "Content-Type": "application/json"
-}
-const DEFAULT_DATATYPE = "JSON"
-
 const EYE_CATCHER = "****************************************"
-
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -68,9 +60,11 @@ function doGET(url, data, resolve, reject){
 
   wx.request({
     url: url,
-    header: DEFAULT_HEADER,
+    header: {
+      "Content-Type": "application/json"
+    },
     method: "GET",
-    dataType: DEFAULT_DATATYPE,
+    dataType: "JSON",
     data: data,
     success: resolve,
     fail: reject
