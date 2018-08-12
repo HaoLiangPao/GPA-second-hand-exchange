@@ -1,7 +1,4 @@
 /* pages/ShuJia/shujia.wxss */
-page {
-    height: 100%;
-}
 
 .rack {
     height: 100%;

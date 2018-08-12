@@ -21,8 +21,7 @@
           </view>
       </navigator>
     </view>
-    <image src="/image/plusBrown.png" mode='aspectFit'></image>
-    <image class="plus" src="{{showView?'/image/plusBrown.png':'/image/red_confirm.png'}}" bindtap="{{showView?'wantsell':'delete'}}"></image>
+    <image class="plus" src="{{showView?'/image/plusColorChanged.png':'/image/red_confirm.png'}}" bindtap="{{showView?'wantsell':'delete'}}"></image>
     <view>
       <text class="txtBottom">(最多8本哦)</text>
       <image class="refresh" src="/image/arrow-refresh-2-icon.png" mode='aspectFit' bindtap='refresh'></image>
