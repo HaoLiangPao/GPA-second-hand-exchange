@@ -49,7 +49,7 @@
         <view wx:hidden='{{ImagePaths.length}} > 0' wx:for="{{ ImagePathsDefault }}" wx:for-item="defaultImage">
           <image class='single_image' src="{{defaultImage}}" catchTap="chooseImageTap" mode="aspectFit"></image>
         </view>
-        <view wx:hidden='{{ ImagePaths.length }} === 0' wx:for="{{ ImagePaths }}" wx:for-item="image">
+        <view wx:hidden='{{ ImagePaths.length }} == 0' wx:for="{{ ImagePaths }}" wx:for-item="image">
           <image src="{{ image }}" catchTap="chooseImageTap" mode="aspectFit" class="single_image"> </image>
         </view>
       </view>

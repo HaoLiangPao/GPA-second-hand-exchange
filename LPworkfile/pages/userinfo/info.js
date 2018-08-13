@@ -112,20 +112,22 @@ Page({
     else if (e.detail.value.date == '2000') { that.toast('请设置入学年份') }
 
     else{
+
+      //TODO：过滤SQL关键字符
+      //set data in this page
       that.setData({
         openid: app.globalData.user.UserID,
-        //Math.random().toString(36).substr(2, 15),
         full_name: e.detail.value.full_name,
         wechat_name: e.detail.value.wechat_name,
         phone: e.detail.value.phone,
         email: e.detail.value.email,
         program: e.detail.value.program,
         campus: this.data.campus,
-        //year
         createDate: this.data.createDate,
-        //GP
+        //year and GP is in different function
       })
 
+      //upload data
       var upload = {
         UserID:this.data.openid,
         FullName:this.data.full_name,
@@ -139,6 +141,8 @@ Page({
         IsGP: this.data.GP,
         QRCodeURL:this.data.qrCode
       }
+
+      //upload or create user by checking the HaveUser
       if(app.globalData.user.HaveUser){
         wx.request({
           url: 'http://localhost:8000/user/update',
@@ -152,8 +156,6 @@ Page({
         })
       }
     }
-    //wx.navigateTo({url:'../success_submit/success'})
-    //在检查通过后对db进行update/insert
   },
 
   // function to upload pictures
@@ -172,21 +174,15 @@ Page({
         }
       }
     })
-
-  },
-  // picker
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      index: e.detail.value
-    })
   },
 
+  //Date picker
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value
     })
   },
+
   // help function to set filePath
   chooseWxImage: function (type) {
     var that = this;
@@ -207,7 +203,6 @@ Page({
   // how to define the checked item??
   checkboxChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value)
-
     var checkItems = this.data.checkItems;
     for (var i = 0, len = checkItems.length; i < len; ++i) {
       checkItems[i].checked = checkItems[i].value == e.detail.value
