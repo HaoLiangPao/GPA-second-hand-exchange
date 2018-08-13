@@ -9,7 +9,6 @@ Page({
     duration: 1000,
     motto: '欢迎使用二手书平台',
     userInfo: {},
-    hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     searchInput: "",
     tempFilePaths: ''
@@ -59,7 +58,7 @@ Page({
 
   //页面加载完成
   onReady: function(){
-    util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
+    //util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
   },
 
   getUserInfo: function (e) {

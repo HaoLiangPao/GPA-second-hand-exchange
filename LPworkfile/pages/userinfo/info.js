@@ -81,7 +81,7 @@ Page({
 
   onUnload: function() {
     // Verify again if the user has updated his info
-    util.checkIfUserExistsIfNotForceInfoUpdate();
+    //util.checkIfUserExistsIfNotForceInfoUpdate();
   },
 
   /**

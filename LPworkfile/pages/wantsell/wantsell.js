@@ -147,7 +147,6 @@ Page({
         confirmText: '好的！',
         content: '请输入合法数据。要求：'
           + '（1）课程代码需满足形式"AAAA00"或者“AAA000”'
-          + '（2）很丑，无法空行，对不起😞'
       })
     }
     else if (!isBookNameValid) {
@@ -157,7 +156,6 @@ Page({
         confirmText: '好的！',
         content: '请输入合法数据。要求：'
         + '（1）书本名称只能包含字母数字和空格，且不超过50个字'
-        + '（2）很丑，无法空行，对不起😞'
       })
     }
     else if (!isInstructorValid) {
@@ -167,7 +165,6 @@ Page({
         confirmText: '好的！',
         content: '请输入合法数据。要求：'
         + '（1）讲师姓名只能包含字母和空格，且不超过50个字'
-        + '（2）很丑，无法空行，对不起😞'
       })
     }
     else if (!isDescriptionValid) {
@@ -177,7 +174,6 @@ Page({
         confirmText: '好的！',
         content: '请输入合法数据。要求：'
         + '（1）书本描述不能超过200个字'
-        + '（5）很丑，无法空行，对不起😞'
       })
     }
 
