@@ -58,7 +58,7 @@ Page({
 
   //页面加载完成
   onReady: function(){
-    //util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
+    util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
   },
 
   getUserInfo: function (e) {
