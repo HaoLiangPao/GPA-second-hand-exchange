@@ -90,7 +90,9 @@ Page({
 
   //main submit function to submit all the information
   submit_in: function (e) {
-    // DEFAULT e.detail.value: {course_code: "", bookname: "", instructor: "", hasNote: "false", description: "" } TODO: Add price
+    // DEFAULT e.detail.value: { course_code: "", bookname: "", instructor: "", hasNote: "false", description: "", price: "" } TODO: Add price
+    console.log(e);
+
     /**
      *  validate input
      */
@@ -117,7 +119,7 @@ Page({
       TakeYear: this.data.year,
       Description: e.detail.value.description,
       CreateDate: util.formatTime(new Date()),
-      Price: '0.0',
+      Price: e.detail.value.price,
       HasNotes: e.detail.value.hasNote
     };
 
