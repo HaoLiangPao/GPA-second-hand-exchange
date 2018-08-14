@@ -1,5 +1,7 @@
 const util = require('../../utils/util.js')
 const app = getApp()
+var path = app.globalData.user_books.book_info
+
 
 Page({
   data: {
@@ -54,11 +56,36 @@ Page({
     };
     var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
     util.doGET(url, upload, success_cb, failure_cb)
+
+    //读取数据库中用户po书本信息并存在global data中
+    var upload = {
+      OwnerID: app.globalData.user.UserID
+    }
+    var url = 'http://localhost:8000/search/display/user';
+    var result = undefined;
+    var success_cb = function (res) {
+      if (res.header.Status == 1) {
+        console.log("提交数据库中没有此用户")
+      }
+      else {
+        result = JSON.parse(res.data); // result should be a JSON array and should have only one object
+        app.globalData.user_books.book_info = result;
+        var obj_count;
+        for (obj_count = 0; obj_count < result.length; obj_count++) {
+          app.globalData.user_books.book_info[obj_count]["BookPhotoURL"] =
+            app.globalData.user_books.book_info[obj_count]["BookPhotoURL"].split(",")
+        }
+        console.log(app.globalData.user_books.book_info)
+      }
+    };
+    var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
+    util.doGET(url, upload, success_cb, failure_cb)
   },
 
   //页面加载完成
   onReady: function(){
     util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
+    console.log(app.globalData.user_books.book_info[0]["CourseCode"])
   },
 
   getUserInfo: function (e) {

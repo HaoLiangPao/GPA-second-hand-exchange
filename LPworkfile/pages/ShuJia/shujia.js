@@ -11,29 +11,10 @@ Page({
    */
   data: {
     items1: [
-
-      {
-      id: "1",
-      src: "../../image/pig.jpg",
-      text: my_book[0],
-      },
-
-      {
-        id: "2",
-        src: "../../image/pig.jpg",
-        text: my_book[1]
-      },
-
-      {
-        id: "3",
-        src: "../../image/pig.jpg",
-        text: my_book[2]
-      },
-      {
-        id: "4",
-        src: "../../image/pig.jpg",
-        text: my_book[3]
-      },
+      {id: "1",src: "../../image/pig.jpg",text: "TEST",},
+      {id: "2",src: "../../image/pig.jpg",text: my_book[1]},
+      {id: "3",src: "../../image/pig.jpg",text: my_book[2]},
+      {id: "4",src: "../../image/pig.jpg",text: my_book[3]},
     ],
     items2:[
       {
@@ -63,7 +44,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    showView: (that.data.showView == "true" ? true : false)
+    showView: (that.data.showView == "true" ? true : false),
+    that.setData({
+      items1: [
+        { id: "1", src: "../../image/pig.jpg", text: "STA302", },
+        { id: "2", src: "../../image/pig.jpg", text: my_book[1] },
+        { id: "3", src: "../../image/pig.jpg", text: my_book[2] },
+        { id: "4", src: "../../image/pig.jpg", text: my_book[3] },
+      ]
+    })
   },
 
   /**
