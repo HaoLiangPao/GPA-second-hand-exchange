@@ -166,6 +166,13 @@ Page({
            *  Update book info with the input data and responded image URLs
            */
           doUpdateInfoRequest(page.data.updateInfoRequestData, concatedURLs);
+          
+          wx.showToast({
+            title: '提交成功',
+            duration: 2000,
+          });
+
+          wx.navigateBack();
         }
         else { // At least one of the image uploading failed
           util.alert("错误", "上传图片失败。详细信息：" + aggErrors.join());

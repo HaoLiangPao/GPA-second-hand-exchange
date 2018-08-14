@@ -85,7 +85,6 @@ Page({
   //页面加载完成
   onReady: function(){
     util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
-    console.log(app.globalData.user_books.book_info[0]["CourseCode"])
   },
 
   getUserInfo: function (e) {
