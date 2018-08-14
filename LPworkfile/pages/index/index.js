@@ -20,45 +20,49 @@ Page({
     })
   },*/
   onLoad: function () {
-    //读取数据库中用户信息并存在globaldata中
-    var upload = {
-      UserID: app.globalData.user.UserID
+    var tryToGetUserInfo = function () {
+      //读取数据库中用户信息并存在globaldata中
+      var upload = {
+        UserID: app.globalData.user.UserID
+      }
+      var url = 'http://localhost:8000/user/getInfo';
+      var result = undefined;
+      var success_cb = function (res) {
+        // The content of 'res': res.data, res.header, res.statusCode, res.errMsg
+        if (res.header.Status == 1) {
+          console.log("数据库中未找到此用户")
+        }
+        else {
+          result = JSON.parse(res.data)[0]; // result should be a JSON array and should have only one object
+          //console.log(result);
+
+          //设置用户全局变量
+          app.globalData.user.HaveUser = true;
+          app.globalData.user.UserID = result['UserID'];
+          app.globalData.user.Campus = result['Campus'];
+          app.globalData.user.CreateDate = result['CreateDate'];
+          app.globalData.user.Email = result['Email'];
+          app.globalData.user.FullName = result['FullName'];
+          app.globalData.user.IsGP = result['IsGP'];
+          app.globalData.user.PhoneNumber = result['PhoneNumber'];
+          app.globalData.user.Program = result['Program'];
+          app.globalData.user.QRCodeURL = result['QRCodeURL'];
+          app.globalData.user.WeChatID = result['WeChatID'];
+          app.globalData.user.Year = result['Year'];
+
+          //console.log(app.globalData.user.HaveUser)
+        }
+        util.checkIfUserExistsIfNotForceInfoUpdate();
+      };
+      var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
+      util.doGET(url, upload, success_cb, failure_cb)
+
     }
-    var url = 'http://localhost:8000/user/getInfo';
-    var result = undefined;
-    var success_cb = function (res) {
-      // The content of 'res': res.data, res.header, res.statusCode, res.errMsg
-      if (res.header.Status == 1) {
-        console.log("数据库中未找到此用户")
-      }
-      else {
-        result = JSON.parse(res.data)[0]; // result should be a JSON array and should have only one object
-        //console.log(result);
-
-        //设置用户全局变量
-        app.globalData.user.HaveUser = true;
-        app.globalData.user.UserID = result['UserID'];
-        app.globalData.user.Campus = result['Campus'];
-        app.globalData.user.CreateDate = result['CreateDate'];
-        app.globalData.user.Email = result['Email'];
-        app.globalData.user.FullName = result['FullName'];
-        app.globalData.user.IsGP = result['IsGP'];
-        app.globalData.user.PhoneNumber = result['PhoneNumber'];
-        app.globalData.user.Program = result['Program'];
-        app.globalData.user.QRCodeURL = result['QRCodeURL'];
-        app.globalData.user.WeChatID = result['WeChatID'];
-        app.globalData.user.Year = result['Year'];
-
-        //console.log(app.globalData.user.HaveUser)
-      }
-    };
-    var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
-    util.doGET(url, upload, success_cb, failure_cb)
+    util.forceUpdateWeChatToTheLatestVersion(tryToGetUserInfo);
   },
 
   //页面加载完成
   onReady: function(){
-    util.forceUpdateWeChatToTheLatestVersion(util.checkIfUserExistsIfNotForceInfoUpdate);
   },
 
   getUserInfo: function (e) {
