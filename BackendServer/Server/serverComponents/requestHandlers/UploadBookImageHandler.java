@@ -33,6 +33,8 @@ public class UploadBookImageHandler implements HttpHandler {
 	
 	@Override
 	public void handle(HttpExchange arg0) throws IOException {
+		// TODO: Check if there already exists a record for this book in database
+		
 		
 		OutputStream out = null;
 		InputStream in = null;

@@ -128,16 +128,16 @@ Page({
       console.log("进入doUpdateInfoRequest");
       console.log("\n")
       urlData.BookPhotoURL = concatedURLs.join();
-      var successUpdateInfoCb = function (res) {
+      var successUpdateInfoCb = function (res, page) {
         var result = res.data;
         if (res.statusCode != 200) { // fail
           util.alert("错误", "更新数据失败 " + JSON.stringify(result));
         }
       };
-      var failUpdateInfoCb = function (err) {
+      var failUpdateInfoCb = function (err, page) {
         util.alert("错误", "更新数据失败 " + JSON.stringify(err));
       };
-      util.doGET("http://localhost:8000/post/create", urlData, successUpdateInfoCb, failUpdateInfoCb);
+      util.doGET("http://localhost:8000/post/create", urlData, successUpdateInfoCb, failUpdateInfoCb, this);
     }
 
     /**
@@ -168,6 +168,13 @@ Page({
            *  Update book info with the input data and responded image URLs
            */
           doUpdateInfoRequest(page.data.updateInfoRequestData, concatedURLs);
+          
+          wx.showToast({
+            title: '提交成功',
+            duration: 2000,
+          });
+
+          wx.navigateBack();
         }
         else { // At least one of the image uploading failed
           util.alert("错误", "上传图片失败。详细信息：" + aggErrors.join());

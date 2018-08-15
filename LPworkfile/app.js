@@ -33,6 +33,9 @@ let handler = {
   },
   // global data
   globalData: {
+    user_books: {
+      book_info:[]
+    },
     user: {
       HaveUser:false,
       UserID: 'val1',//should be the openid which will be set at the index page

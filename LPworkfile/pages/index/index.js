@@ -1,5 +1,7 @@
 const util = require('../../utils/util.js')
 const app = getApp()
+var path = app.globalData.user_books.book_info
+
 
 Page({
   data: {
@@ -27,7 +29,7 @@ Page({
       }
       var url = 'http://localhost:8000/user/getInfo';
       var result = undefined;
-      var success_cb = function (res) {
+      var success_cb = function (res, page) {
         // The content of 'res': res.data, res.header, res.statusCode, res.errMsg
         if (res.header.Status == 1) {
           console.log("数据库中未找到此用户")
@@ -49,20 +51,41 @@ Page({
           app.globalData.user.QRCodeURL = result['QRCodeURL'];
           app.globalData.user.WeChatID = result['WeChatID'];
           app.globalData.user.Year = result['Year'];
-
-          //console.log(app.globalData.user.HaveUser)
+        //console.log(app.globalData.user.HaveUser)
         }
-        util.checkIfUserExistsIfNotForceInfoUpdate();
-      };
-      var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
-      util.doGET(url, upload, success_cb, failure_cb)
-
+      util.checkIfUserExistsIfNotForceInfoUpdate();
+    };
+    var failure_cb = function (err, page) { util.alert("错误", "获取数据失败" + JSON.stringify(err)) };
+    util.doGET(url, upload, success_cb, failure_cb, this)
     }
+    //读取数据库中用户po书本信息并存在global data中
+    var upload = {
+      OwnerID: app.globalData.user.UserID
+    }
+    var url = 'http://localhost:8000/search/display/user';
+    var result = undefined;
+    var success_cb = function (res, page) {
+      if (res.header.Status == 1) {
+        console.log("提交数据库中没有此用户")
+      }
+      else {
+        result = JSON.parse(res.data); // result should be a JSON array and should have only one object
+        app.globalData.user_books.book_info = result;
+        var obj_count;
+        for (obj_count = 0; obj_count < result.length; obj_count++) {
+          app.globalData.user_books.book_info[obj_count]["BookPhotoURL"] =
+            app.globalData.user_books.book_info[obj_count]["BookPhotoURL"].split(",")
+        }
+        console.log(app.globalData.user_books.book_info)
+      }
+    };
+    var failure_cb = function (err, page) { util.alert("错误", "获取数据失败" + JSON.stringify(err)) };
+    util.doGET(url, upload, success_cb, failure_cb, this)
     util.forceUpdateWeChatToTheLatestVersion(tryToGetUserInfo);
   },
 
   //页面加载完成
-  onReady: function(){
+  onReady: function (){
   },
 
   getUserInfo: function (e) {
