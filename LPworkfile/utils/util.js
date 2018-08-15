@@ -48,10 +48,11 @@ function buildURL(url, data){
  * data -- parameters
  * resolve -- callback for succeeded request
  * reject -- callback for failed request
+ * page -- reference to the page
  * 
  * Do HTTP GET request
  */
-function doGET(url, data, resolve, reject){
+function doGET(url, data, resolve, reject, page){
   console.log(EYE_CATCHER)
   console.log("Doing HTTP GET request: ")
   console.log("URL: " + url)
@@ -66,8 +67,12 @@ function doGET(url, data, resolve, reject){
     method: "GET",
     dataType: "JSON",
     data: data,
-    success: resolve,
-    fail: reject
+    success: function (res) {
+      resolve(res, page);
+    },
+    fail: function (err) {
+      reject(err, page);
+    }
   })
 }
 

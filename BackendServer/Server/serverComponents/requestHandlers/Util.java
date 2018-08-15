@@ -76,6 +76,9 @@ public class Util {
 				System.out.println("YES");
 				arg0.getResponseHeaders().add("status", "1");
 			}
+			else{
+				arg0.getResponseHeaders().add("status", "0");
+			}
 			Util.doSuccessResponse(response, arg0);
 			return parameters;
 		} catch (Exception e) {
@@ -118,7 +121,7 @@ public class Util {
 				}													   // From https://docs.oracle.com/javase/7/docs/api/java/net/URLDecoder.html, UTF-8 should be used as the encoding scheme
 				System.out.println("This key-value pair: " + this_key + "-" + this_value);
 				if (parameters.containsKey(this_key)) {
-					parameters.put(this_key, this_value);
+					parameters.put(this_key, this_value.equals("@") ? "" : this_value); // Use '@' to represent empty string in URL, otherwise: empty string value = no value = NULL value here
 				} else {
 					throw new Exception(String.format("Unexpected key [%s] in URL query: %s", this_key, query));
 				}
@@ -140,6 +143,9 @@ public class Util {
     		String value = parameters.get(ordered_qry_tokens[i]);
     		if ( null == value ) {
     			ps.setNull(i+1, Types.VARCHAR);
+    		}
+    		else if ( ordered_qry_tokens[i].equals("N") ) { // Special case: parameter 'N' specified by SearchNextN requests
+    			ps.setInt(i+1, Integer.parseInt(parameters.get(ordered_qry_tokens[i])));
     		}
     		else {
         		ps.setString(i+1, parameters.get(ordered_qry_tokens[i]));

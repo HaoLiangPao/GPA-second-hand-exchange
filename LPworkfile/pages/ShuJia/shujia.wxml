@@ -3,30 +3,37 @@
 <view class="rack">
     <image class="background" src="../../image/bookrack.jpg"></image>
     <text class="txtTop">我的上架书目</text>
+    <checkbox-group bindchange="checkboxChange">
     <view class="mybook">
+      
       <navigator wx:for="{{items1}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
+      
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
-              <checkbox class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
+              <checkbox value="{{item.id}}" class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
           </view>
+
       </navigator>
+      
     </view>
     <view class="mybook2">
       <navigator wx:for="{{items2}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
-              <checkbox class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
+              <checkbox value="{{item.id}}" class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
           </view>
+        
       </navigator>
     </view>
-    <image class="plus" src="{{showView?'/image/plusColorChanged.png':'/image/red_confirm.png'}}" bindtap="{{showView?'wantsell':'delete'}}"></image>
+    </checkbox-group>
+    <image class="plus" src="{{showView?'/image/plusColorChanged.png':'/image/arrows.png'}}" bindtap="{{showView?'wantsell':'switch'}}"></image>
     <view>
       <text class="txtBottom">(最多8本哦)</text>
       <image class="refresh" src="/image/arrow-refresh-2-icon.png" mode='aspectFit' bindtap='refresh'></image>
     </view>
     
-    <image class="minus" src="{{showView?'/image/trash.png':'/image/arrows.png'}}" bindtap="switch"></image>
+    <image class="minus" src="{{showView?'/image/trash.png':'/image/red_confirm.png'}}" bindtap="{{showView?'switch':'delete'}}"></image>
 
 </view>

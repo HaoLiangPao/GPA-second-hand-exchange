@@ -3,7 +3,7 @@ import config from '../../utils/config';
 const util = require('../../utils/util.js');
 
 let app = getApp();
-const numOfNewBooksOnReachBottom = 4;
+const numOfNewBooksOnReachBottom = 10;
 
 // 后继的代码都会放在此对象中
 let handler = {
@@ -11,92 +11,112 @@ let handler = {
     hasMore: true,// 用来判断下拉加载更多内容操作
     bookList: [], // 存放文章列表数据，与视图相关联
     numOfBooksOnPage: 0,
-    idOldestBookOnPage: 0,
+    idOldestBookOnPage: '@',
+    dateOldestBookOnPage: '@',
     defaultImg: config.defaultImg
   },
 
   onLoad(options) {
     this.requestFirstNBooks(numOfNewBooksOnReachBottom);
-    this.showLoading();
   },
 
   onReady(){
-    this.hideLoading();
   },
 
-  onReachBottom() {
+  onReachBottom() { // TODO: Switch to a button and make the button disappear when doing any requests; Otherwise if we can do the next request or not has to depend on the value of this.data.idOldestBookOnPage and this.data.dateOldestBookOnPage, which is however hard to achieve
     if (this.data.hasMore) {
-      this.requestNextNBooks(idOldestBookOnPage, numOfNewBooksOnReachBottom);
+      this.requestNextNBooks(this.data.idOldestBookOnPage, this.data.dateOldestBookOnPage, numOfNewBooksOnReachBottom);
     }
   },
 
   /**
-   * From database, retrieve information of the first n books in descending order of upload date and ascending order of ID
-   * 
-   * TODO: Do real database request
+   * From database, retrieve information of the first n books in ascending order of upload date and ascending order of ID
    * 
    */
-  requestFirstNBooks(n){
-    utilOLD.requestMock({
-      url: 'mockData',
-      numOfBooks: n,
-      idStartFrom: undefined,
-      mock: true,
-    }).then(this.resolveSuccessBookRequest, this.resolveFailureBookRequest);
+  requestFirstNBooks(n) {
+    this.bookList = []; // Discard existing data
+    this.showLoading();
+    util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: '@', CreateDate: '@', N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
   },
 
   /**
-   * From database, retrieve information of the next N books in descending order of upload date and ascending order of ID, where N = numOfNewBooksOnReachBottom.
+   * From database, retrieve information of the next N books in ascending order of upload date and ascending order of ID, where N = numOfNewBooksOnReachBottom.
    * 
-   * TODO: Do real database request
    */
-  requestNextNBooks(idStartFrom, n) {
-    utilOLD.requestMock({
-      url: 'mockData',
-      numOfBooks: n,
-      idStartFrom: idStartFrom,
-      mock: true,
-    }).then(this.resolveSuccessBookRequest, this.resolveFailureBookRequest);
+  requestNextNBooks(idStartFrom, dateStartFrom, n) {
+    console.log(idStartFrom);
+    console.log(dateStartFrom);
+    this.showLoading();
+    util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
   },
 
-  resolveSuccessBookRequest(res){
-      this.showLoading();
-
+  resolveSuccessBookRequest(res, page){
+      console.log(res);
       // Update the book list with new data (res.data)
-      if (res && res.Status === 0 && res.data && res.data.length) {
-        var bookData = res.data;
-        this.generateFormattedDates(bookData); // bookData -- array of JSON where each JSON is a group
-        this.data.bookList = bookData;
-        this.data.hasMore = res.hasMore;
-        this.flushNewDataToPageView();
+      if (res && res.statusCode == 200 && res.data && res.data.length) {
+        var bookData = JSON.parse(res.data);
+        console.log(bookData);
+        page.data.bookList = page.data.bookList.concat(page.formatBookData(bookData, page));
+        page.data.hasMore = (res.header.Status == 1) ? false : true;
+        page.flushNewDataToPageView(page);
+        page.numOfBooksOnPage = page.numOfBooksOnPage + numOfNewBooksOnReachBottom;
       }
-      else if(res.Status === 1){ // Some error, ignore for now
-        return;
+      else{
+        util.alert("错误", "抱歉，数据加载失败了。请您重试或者联系客服。");
       }
-
-      this.hideLoading();
+      page.hideLoading();
   },
 
-  resolveFailureBookRequest(res){
+  resolveFailureBookRequest(res, page){
+    page.hideLoading();
     util.alert("错误", "抱歉，数据加载失败了。请您重试或者联系客服。");
   },
 
   /*
   * data -- Newly requested book data from database (array of goup data in JSON)
+  * page -- Reference to this page
   *
-  * Generates a new property formatedDate for each group data object (JSON) based on the existing property date.
+  * Group up and format book data to make them easier used by the views.
   */
-  generateFormattedDates(data) {
+  formatBookData(data, page) {
+    var result = [];
     if (data && data.length) {
+      var thisGroup = { books: [], date: "", formattedDate: "" };
+      var date = "";
       for (var i = 0; i < data.length; i++) {
-        var thisGroup = data[i];
-        thisGroup.formattedDate = this.dateConvert(thisGroup.date);
+        console.log("\n\nThis Group:");
+        console.log(thisGroup);
+        console.log(result);
+        var thisBook = data[i];
+        var thisBookDate = thisBook.CreateDate.split(' ')[0]
+        if ( thisBookDate > date ) {
+          if (date != "") {
+            result.push(thisGroup);
+          }
+          date = thisBookDate;
+          thisGroup = { books: [], date: "", formattedDate: "" };
+          thisGroup.date = date;
+          thisGroup.formattedDate = page.dateConvert(date);
+          thisGroup.books.push(thisBook);
+        }
+        else {
+          thisGroup.books.push(thisBook);
+        }
+        if( i == data.length - 1 ) {
+          result.push(thisGroup);
+          // Record the OwnerID and CreateDate of the last book, used for the next server request
+          page.data.idOldestBookOnPage = thisBook.OwnerID;
+          page.data.dateOldestBookOnPage = thisBook.CreateDate;
+        }
       }
     }
+    console.log("\n\nResult:");
+    console.log(result);
+    return result;
   },
 
   /*
-  * Given a date in format: 'YEAR-MONTH-DAY' e.g. '2017-06-12'
+  * Given a date in format: 'YEAR/MONTH/DAY' e.g. '2017/06/12'
   * Return '今日' (If it is today) / '08-21' (If it is in the current year) / '2017-06-12' (If it is in any past year)
   */
   dateConvert(dateStr) {
@@ -109,14 +129,14 @@ let handler = {
       todayDay = ('0' + today.getDate()).slice(-2);
     let convertStr = '';
     let originYear = +dateStr.slice(0, 4);
-    let todayFormat = `${todayYear}-${todayMonth}-${todayDay}`;
+    let todayFormat = `${todayYear}/${todayMonth}/${todayDay}`;
     if (dateStr === todayFormat) {
       convertStr = '今日';
     } else if (originYear < todayYear) {
-      let splitStr = dateStr.split('-');
+      let splitStr = dateStr.split('/');
       convertStr = `${splitStr[0]}年${splitStr[1]}月${splitStr[2]}日`;
     } else {
-      convertStr = dateStr.slice(5).replace('-', '月') + '日'
+      convertStr = dateStr.slice(5).replace('/', '月') + '日'
     }
     return convertStr;
   },
@@ -138,29 +158,17 @@ let handler = {
         }
       }
     }
-    this.flushNewDataToPageView();
+    this.flushNewDataToPageView(page);
   },
 
   /**
    * Update page view with the current book list data
    * Also update the 'hasMore' flag which marks if there's more books to display
    */
-  flushNewDataToPageView() {
-    this.setData({
-      bookList: this.data.bookList,
-      hasMore: this.data.hasMore
-    })
-  },
-
-  showLoading(){
-    this.setData({
-      hiddenLoading: false
-    })
-  },
-
-  hideLoading(){
-    this.setData({
-      hiddenLoading: true
+  flushNewDataToPageView(page) {
+    page.setData({
+      bookList: page.data.bookList,
+      hasMore: page.data.hasMore
     })
   },
 
@@ -179,6 +187,18 @@ let handler = {
         // Sharing Failed
       }
     }
+  },
+
+  showLoading() {
+    this.setData({
+      hiddenLoading: false
+    })
+  },
+
+  hideLoading() {
+    this.setData({
+      hiddenLoading: true
+    })
   },
 
   /*
@@ -202,7 +222,7 @@ let handler = {
     var url = "http://" + config.serverURL + "/searchAllInfo/byBookID";
     var data = { PostID: bookID };
     var result = undefined;
-    var success_cb = function (res) {
+    var success_cb = function (res, page) {
       if(res.header.Status == 1){
         util.alert("提示", "抱歉，这本书刚刚下架了~");
       }
@@ -216,8 +236,8 @@ let handler = {
         });
       }
     };
-    var failure_cb = function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
-    util.doGET(url, data, success_cb, failure_cb)
+    var failure_cb = function (err, page) { util.alert("错误", "获取数据失败" + JSON.stringify(e)) };
+    util.doGET(url, data, success_cb, failure_cb, this)
   }
 }
 
