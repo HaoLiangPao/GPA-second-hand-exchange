@@ -134,16 +134,8 @@ Page({
   //搜索方程 （待接课程编码）
   query: function (e) {
     wx.navigateTo({
-      url: '../bookList/bookList?mode=search&value=' + this.data.searchInput
+      url: '../bookList/bookList?mode=search&value=' + this.data.searchInput + '%'
     })
-    //var url = "http://localhost:8000/search/byBook";//查询数据的URL
-    //console.log("YES!")
-    // 搜索：获取数据库书本数据
-    //util.doGET(url, { BookTitle: "val3" }, function (res) {
-      //wx.navigateTo({
-        //url: util.buildURL('../detail/detail?', res.data[0]),
-      //})
-    //}, function (err) { util.alert("错误", "获取数据失败" + JSON.stringify(e))})
   },
 
   BookList: function () {

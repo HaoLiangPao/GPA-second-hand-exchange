@@ -13,17 +13,29 @@ let handler = {
     numOfBooksOnPage: 0,
     idOldestBookOnPage: '@',
     dateOldestBookOnPage: '@',
-    defaultImg: config.defaultImg
+    defaultImg: config.defaultImg,
+    mode: "",
+    searchInput: ""
   },
 
   onLoad(options) {
+    console.log(options);
+    this.data.mode = options.mode;
+    this.data.searchInput = options.value;
     this.requestFirstNBooks(numOfNewBooksOnReachBottom);
   },
 
   onReady(){
   },
 
+  onPullDownRefresh(){
+    console.log("ON PULL DOWN REFRESH!!!")
+    this.requestFirstNBooks(numOfNewBooksOnReachBottom);
+    wx.stopPullDownRefresh()
+  },
+
   onReachBottom() { // TODO: Switch to a button and make the button disappear when doing any requests; Otherwise if we can do the next request or not has to depend on the value of this.data.idOldestBookOnPage and this.data.dateOldestBookOnPage, which is however hard to achieve
+    console.log("ON REACH BOTTOM!!!")
     if (this.data.hasMore) {
       this.requestNextNBooks(this.data.idOldestBookOnPage, this.data.dateOldestBookOnPage, numOfNewBooksOnReachBottom);
     }
@@ -34,9 +46,17 @@ let handler = {
    * 
    */
   requestFirstNBooks(n) {
-    this.bookList = []; // Discard existing data
+    this.data.bookList = []; // Discard existing data
     this.showLoading();
-    util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: '@', CreateDate: '@', N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
+    if ( this.data.mode == "newBook" ) {
+      util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: '@', CreateDate: '@', N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
+    }
+    else if ( this.data.mode == "search" ) {
+      util.doGET('http://localhost:8000/search/display/courseNextN', { OwnerID: '@', CreateDate: '@', CourseCode: this.data.searchInput, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
+    }
+    else {
+      this.hideLoading();
+    }
   },
 
   /**
@@ -47,7 +67,15 @@ let handler = {
     console.log(idStartFrom);
     console.log(dateStartFrom);
     this.showLoading();
-    util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
+    if ( this.data.mode == "newBook" ) {
+      util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
+    }
+    else if (this.data.mode == "search" ) {
+      util.doGET('http://localhost:8000/search/display/courseNextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, CourseCode: this.data.searchInput, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
+    }
+    else {
+      this.hideLoading();
+    }
   },
 
   resolveSuccessBookRequest(res, page){
@@ -88,6 +116,7 @@ let handler = {
         console.log(thisGroup);
         console.log(result);
         var thisBook = data[i];
+        thisBook.cover = thisBook.BookPhotoURL.split(',')[0] // Chose a cover photo
         var thisBookDate = thisBook.CreateDate.split(' ')[0]
         if ( thisBookDate > date ) {
           if (date != "") {
@@ -152,7 +181,7 @@ let handler = {
       if(this.data.bookList[i].date === groupDate){
         var thisGroup = this.data.bookList[i].books;
         for (var j = 0; j < thisGroup.length; j++) {
-          if (thisGroup[j].contentId === contentId) {
+          if (thisGroup[j].BookPhotoURL === contentId) {
             thisGroup[j].isVisited = 1;
           }
         }
@@ -205,22 +234,23 @@ let handler = {
   * Navigates to book detail page
   */
   showDetail(target) {
-    var dataset = target.currentTarget.dataset
-    var bookid = dataset && dataset.bookid;
-    var groupdate = dataset && dataset.pubdate.substring(0, 10);
-    //util.alert("提示", "抱歉，这本书刚刚下架了~"); TODO: Do database request here to check if the book no longer exists
-    bookid = "（假）书号"; // FAKE!!!! 
-    this.goToBookDetailPage(bookid);
+    console.log(target);
+    var itemData = target.currentTarget.dataset.item;
+    var bookid = itemData && itemData.BookPhotoURL; // Use the book's images' URL as the unique identifier
+    var ownerid = itemData && itemData.OwnerID;
+    var bookTitle = itemData && itemData.BookTitle;
+    var groupdate = itemData && itemData.CreateDate.substring(0, 10);
+    this.goToBookDetailPage(ownerid, bookTitle);
     // Mark this book as read
     this.markRead(groupdate, bookid)
   },
 
   /**
-   * Get a book's information by book ID, then navigates to the detailed information page rendered by it.
+   * Get a book's information by its OwnerID and BookTitle, then navigates to the detailed information page rendered by it.
    */
-  goToBookDetailPage(bookID){
-    var url = "http://" + config.serverURL + "/searchAllInfo/byBookID";
-    var data = { PostID: bookID };
+  goToBookDetailPage(ownerid, bookTitle){
+    var url = "http://" + config.serverURL + "/search/detail";
+    var data = { OwnerID: ownerid, BookTitle: bookTitle };
     var result = undefined;
     var success_cb = function (res, page) {
       if(res.header.Status == 1){

@@ -29,6 +29,7 @@ public class Server {
 		server.createContext("/user/update", new UpdateUserInfoHandler());
 		server.createContext("/search/display/all", new SearchAllHandler());
 		server.createContext("/search/display/user", new SearchUserAllHandler());
+		server.createContext("/search/display/courseNextN", new SearchCourseNextNHandler());
 		server.createContext("/search/display/course", new SearchCourseAllHandler());
 		server.createContext("/search/display/nextN", new SearchNextNHandler());
 		server.createContext("/search/detail", new SearchByBookHandler());

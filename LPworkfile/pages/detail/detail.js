@@ -34,7 +34,7 @@ Page({
    * option.TakeYear -- the year in which the owner took the course
    * option.Description -- book description
    * option.Price -- price
-   * option.UploadTime -- The time this post is created
+   * option.CreateDate -- The time this post is created
    * 
    * option.PhoneNumber -- Owner's phone number
    * option.Email -- Owner's email
