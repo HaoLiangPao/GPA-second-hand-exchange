@@ -187,7 +187,7 @@ let handler = {
         }
       }
     }
-    this.flushNewDataToPageView(page);
+    this.flushNewDataToPageView(this);
   },
 
   /**
@@ -259,10 +259,10 @@ let handler = {
       else{
         result = res.data; // result should be a JSON array and should have only one object
         var detailPageURL = "../detail/detail?";
-        console.log(result);
+        console.log(JSON.parse(result)[0]);
         console.log();
         wx.navigateTo({
-          url: util.buildURL(detailPageURL, JSON.parse(result)[0])
+          url: util.buildURLWithEncoding(detailPageURL, JSON.parse(result)[0])
         });
       }
     };

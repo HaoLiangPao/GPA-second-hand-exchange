@@ -44,6 +44,23 @@ function buildURL(url, data){
 }
 
 /**
+ * url -- url without parameters (e.g. ../detail/detail?)
+ * data -- JSON which contains the key-value pairs to be added to the url
+ * 
+ * Return a url with parameters added AND all JSON data encoded (keys are not encoded and also not needed to be encoded)
+ */
+function buildURLWithEncoding(url, data){
+  var result = url;
+  var keys = Object.keys(data);
+  for (var i = 0; i < keys.length; i++) {
+    var thisKey = keys[i];
+    result = result + ((i != 0) ? "&" : "") + thisKey + "=" + encodeURIComponent(data[thisKey]);
+  }
+  console.log(result);
+  return result;
+}
+
+/**
  * url -- URL
  * data -- parameters
  * resolve -- callback for succeeded request
@@ -171,6 +188,7 @@ function forceUpdateWeChatToTheLatestVersion(nextAction) {
 module.exports = {
   formatTime: formatTime,
   buildURL: buildURL,
+  buildURLWithEncoding: buildURLWithEncoding,
   doGET: doGET,
   alert: alert,
   checkIfUserExistsIfNotForceInfoUpdate: checkIfUserExistsIfNotForceInfoUpdate,
