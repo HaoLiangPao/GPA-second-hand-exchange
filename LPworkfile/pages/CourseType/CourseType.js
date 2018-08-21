@@ -103,57 +103,57 @@ Page({
           {
             child_id: 1,
             name: 'CSCA08H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 2,
             name: 'CSCA20H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 3,
             name: 'CSCA48H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 4,
             name: 'CSCA67H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 5,
             name: 'CSCB07H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 6,
             name: 'CSCB09H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 7,
             name: 'CSCB20H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 8,
             name: 'CSCB36H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 9,
             name: 'CSCB29H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 10,
             name: 'CSCB58H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
           {
             child_id: 11,
             name: 'CSCB63H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/csBook.png"
           },
         ]
       },
@@ -166,87 +166,87 @@ Page({
           {
             child_id: 1,
             name: 'MATA02H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 2,
             name: 'MATA23H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 3,
             name: 'MATA29H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 4,
             name: 'MATA30H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 5,
             name: 'MATA31H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 6,
             name: 'MATA32H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153817721.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 7,
             name: 'MATA33H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153819354.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 8,
             name: 'MATA35H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161215/148179053369.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 9,
             name: 'MATA36H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 10,
             name: 'MATA37H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 11,
             name: 'MATA67H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 12,
             name: 'MATB24H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 13,
             name: 'MATB41H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 14,
             name: 'MATB42H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 15,
             name: 'MATB43H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 16,
             name: 'MATB44H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
           {
             child_id: 17,
             name: 'MATB61H3',
-            image: "../../image/pig.jpg"
+            image: "../../image/matBook.png"
           },
         ]
       },
@@ -259,99 +259,99 @@ Page({
           {
             child_id: 1,
             name: 'MGAB01H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 2,
             name: 'MGAB02H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 3,
             name: 'MGAB03H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 4,
             name: 'MGFB10H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 5,
             name: 'MGIA01H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 6,
             name: 'MGFB10H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 7,
             name: 'MGIB01H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 8,
             name: 'MGIB02H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 9,
             name: 'MGIB12H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 10,
             name: 'MGMA01H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
           {
             child_id: 11,
             name: 'MGMB01H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/MAT.png"
           },
         ]
       },
       {
         cate_id: 4,
         cate_name: arr_name[3],
-        ishaveChild: false,
+        ishaveChild: true,
         children: 
         [
           {
           child_id: 1,
           name: 'STAA57H3',
-          image: "../../image/pig.jpg"},
+          image: "../../image/stats.png"},
           {
           child_id: 2,
           name: 'STAB22H3',
-          image: "../../image/pig.jpg"
+          image: "../../image/stats.png"
           },
           {
           child_id: 3,
           name: 'STAB23H3',
-          image: "../../image/pig.jpg"
+          image: "../../image/stats.png"
           },
           {
           child_id: 4,
           name: 'STAB27H3',
-          image: "../../image/pig.jpg"
+          image: "../../image/stats.png"
           },
           {
           child_id: 5,
           name: 'STAB41H3',
-          image: "../../image/pig.jpg"
+          image: "../../image/stats.png"
           },
           {
           child_id: 6,
           name: 'STAB52H3',
-          image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153817721.jpg"
+          image: "../../image/stats.png"
           },
           {
           child_id: 7,
           name: 'STAB57H3',
-          image: "http://mz.djmall.xmisp.cn/files/logo/20161212/148153819354.jpg"
+          image: "../../image/stats.png"
           }]
       },
       {
@@ -362,23 +362,23 @@ Page({
         [
           {
             child_id: 1,
-            name: '淡香水EDT',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+            name: 'MGTA06H3',
+            image: "../../image/mat.jpg"
           },
           {
             child_id: 2,
-            name: '浓香水EDP',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+            name: 'MGTA01H3',
+            image: "../../image/mat.jpg"
           },
           {
             child_id: 3,
-            name: '香体走珠',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+            name: 'MGTA02H3',
+            image: "../../image/mat.jpg"
           },
           {
             child_id: 4,
-            name: '古龙香水男士的最爱',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            name: 'MGTB20H3',
+            image: "../../image/mat.jpg"
           }
         ]
       },
@@ -391,52 +391,52 @@ Page({
           {
             child_id: 1,
             name: 'LINA01H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 2,
             name: 'LINA02H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 3,
             name: 'LINB04H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 4,
             name: 'LINB06H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 5,
             name: 'LINB09H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 6,
             name: 'LINB10H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 7,
             name: 'LINB13H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 8,
             name: 'LINB18H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 9,
             name: 'LINB19H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
           {
             child_id: 10,
             name: 'LINB20H3',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            image: "../../image/linguistic.png"
           },
         ]
       },
@@ -448,23 +448,33 @@ Page({
         [
           {
             child_id: 1,
-            name: '淡香水EDT',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+            name: 'EESA01',
+            image: "../../image/Environmental.png"
           },
           {
             child_id: 2,
-            name: '浓香水EDP',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+            name: 'EESA06',
+            image: "../../image/Environmental.png"
           },
           {
             child_id: 3,
-            name: '香体走珠',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+            name: 'EESA02',
+            image: "../../image/Environmental.png"
           },
           {
             child_id: 4,
-            name: '古龙香水男士的最爱',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            name: 'EESB09',
+            image: "../../image/Environmental.png"
+          },
+          {
+            child_id: 5,
+            name: 'EESB04',
+            image: "../../image/Environmental.png"
+          },
+          {
+            child_id: 6,
+            name: 'EESB03',
+            image: "../../image/Environmental.png"
           }
         ]
       },
@@ -476,23 +486,23 @@ Page({
         [
           {
             child_id: 1,
-            name: '淡香水EDT',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815978910.jpg"
+            name: 'BIOA01',
+            image: "../../image/biology.png"
           },
           {
             child_id: 2,
-            name: '浓香水EDP',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159789883.jpg"
+            name: 'BIOA02',
+            image: "../../image/biology.png"
           },
           {
             child_id: 3,
-            name: '香体走珠',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/14815979307.jpg"
+            name: 'BIOB03',
+            image: "../../image/biology.png"
           },
           {
             child_id: 4,
-            name: '古龙香水男士的最爱',
-            image: "http://mz.djmall.xmisp.cn/files/logo/20161213/148159765589.jpg"
+            name: 'BIOB14',
+            image: "../../image/biology.png"
           }
         ]
       },

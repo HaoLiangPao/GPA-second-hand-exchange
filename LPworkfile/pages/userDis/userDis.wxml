@@ -36,6 +36,6 @@
   </view>
 
   <view class="image_container">
-    <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit"></image>
+    <image src="/image/Hao_QR_Code.jpg" catchTap="chooseImageTap" mode="aspectFit"></image>
   </view>
 </view>
