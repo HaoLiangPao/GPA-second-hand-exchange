@@ -17,7 +17,8 @@
     "navigationBarBackgroundColor": "#4abb3b",
     "navigationBarTitleText": "GPA二手教材交易平台",
     "backgroundColor": "#f8f8f8",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#7A7E83",

@@ -1,3 +1,4 @@
+<loading hidden="{{hiddenLoading}}">数据加载中</loading> 
 
 <scroll-view scroll-y="true" enable-back-to-top="true" class="root-wrap">
   <view class="wrapper">

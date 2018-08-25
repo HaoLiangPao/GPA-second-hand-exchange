@@ -8,9 +8,10 @@ const NA = "N/A";
 Page({
 
   data: {
-    detailData: {
-      BookTitle: NA, Instructor: NA, formatedUpdateTime: NA, Description: NA, Instructor: NA, Price: NA, TakeYear: NA, CourseID: NA, PostID: NA, OwnerID: NA, BookPhoto: NA, UploadTime: NA, share: NA, PhoneNumber: NA, Email: NA, Program: NA, Year: NA, QRCodeURL: NA, WeChatInfo: NA},
+    detailData: {},
+    userData: {},
     fromSale: false,
+    hiddenLoading: true
   },
 
   /**
@@ -25,44 +26,66 @@ Page({
   /**
    * option contains:
    * 
-   * option.PostID -- book id
-   * option.OwnerID -- owner
+   * option.OwnerID -- owner id
    * option.BookTitle -- book title
-   * option.BookPhoto -- book photo URL
-   * option.CourseID -- course code (CSCA08, MATA37...)
+   * option.BookPhotoURL -- book photo URL
+   * option.CourseCode -- course code (CSCA08, MATA37...)
    * option.Instructor -- instructor name
    * option.TakeYear -- the year in which the owner took the course
-   * option.Description -- book description
    * option.Price -- price
-   * option.UploadTime -- The time this post is created
+   * option.CreateDate -- The time this post is created
+   * option.Description -- The description of the book
+   * option.HasNotes -- If the book posting includes notes or not
    * 
-   * option.PhoneNumber -- Owner's phone number
-   * option.Email -- Owner's email
-   * option.Program -- Owner's program
-   * option.Year -- The year in which the owner attented UTSC
-   * option.QRCodeURL -- owner's QR code URL
-   * option.WeChatInfo -- owner's wechat ID
    */
   onLoad(option) {
+    this.showLoading();
     console.log(commonUtil.EYE_CATCHER + "\ndetail.js page parameters:");
     console.log(option);
     console.log("\n" + commonUtil.EYE_CATCHER);
-    //let id = option.PostID || 0;
-    //console.log(id);
     // to indicate how the users get to this place
     this.setData({
       isFromShare: !!option.share
     });
     for (var property in option) {
-      this.data.detailData[property] = option[property];
+      this.data.detailData[property] = decodeURIComponent(option[property]);
     }
     console.log(commonUtil.EYE_CATCHER + "\nDEBUG: Updated data:");
     console.log(this.data.detailData);
     console.log("\n" + commonUtil.EYE_CATCHER);
-    this.flushNewDataToPageView();
+    // Get the book owner's information
+    var url = "http://localhost:8000/user/getInfo";
+    var data = {
+      UserID: this.data.detailData.OwnerID
+    };
+    var resolve = function (res, page) {
+      page.data.userData = JSON.parse(res.data)[0];
+      console.log(commonUtil.EYE_CATCHER + "\nDEBUG: User data:");
+      console.log(page.data.userData);
+      console.log("\n" + commonUtil.EYE_CATCHER);
+      page.flushNewDataToPageView();
+      page.hideLoading();
+    };
+    var reject = function (err, page) {
+      commonUtil.alert("错误", "获取数据失败" + JSON.stringify(err));
+      page.flushNewDataToPageView();
+      page.hideLoading();
+    };
+    commonUtil.doGET(url, data, resolve, reject, this);
     //this.init(id);
   },
 
+  showLoading() {
+    this.setData({
+      hiddenLoading: false
+    })
+  },
+
+  hideLoading() {
+    this.setData({
+      hiddenLoading: true
+    })
+  },
 
   // work as a constructor
   /*init(contentId) {
