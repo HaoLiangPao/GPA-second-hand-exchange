@@ -31,7 +31,7 @@
 
 .rack .mybook .item_size {
   position:relative;
-  padding-right:3ch;
+  padding-right:2ch;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +63,7 @@
 
 .rack .mybook2 .item_size {
   position:relative;
-  padding-right:3ch;
+  padding-right:2ch;
   display: flex;
   flex-direction: column;
   align-items: center;

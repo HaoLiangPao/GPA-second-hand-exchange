@@ -3,6 +3,7 @@ var app = getApp()
 var my_book = ["","","",""]
 var arr_link = [1,2,3,4]
 var file = ""
+import util from '../../utils/util';
 
 Page({
   
@@ -151,22 +152,40 @@ Page({
     var id=0;
     var idx;
     var select = this.data.selected
+    //获取ownerid 和 书本 title
+    console.log("id" + select)
     for (id in select) {
-        idx = select[id]
-        console.log(idx)
-        // 本page列表里删
-        this.data.temp.splice(parseInt(idx), 1)
-        //user book_info里删??
-        app.globalData.user_books.book_info.splice(parseInt(idx), 1)
-        //数据库里删？
-        //
+      idx = parseInt(select[id])
+      //数据库中先进行删除
+      console.log(app.globalData.user_books.book_info)
+      var BookTitle = app.globalData.user_books.book_info[idx]["BookTitle"]
+      var OwnerID = app.globalData.user_books.book_info[idx]["OwnerID"]
+      var upload = {
+        BookTitle:BookTitle,
+        OwnerID:OwnerID
+      }
+      wx.request({
+        url: 'http://localhost:8000/post/delete',
+        data: upload
+      })
+      // 本page列表里删
+      this.data.temp.splice(idx, 1)
+      //user book_info里删??
+      app.globalData.user_books.book_info.splice(idx, 1)
       }
 
     this.refresh();
 
+    //提示
     wx.showToast({
-      title:"删除选中书本",
+      title:"已删除书本",
       duration:3000
+    })
+
+    //切换回修改模式
+    var that = this
+    that.setData({
+      showView: (!that.data.showView)
     })
   },
 
@@ -175,7 +194,5 @@ Page({
     this.setData({item1 : [] , item2 : []});
     //添加现有书本并显示
     this.display();
-  },
-
-
+  }
 })

@@ -2,7 +2,7 @@
 
 <view class="rack">
     <image class="background" src="../../image/bookrack.jpg"></image>
-    <text class="txtTop">我的上架书目</text>
+    <text class="txtTop">{{showView?"我的上架书目":"删除选中书目"}}</text>
     <checkbox-group bindchange="checkboxChange">
     <view class="mybook">
       
