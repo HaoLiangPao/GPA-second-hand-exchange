@@ -53,7 +53,7 @@ Page({
     this.data.detailData.BookPhotoURL = this.data.detailData.BookPhotoURL.split(',');
 
     // Get the book owner's information
-    var url = "http://localhost:8000/user/getInfo";
+    var url = "http://" + config.serverURL + "/user/getInfo";
     var data = {
       UserID: this.data.detailData.OwnerID
     };

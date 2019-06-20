@@ -1,5 +1,6 @@
 // pages/wantsell/wantsell.js
 import util from '../../utils/util';
+import config from '../../utils/config';
 const app = getApp();
 
 
@@ -137,7 +138,7 @@ Page({
       var failUpdateInfoCb = function (err, page) {
         util.alert("错误", "更新数据失败 " + JSON.stringify(err));
       };
-      util.doGET("http://localhost:8000/post/create", urlData, successUpdateInfoCb, failUpdateInfoCb, this);
+      util.doGET("http://" + config.serverURL +"/post/create", urlData, successUpdateInfoCb, failUpdateInfoCb, this);
     }
 
     /**
@@ -185,7 +186,7 @@ Page({
       else {
         // Upload this image
         wx.uploadFile({
-            url: util.buildURL("http://localhost:8000/bookImage/upload?", {
+            url: util.buildURL("http://" + config.serverURL + "/bookImage/upload?", {
             OwnerID: app.globalData.user.UserID,
             BookTitle: e.detail.value.bookname
           }),

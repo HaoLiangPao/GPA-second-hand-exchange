@@ -1,4 +1,5 @@
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+import config from '../../utils/config';
 const app = getApp()
 var path = app.globalData.user_books.book_info
 
@@ -22,7 +23,8 @@ Page({
       var upload = {
         UserID: app.globalData.user.UserID
       }
-      var url = 'http://localhost:8000/user/getInfo';
+      var url = 'http://' + config.serverURL +'/user/getInfo';
+      console.log(url)
       var result = undefined;
       var success_cb = function (res, page) {
         // The content of 'res': res.data, res.header, res.statusCode, res.errMsg
@@ -54,7 +56,7 @@ Page({
     var upload = {
       OwnerID: app.globalData.user.UserID
     }
-    var url = 'http://localhost:8000/search/display/user';
+    var url = 'http://' + config.serverURL +'/search/display/user';
     var result = undefined;
     var success_cb = function (res, page) {
       if (res.header.Status == 1) {

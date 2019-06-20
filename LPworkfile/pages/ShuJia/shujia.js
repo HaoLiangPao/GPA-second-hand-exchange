@@ -165,7 +165,7 @@ Page({
         OwnerID:OwnerID
       }
       wx.request({
-        url: 'http://localhost:8000/post/delete',
+        url: 'http://'+ config.serverURL +'/post/delete',
         data: upload
       })
       // 本page列表里删
@@ -189,6 +189,7 @@ Page({
     })
   },
 
+  //TODO：function 无法工作，需要修改
   refresh: function () {
     //重置place holder
     this.setData({item1 : [] , item2 : []});

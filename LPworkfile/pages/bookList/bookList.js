@@ -49,10 +49,10 @@ let handler = {
     this.data.bookList = []; // Discard existing data
     this.showLoading();
     if ( this.data.mode == "newBook" ) {
-      util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: '@', CreateDate: '@', N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
+      util.doGET('http://'+config.serverURL+'/search/display/nextN', { OwnerID: '@', CreateDate: '@', N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
     }
     else if ( this.data.mode == "search" ) {
-      util.doGET('http://localhost:8000/search/display/courseNextN', { OwnerID: '@', CreateDate: '@', CourseCode: this.data.searchInput, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
+      util.doGET('http://'+config.serverURL+'/search/display/courseNextN', { OwnerID: '@', CreateDate: '@', CourseCode: this.data.searchInput, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this); // Use '@' to represent empty string in request URL
     }
     else {
       this.hideLoading();
@@ -68,10 +68,10 @@ let handler = {
     console.log(dateStartFrom);
     this.showLoading();
     if ( this.data.mode == "newBook" ) {
-      util.doGET('http://localhost:8000/search/display/nextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
+      util.doGET('http://'+config.serverURL+'/search/display/nextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
     }
     else if (this.data.mode == "search" ) {
-      util.doGET('http://localhost:8000/search/display/courseNextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, CourseCode: this.data.searchInput, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
+      util.doGET('http://'+config.serverURL+'/search/display/courseNextN', { OwnerID: idStartFrom, CreateDate: dateStartFrom, CourseCode: this.data.searchInput, N: n }, this.resolveSuccessBookRequest, this.resolveFailureBookRequest, this);
     }
     else {
       this.hideLoading();
