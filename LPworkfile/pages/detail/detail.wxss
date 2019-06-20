@@ -177,3 +177,21 @@
   font: italic;
   size: 10in;
 }
+
+.image_container{
+  padding: 5%;
+  width:100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  padding-left: 75rpx;
+}
+
+.image_container .single_image{
+  width: 200rpx;
+  height: 200rpx;
+  padding: 10rpx;
+  display: flex;
+}

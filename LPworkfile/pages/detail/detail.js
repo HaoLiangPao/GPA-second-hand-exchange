@@ -40,8 +40,6 @@ Page({
    */
   onLoad(option) {
     this.showLoading();
-    console.log(commonUtil.EYE_CATCHER + "\ndetail.js page parameters:");
-    console.log(option);
     this.setData({
       isFromShare: !!option.share
     });
@@ -51,6 +49,8 @@ Page({
     console.log(commonUtil.EYE_CATCHER + "\nDEBUG: Updated data:");
     console.log(this.data.detailData);
     console.log("\n" + commonUtil.EYE_CATCHER);
+    //Get all book photos URL
+    this.data.detailData.BookPhotoURL = this.data.detailData.BookPhotoURL.split(',');
 
     // Get the book owner's information
     var url = "http://localhost:8000/user/getInfo";
