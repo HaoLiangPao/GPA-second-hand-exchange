@@ -95,11 +95,12 @@ Page({
   },
 
   getInput: function(e) {
-    this.data.searchInput = e.detail.value
+    this.setData({ searchInput : e.detail.value})
   },
 
   //搜索方程
   query: function (e) {
+    console.log(this.data.searchInput)
     wx.navigateTo({
       url: '../bookList/bookList?mode=search&value=' + this.data.searchInput + '%'
     })
