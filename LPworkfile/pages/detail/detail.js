@@ -42,8 +42,6 @@ Page({
     this.showLoading();
     console.log(commonUtil.EYE_CATCHER + "\ndetail.js page parameters:");
     console.log(option);
-    console.log("\n" + commonUtil.EYE_CATCHER);
-    // to indicate how the users get to this place
     this.setData({
       isFromShare: !!option.share
     });
@@ -53,6 +51,7 @@ Page({
     console.log(commonUtil.EYE_CATCHER + "\nDEBUG: Updated data:");
     console.log(this.data.detailData);
     console.log("\n" + commonUtil.EYE_CATCHER);
+
     // Get the book owner's information
     var url = "http://localhost:8000/user/getInfo";
     var data = {
@@ -60,9 +59,6 @@ Page({
     };
     var resolve = function (res, page) {
       page.data.userData = JSON.parse(res.data)[0];
-      console.log(commonUtil.EYE_CATCHER + "\nDEBUG: User data:");
-      console.log(page.data.userData);
-      console.log("\n" + commonUtil.EYE_CATCHER);
       page.flushNewDataToPageView();
       page.hideLoading();
     };
@@ -72,7 +68,19 @@ Page({
       page.hideLoading();
     };
     commonUtil.doGET(url, data, resolve, reject, this);
-    //this.init(id);
+    
+    //Get the book seller info
+    var owner_info = {
+      UserID: option.OwnerID
+    };
+
+    var resolve = function (res, page) {
+      app.globalData.user.temp_info = JSON.parse(res.data)[0];
+    };
+    var reject = function (err, page) {
+      commonUtil.alert("错误", "获取数据失败" + JSON.stringify(err));
+    };
+    commonUtil.doGET(url, data, resolve, reject, this);
   },
 
   showLoading() {
@@ -87,64 +95,6 @@ Page({
     })
   },
 
-  // work as a constructor
-  /*init(contentId) {
-    // only do the following process when contentID exists
-    if (contentId) {
-      this.requestDetail(contentId)
-        // print the message out for debug purpose
-        .then(data => {
-          // reset the data
-          this.configPageData(data)
-          util.log(data)
-        })
-    }
-  },*/
-
-
-  // request for detail information
-  /*requestDetail(contentId) {
-    return util.requestMock({
-      url: 'detail',
-      mock: true,
-      data: {
-        source: 1
-      }
-    })
-      .then(res => {
-        let formatedUpdateTime = this.formatTime(res.data.lastUpdateTime)
-        // 格式化后的时间
-        res.data.formatedUpdateTime = formatedUpdateTime
-        return res.data
-      })
-  },*/
-
-  // 更改时间格式
-  /*formatTime(timeStr = '') {
-    let year = timeStr.slice(0, 4),
-      month = timeStr.slice(5, 7),
-      day = timeStr.slice(8, 10);
-    return `${year}/${month}/${day}`;
-  },*/
-
-
-  // change title with the changed data
-  /*configPageData(data) {
-    if (data) {
-      // 同步数据到 Model 层，Model 层数据发生变化的话，视图层会自动渲染
-      this.setData({
-        detailData: data
-      });
-      //设置标题
-      let title = this.data.detailData.title || config.defaultBarTitle
-      //title = "哈哈哈哈哈哈哈哈哈哈"
-      wx.setNavigationBarTitle({
-        title: title
-      })
-    }
-  },*/
-
-
   // enable "next book" function
   next() {
     this.requestNextContentId()
@@ -153,6 +103,7 @@ Page({
         this.init(contentId);
       })
   },
+
   requestNextContentId() {
     //let pubDate = this.data.detailData && this.data.detailData.lastUpdateTime || ''
     let contentId = this.data.detailData && this.data.detailData.contentId || 0
@@ -232,8 +183,10 @@ Page({
    * Go to the page which shows the seller's information
    */
   sellerInfo: function (event){
+    console.log('../SellerInfo/SellerInfo?OwnerID=' + this.data.detailData.OwnerID)
     wx.navigateTo({
-      url: '../SellerInfo/SellerInfo'
+      url: '../SellerInfo/SellerInfo?OwnerID=' + this.data.detailData.OwnerID
     })
   }
+
 })

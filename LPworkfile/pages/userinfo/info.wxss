@@ -64,25 +64,15 @@
 }
 
 /*
-  QR Code 按钮
+  确认修改 按钮
 */
-.pageView .BigForm .button1{
+.pageView .BigForm .button2{
   border-radius: 15%;
   width: 80%;
   align-self: center;
   margin-top: 10%;
   margin-left: 10%;
   margin-bottom: 2%;
-}
-
-/*
-  submit 按钮
-*/
-.pageView .BigForm .button2{
-  border-radius: 30%;
-  width: 80%;
-  align-self: center;
-  margin-left: 10%;
 }
 
 /*

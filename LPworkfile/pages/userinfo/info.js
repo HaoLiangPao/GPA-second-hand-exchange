@@ -26,7 +26,7 @@ Page({
       { name: 'GP_Student', value: 'true'},
       { name: 'Non_GP', value: 'false' },
     ],
-    GP: '',
+    GP: false,
     createDate:''
   },
 
@@ -110,10 +110,7 @@ Page({
     else if (!email_ex.test(e.detail.value.email)) { that.toast('邮箱格式错误') }
     else if (e.detail.value.program == '') { that.toast('专业不能为空') }
     else if (e.detail.value.date == '2000') { that.toast('请设置入学年份') }
-
     else{
-
-      //TODO：过滤SQL关键字符
       //set data in this page
       that.setData({
         openid: app.globalData.user.UserID,
@@ -156,6 +153,7 @@ Page({
         })
       }
     }
+    //need to refresh the data and output in userDis
   },
 
   // function to upload pictures

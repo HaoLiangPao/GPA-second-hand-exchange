@@ -6,27 +6,26 @@
     <checkbox-group bindchange="checkboxChange">
     <view class="mybook">
       
-      <navigator wx:for="{{items1}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
-      
+      <view wx:for="{{items1}}">
           <view class="item_size">
-              <image class="img" src="{{item.src}}"></image>
+              <image class="img" src="{{item.src}}" data-item="{{item}}" bindtap="showDetail"></image>
               <text class="text">{{item.text}}</text>
               <checkbox value="{{item.id}}" class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
           </view>
 
-      </navigator>
-      
+      </view>
     </view>
+
     <view class="mybook2">
-      <navigator wx:for="{{items2}}" url="{{url}}?listId={{item.id}}&listName={{item.text}}">
+      <view wx:for="{{items2}}" data-item="{{item}}" bindtap="showDetail">
           <view class="item_size">
               <image class="img" src="{{item.src}}"></image>
               <text class="text">{{item.text}}</text>
               <checkbox value="{{item.id}}" class="{{showView?'deleteBox_hide':'deleteBox'}}"> </checkbox>
           </view>
-        
-      </navigator>
+      </view>
     </view>
+
     </checkbox-group>
     <image class="plus" src="{{showView?'/image/plusColorChanged.png':'/image/arrows.png'}}" bindtap="{{showView?'wantsell':'switch'}}"></image>
     <view>

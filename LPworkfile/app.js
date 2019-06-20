@@ -13,7 +13,6 @@ let handler = {
     wx.login({
       success: function (res) {
         if (res.code) {
-          console.log(res.code);//暂时登陆凭证
           //发起网络请求
           wx.request({
             url: 'https://test.com/onLogin',
@@ -51,7 +50,8 @@ let handler = {
       QRCodeURL: {}
     },
     bookData: [{}],
-    visitedBooks: ''
+    visitedBooks: '',
+    temp_info:{}
   }
 };
 App(handler);

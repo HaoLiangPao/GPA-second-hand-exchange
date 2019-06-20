@@ -70,7 +70,6 @@ function buildURLWithEncoding(url, data){
  * Do HTTP GET request
  */
 function doGET(url, data, resolve, reject, page){
-  console.log(EYE_CATCHER)
   console.log("Doing HTTP GET request: ")
   console.log("URL: " + url)
   console.log("data: ", data)

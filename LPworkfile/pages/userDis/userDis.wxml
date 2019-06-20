@@ -28,14 +28,5 @@
       <button wx:if="{{fromSale}} == false" bindtap="edit" class="eidt"> 编辑个人信息 </button>
       <button wx:if="{{fromSale}} == ture" bindtap='call' class="edit"> </button>
     </view>
-
-
-    <view class="row">
-      <text> ⬇️ 下拉加载二维码 ⬇️ </text>
-    </view>
-  </view>
-
-  <view class="image_container">
-    <image src="/image/Hao_QR_Code.jpg" catchTap="chooseImageTap" mode="aspectFit"></image>
   </view>
 </view>

@@ -42,9 +42,6 @@
           </radio-group>
         </checkbox-group>
       </view>
-      <view class='button1'>
-        <button type="default" bindtap="chooseimage">上传您的QR_Code</button>
-      </view>
       <view class='button2'>
         <button type="primary" bindtap="submit" form-type='submit'>确认修改           </button>
       </view>

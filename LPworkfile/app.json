@@ -5,11 +5,9 @@
     "pages/userDis/userDis",
     "pages/logs/logs",
     "pages/wantsell/wantsell",
-    "pages/history/history",
     "pages/userinfo/info",
     "pages/detail/detail",
     "pages/bookList/bookList",
-    "pages/CourseType/CourseType",
     "pages/SellerInfo/SellerInfo"
   ],
   "window": {

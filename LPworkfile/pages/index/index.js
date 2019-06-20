@@ -15,12 +15,7 @@ Page({
     searchInput: "",
     tempFilePaths: ''
   },
-  /*//事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },*/
+
   onLoad: function () {
     var tryToGetUserInfo = function () {
       //读取数据库中用户信息并存在globaldata中
@@ -35,9 +30,7 @@ Page({
           console.log("数据库中未找到此用户")
         }
         else {
-          result = JSON.parse(res.data)[0]; // result should be a JSON array and should have only one object
-          //console.log(result);
-
+          result = JSON.parse(res.data)[0]; 
           //设置用户全局变量
           app.globalData.user.HaveUser = true;
           app.globalData.user.UserID = result['UserID'];
@@ -51,12 +44,11 @@ Page({
           app.globalData.user.QRCodeURL = result['QRCodeURL'];
           app.globalData.user.WeChatID = result['WeChatID'];
           app.globalData.user.Year = result['Year'];
-        //console.log(app.globalData.user.HaveUser)
         }
       util.checkIfUserExistsIfNotForceInfoUpdate();
     };
-    var failure_cb = function (err, page) { util.alert("错误", "获取数据失败" + JSON.stringify(err)) };
-    util.doGET(url, upload, success_cb, failure_cb, this)
+      var failure_cb = function (err, page) { util.alert("错误", "获取数据失败" + JSON.stringify(err)) };
+      util.doGET(url, upload, success_cb, failure_cb, this)
     }
     //读取数据库中用户po书本信息并存在global data中
     var upload = {
@@ -69,7 +61,7 @@ Page({
         console.log("提交数据库中没有此用户")
       }
       else {
-        result = JSON.parse(res.data); // result should be a JSON array and should have only one object
+        result = JSON.parse(res.data); 
         app.globalData.user_books.book_info = result;
         var obj_count;
         for (obj_count = 0; obj_count < result.length; obj_count++) {
@@ -89,70 +81,33 @@ Page({
   },
 
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
+  
   setDemoData: function (e) {
     this.setData({
       coursecode: this.data.demoData
     });
   },
-  //照片查书(硬编码未完成)
-  scan: function (e) {
-    var that = this;
-    wx.showToast({
-      title: '功能敬请期待',
-      image: '/image/pig.jpg',
-      duration: 2000
-    });
-    //wx.scanCode({
-    //  success: function (res) {
-    //    that.setData({
-    //      barcode: res.result
-    //    });
-    //    that.query(e);
-    //  },
-    //  fail: function () {
-    //    that.setData({
-    //      barcode: "",
-    //      hiddenData: true
-    //    });
-    //  },
-    //  complete: function () {
-        // complete
-    //  }
-    //})
-  },
+
   getInput: function(e) {
     this.data.searchInput = e.detail.value
   },
 
-  //搜索方程 （待接课程编码）
+  //搜索方程
   query: function (e) {
     wx.navigateTo({
       url: '../bookList/bookList?mode=search&value=' + this.data.searchInput + '%'
     })
   },
 
-  BookList: function () {
-    wx.navigateTo({
-      url: '../bookList/bookList?mode=newBook',
-    })
-  },
-
-  CourseType: function () {
-    wx.navigateTo({
-      url: '../CourseType/CourseType',
-    })
-  },
-
   egg: function (){
     wx.showToast({
-      title: '老铁，不存在的',
+      title: 'WSYNB',
       icon: 'succes',
       duration: 1000,
       mask: true

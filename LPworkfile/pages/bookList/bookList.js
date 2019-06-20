@@ -112,9 +112,6 @@ let handler = {
       var thisGroup = { books: [], date: "", formattedDate: "" };
       var date = "";
       for (var i = 0; i < data.length; i++) {
-        console.log("\n\nThis Group:");
-        console.log(thisGroup);
-        console.log(result);
         var thisBook = data[i];
         thisBook.cover = thisBook.BookPhotoURL.split(',')[0] // Chose a cover photo
         var thisBookDate = thisBook.CreateDate.split(' ')[0]
@@ -139,8 +136,6 @@ let handler = {
         }
       }
     }
-    console.log("\n\nResult:");
-    console.log(result);
     return result;
   },
 
@@ -234,7 +229,7 @@ let handler = {
   * Navigates to book detail page
   */
   showDetail(target) {
-    console.log(target);
+    console.log(target)
     var itemData = target.currentTarget.dataset.item;
     var bookid = itemData && itemData.BookPhotoURL; // Use the book's images' URL as the unique identifier
     var ownerid = itemData && itemData.OwnerID;
@@ -259,8 +254,6 @@ let handler = {
       else{
         result = res.data; // result should be a JSON array and should have only one object
         var detailPageURL = "../detail/detail?";
-        console.log(JSON.parse(result)[0]);
-        console.log();
         wx.navigateTo({
           url: util.buildURLWithEncoding(detailPageURL, JSON.parse(result)[0])
         });

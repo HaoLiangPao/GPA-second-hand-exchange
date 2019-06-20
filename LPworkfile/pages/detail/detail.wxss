@@ -141,7 +141,7 @@
 }
 
 .wrapper .content .answer,.wrapper .content .question,.wrapper .content .para,.wrapper .content .wxParse-p {
-  margin: 44rpx 0
+  margin: 10rpx;
 }
 
 .wrapper .content image {

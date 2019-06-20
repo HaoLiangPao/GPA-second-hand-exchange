@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(rgba(3,189,14, 0.7)), to(rgba(231,245,121, 0.76)));
-  height: 1150rpx;
+  height: 100%;
   width: 100%;
 }
 
@@ -54,5 +54,5 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 1800rpx;
+  height: 100%;
 }

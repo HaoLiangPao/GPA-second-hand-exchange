@@ -14,33 +14,31 @@
 
     <view class="content">
       <!-- 书本详情  -->
-      <image src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBGnTjcjcIZFsPdOHcXkdD1-qvbmgsXpd1zAgPNnrV3kgsOMJiRA'> </image>
+      <image src="{{detailData.BookPhotoURL}}"> </image>
           <view class="question">书本介绍:</view>
-          <view class="answer">CSCA20 -- an introduction of computer science？</view>
+          <view class="answer">{{detailData.Description}}</view>
 
-          <view class="question">授课教授：</view>
-          <view class="answer"> Anna Brancher </view>
+          <view class="question">课程代码：</view>
+          <view class="answer">{{detailData.CourseCode}}</view>
+
+          <view class="question">使用年份：</view>
+          <view class="answer">{{detailData.TakeYear}}</view>
+          
         <!-- 卖家介绍-->
-          <view class="question">卖家（个人微信号）：</view>
-          <view class="answer">Hao Liang （hflsforeverhao1997）</view>
+          <view class="question">授课老师</view>
+          <view class="answer">{{detailData.Instructor}}</view>
           <button bindtap='sellerInfo'>查看该卖家</button>
 
           <view class="question">价格以及包含内容：</view>
-          <view class="answer">30$ 课本书籍 + 个人笔记</view>
-          <!-- 如果有更多照片 可添加Swiper-->
-
-          <view class="author">编辑：GPA CS小队）</view>
-          <view class="declaration">声明：本书籍/卖家资料均为卖家资源上传，经GPA整合后发布。均视为GPA原创内容，转载请注明出处。仅供参考。如有不妥之处，欢迎指正。</view>
-          </view>
+          <view class="answer">{{detailData.Price}}$</view>
+          <view class="answer" wx:if="{{detailData.HasNotes}}">包括笔记</view>
+          <view class="answer" wx:else>不包括笔记</view>
+    </view>
 
     <view class="footbar">
       <form>
         <button class="footbar-back clearBtnDefault" bindtap="back">
           <view class="icon footbar-back-icon"></view>
-        </button>
-        <button class="footbar-btn clearBtnDefault" bindtap="next">下一篇</button>
-        <button class="footbar-share clearBtnDefault" bindtap="share" open-type="share">
-          <view class="icon footbar-share-icon"></view>
         </button>
       </form>
     </view>

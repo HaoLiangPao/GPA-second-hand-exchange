@@ -3,16 +3,21 @@
 
   <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
 
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <text class="userinfo-nickname">{{name}}</text>
+
+  <view class="row">
+    <text>📖 微信号：</text>
+    <text class="program">{{wechatID}}</text>
+  </view>
 
   <view class="row">
     <text>📖 专业：</text>
-    <text class="program">Statistics</text>
+    <text class="program">{{program}}</text>
   </view>
 
   <view class="row">
     <text>🏫 入学年份：</text>
-    <text class="program">2016</text>
+    <text class="program">{{entryYear}}</text>
   </view>
   
   <view class="row">
@@ -23,14 +28,5 @@
     <text>📮 邮箱：</text>
     <text class="email"> {{email}}</text>
   </view>
-  
-  <button bindtap="call" class="call">  Call  </button>
 
-  <view class="row">
-    <text> ⬇️ 下拉加载二维码 ⬇️ </text>
-  </view>
 </view>
-  
-  <view class="image_container">
-    <image src="{{qrCode[0]}}" catchTap="chooseImageTap" mode="aspectFit"></image>
-  </view>
