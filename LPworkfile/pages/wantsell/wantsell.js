@@ -91,7 +91,6 @@ Page({
 
   //main submit function to submit all the information
   submit_in: function (e) {
-    // DEFAULT e.detail.value: { course_code: "", bookname: "", instructor: "", hasNote: "false", description: "", price: "" } TODO: Add price
     console.log(e);
 
     /**
@@ -127,8 +126,8 @@ Page({
     var doUpdateInfoRequest = function (urlData, concatedURLs) {
       console.log("\n");
       console.log("进入doUpdateInfoRequest");
-      console.log("\n")
-      urlData.BookPhotoURL = concatedURLs.join();
+      console.log("\n");
+      urlData.BookPhotoURL = concatedURLs.join().replace(/localhost:8000/g, config.serverURL);
       var successUpdateInfoCb = function (res, page) {
         var result = res.data;
         if (res.statusCode != 200) { // fail
@@ -153,6 +152,7 @@ Page({
       if (res.statusCode == 200) { // success
         var urlArray = JSON.parse(result);
         var url = urlArray[0].BookPhotoURL;
+        console.log(url)
         concatedURLs.push(url);
       } else {
         aggErrors.push(result);
@@ -181,7 +181,6 @@ Page({
           util.alert("错误", "上传图片失败。详细信息：" + aggErrors.join());
           // TODO: Server has to delete all the uploaded images for this book
         }
-        
       }
       else {
         // Upload this image
