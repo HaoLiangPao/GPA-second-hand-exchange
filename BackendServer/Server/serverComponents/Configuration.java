@@ -11,14 +11,14 @@ public class Configuration {
 	public static final String DOMAIN_NAME = "localhost:8000";
 	
 	// Constants for image download/upload API
-	public static final String IMAGE_DIR = "/Users/weisiyi/Desktop/tempFolder";
+	public static final String IMAGE_DIR = "/root/imageFolder";
 	public static final String IMAGE_UPLOAD_ROUTE = "/bookImage/upload";
 	public static final String IMAGE_DOWNLOAD_ROUTE = "/bookImage/download";
 	
 	// Connection configuration
 	public static final int PORT = 8000;
 	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC&useSSL=false";
-	public static final String MYSQL_DB = "test2";
+	public static final String MYSQL_DB = "SHB_db";
 	public static final String MYSQL_USER = "root";
 	public static final String MYSQL_PWD = "a19970504";
 	

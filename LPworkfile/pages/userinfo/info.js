@@ -1,5 +1,6 @@
 // pages/userinfo/info.js
 import util from '../../utils/util';
+import config from '../../utils/config';
 
 const app = getApp()
 
@@ -142,13 +143,13 @@ Page({
       //upload or create user by checking the HaveUser
       if(app.globalData.user.HaveUser){
         wx.request({
-          url: 'http://localhost:8000/user/update',
+          url: 'http://'+ config.serverURL +'/user/update',
           data: upload
         })
       }else{
         console.log(app.globalData.user.HaveUser)
         wx.request({
-          url: 'http://localhost:8000/user/create',
+          url: 'http://'+config.serverURL+'/user/create',
           data: upload
         })
       }

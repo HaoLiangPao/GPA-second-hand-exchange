@@ -28,7 +28,7 @@ const defaultImg = {
   coverImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_c8GvctTkm_DnPpyymdN8BRp7lHWeKZk81SZCE90ka1tDqBBm'
 };
 
-const serverURL = "localhost:8000";
+const serverURL = "212.64.121.71:8000";
 
 let core = {
   env: env,
