@@ -20,7 +20,7 @@ public class Configuration {
 	public static final String MYSQL_JDBC_URL = "jdbc:mysql://localhost:3306/%s?serverTimezone=UTC&useSSL=false";
 	public static final String MYSQL_DB = "SHB_db";
 	public static final String MYSQL_USER = "root";
-	public static final String MYSQL_PWD = "a19970504";
+	public static final String MYSQL_PWD = "aA!9970504";
 	
 	// Connection pool configuration
 	
