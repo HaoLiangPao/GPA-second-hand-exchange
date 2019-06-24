@@ -4,14 +4,14 @@ GPA小程序开发团队为UTSC中国留学生开发的二手教材交易平台�
 ISSUE：
 
 BUG：
-1:书架界面的refresh功能//
+1:书架界面的refresh功能<br />
 2:个人信息的refresh功能
 
 后端：
-1:增加openid申请的function//
+1:增加openid申请的function<br />
 2:增加https安全证书
 
 前端：
-1:增加申请openid的function并添加到userid//
+1:增加申请openid的function并添加到userid<br />
 2:修改发送请求的url地址(http->https)
 
